@@ -1,36 +1,52 @@
 package gim.microserviciopersona.service;
 
+import gim.microserviciopersona.dto.ActualizarPerfilDTO;
+import gim.microserviciopersona.dto.LoginDTO;
 import gim.microserviciopersona.dto.PersonaPerfilDTO;
+import gim.microserviciopersona.dto.RegistrarDTO;
 import gim.microserviciopersona.entity.Persona;
 import gim.microserviciopersona.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
 public class PersonaService {
     @Autowired
     private PersonaRepository personaRepository;
 
-    public Persona registrar(Persona persona){
-
-        if(personaRepository.existsByEmail(persona.getEmail())){
+    public PersonaPerfilDTO registrar(RegistrarDTO datos){
+        if(personaRepository.existsByEmail(datos.getEmail())){
             throw new RuntimeException("Error: Email ya registrado, intente con otro");
         }
+
+        Persona persona = new Persona();
+        persona.setNombre(datos.getNombre());
+        persona.setApellido(datos.getApellido());
+        persona.setEmail(datos.getEmail());
+        //esto deberia hashearse mas adelante
+        persona.setPassword(datos.getPassword());
+        persona.setPeso(datos.getPeso());
+        persona.setAltura(datos.getAltura());
+
         persona.setFechaRegistro(LocalDate.now());
-        return personaRepository.save(persona);
+
+        personaRepository.save(persona);
+
+        return new PersonaPerfilDTO(persona);
     }
 
-    public Persona login(String email, String password){
-        Persona persona = personaRepository.findPersonaByEmail(email)
-                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
-        if(!persona.getPassword().equals(password)){
-            throw new RuntimeException("Password Incorrecta ");
+    public PersonaPerfilDTO login(LoginDTO datos){
+
+        Persona persona = personaRepository.findByEmail(datos.getEmail())
+                .orElseThrow(() -> new RuntimeException("Credenciales inválidas"));
+        // despues encriptar password
+        if(!persona.getPassword().equals(datos.getPassword())){
+            throw new RuntimeException("Credenciales inválidas ");
         }
-        return persona;
+
+        return new PersonaPerfilDTO(persona);
     }
     public PersonaPerfilDTO obtenerPerfil(Long id){
         Persona personaPerfil = personaRepository.findById(id)
@@ -38,11 +54,19 @@ public class PersonaService {
 
         return new PersonaPerfilDTO(personaPerfil);
     }
-    /*public Persona actualizarPerfil(Long id, Persona datos){
+    public PersonaPerfilDTO actualizarPerfil(Long id, ActualizarPerfilDTO datos){
+        Persona persona = personaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Id no encontrado"));
+        persona.setNombre(datos.getNombre());
+        persona.setApellido(datos.getApellido());
+        persona.setAltura(datos.getAltura());
+        persona.setPeso(datos.getPeso());
+        Persona pActualizada = personaRepository.save(persona);
+        return new PersonaPerfilDTO(pActualizada);
 
     }
 
-     */
+
 
     public void borrarPersona(Persona persona){
         if(personaRepository.existsById(persona.getId()))
