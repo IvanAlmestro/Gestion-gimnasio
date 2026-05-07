@@ -1,5 +1,6 @@
 package gim.microserviciopersona.service;
 
+import gim.microserviciopersona.dto.PersonaPerfilDTO;
 import gim.microserviciopersona.entity.Persona;
 import gim.microserviciopersona.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +17,6 @@ public class PersonaService {
 
     public Persona registrar(Persona persona){
 
-        if(personaRepository.existsByDni(persona.getDni())){
-            throw new RuntimeException("Error: DNI ya registrado");
-        }
         if(personaRepository.existsByEmail(persona.getEmail())){
             throw new RuntimeException("Error: Email ya registrado, intente con otro");
         }
@@ -34,15 +32,20 @@ public class PersonaService {
         }
         return persona;
     }
-    /*public Persona obtenerPerfil(Long id){ o no que si
+    public PersonaPerfilDTO obtenerPerfil(Long id){
+        Persona personaPerfil = personaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Id no encontrado"));
+
+        return new PersonaPerfilDTO(personaPerfil);
+    }
+    /*public Persona actualizarPerfil(Long id, Persona datos){
 
     }
-    public Persona actualizarPerfil(Long id, Persona datos){
 
-    }
-    */
+     */
+
     public void borrarPersona(Persona persona){
-        if(personaRepository.existsByDni(persona.getDni()))
+        if(personaRepository.existsById(persona.getId()))
             personaRepository.delete(persona);
         else {
             throw new RuntimeException("No existe la persona con el DNI que se intenta eliminar ");

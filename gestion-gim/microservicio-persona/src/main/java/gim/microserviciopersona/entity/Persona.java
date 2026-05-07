@@ -19,10 +19,8 @@ public class Persona {
     private String nombre;
     @Column
     private String apellido;
-    @Column
+    @Column(unique = true)
     private String email;
-    @Column
-    private String dni;
     private String password;
 
     private Double peso;

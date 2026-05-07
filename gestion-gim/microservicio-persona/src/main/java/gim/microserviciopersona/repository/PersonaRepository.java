@@ -8,8 +8,6 @@ import java.util.Optional;
 
 
 public interface PersonaRepository  extends JpaRepository<Persona, Long> {
-    List<Persona> findPersonaByDni(String dni);
-    boolean existsByDni(String dni);
 
     Optional<Persona> findPersonaByEmail(String email);
     boolean existsByEmail(String email);
