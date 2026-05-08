@@ -22,6 +22,7 @@ public class Persona {
     @Column(unique = true)
     private String email;
     private String password;
+    private String objetivo;
 
     private Double peso;
     private Double altura;

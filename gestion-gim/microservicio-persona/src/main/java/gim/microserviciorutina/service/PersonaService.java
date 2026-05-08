@@ -29,6 +29,7 @@ public class PersonaService {
         persona.setPassword(datos.getPassword());
         persona.setPeso(datos.getPeso());
         persona.setAltura(datos.getAltura());
+        persona.setObjetivo(datos.getObjetivo());
 
         persona.setFechaRegistro(LocalDate.now());
 
@@ -61,6 +62,7 @@ public class PersonaService {
         persona.setApellido(datos.getApellido());
         persona.setAltura(datos.getAltura());
         persona.setPeso(datos.getPeso());
+        persona.setObjetivo(datos.getObjetivo());
         Persona pActualizada = personaRepository.save(persona);
         return new PersonaPerfilDTO(pActualizada);
 

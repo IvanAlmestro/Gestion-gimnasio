@@ -5,4 +5,5 @@ public class PersonaDTO {
     private String nombre;
     private String email;
     private String dni;
+    private String objetivo;
 }

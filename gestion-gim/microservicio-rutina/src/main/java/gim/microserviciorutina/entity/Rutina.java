@@ -15,6 +15,12 @@ public class Rutina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String nombre;
+    private String descripcion;
+    private String objetivo; // esto estaria piola que sea un enum
+    private LocalDate fechaCreacion;
+    private Long idUsuario;
+
 
 
 

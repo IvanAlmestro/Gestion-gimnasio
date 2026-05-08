@@ -15,6 +15,7 @@ public class PersonaPerfilDTO {
     private String email;
     private Double altura;
     private Double peso;
+    private String objetivo;
 
     public PersonaPerfilDTO(Persona persona){
         this.id = persona.getId();
@@ -23,6 +24,7 @@ public class PersonaPerfilDTO {
         this.email = persona.getEmail();
         this.altura = persona.getAltura();
         this.peso = persona.getPeso();
+        this.objetivo = persona.getObjetivo();
 
     }
 }
