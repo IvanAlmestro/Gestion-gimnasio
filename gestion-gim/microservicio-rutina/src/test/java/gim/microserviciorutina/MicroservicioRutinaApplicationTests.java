@@ -1,10 +1,10 @@
-package gim.microserviciopersona;
+package gim.microserviciorutina;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MicroservicioPersonaApplicationTests {
+class MicroservicioRutinaApplicationTests {
 
     @Test
     void contextLoads() {

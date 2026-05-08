@@ -6,6 +6,7 @@
       <list>
         <option value="$PROJECT_DIR$/gestion-gim/microservicio-persona/pom.xml" />
         <option value="$PROJECT_DIR$/gestion-gim/pom.xml" />
+        <option value="$PROJECT_DIR$/gestion-gim/microservicio-rutina/pom.xml" />
       </list>
     </option>
   </component>

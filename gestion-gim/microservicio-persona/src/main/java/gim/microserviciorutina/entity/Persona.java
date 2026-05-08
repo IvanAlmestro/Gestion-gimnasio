@@ -1,4 +1,4 @@
-package gim.microserviciopersona.entity;
+package gim.microserviciorutina.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

@@ -1,4 +1,4 @@
-package gim.microserviciopersona.dto;
+package gim.microserviciorutina.dto;
 
 public class PersonaDTO {
     private Long id;

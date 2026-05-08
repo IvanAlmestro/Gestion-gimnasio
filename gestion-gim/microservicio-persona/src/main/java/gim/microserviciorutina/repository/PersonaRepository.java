@@ -1,6 +1,6 @@
-package gim.microserviciopersona.repository;
+package gim.microserviciorutina.repository;
 
-import gim.microserviciopersona.entity.Persona;
+import gim.microserviciorutina.entity.Persona;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,10 +1,10 @@
-package gim.microserviciopersona.controller;
+package gim.microserviciorutina.controller;
 
-import gim.microserviciopersona.dto.ActualizarPerfilDTO;
-import gim.microserviciopersona.dto.LoginDTO;
-import gim.microserviciopersona.dto.PersonaPerfilDTO;
-import gim.microserviciopersona.dto.RegistrarDTO;
-import gim.microserviciopersona.service.PersonaService;
+import gim.microserviciorutina.dto.ActualizarPerfilDTO;
+import gim.microserviciorutina.dto.LoginDTO;
+import gim.microserviciorutina.dto.PersonaPerfilDTO;
+import gim.microserviciorutina.dto.RegistrarDTO;
+import gim.microserviciorutina.service.PersonaService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

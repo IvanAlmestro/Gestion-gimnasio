@@ -1,4 +1,4 @@
-package gim.microserviciopersona.dto;
+package gim.microserviciorutina.dto;
 
 import lombok.Getter;
 import lombok.Setter;

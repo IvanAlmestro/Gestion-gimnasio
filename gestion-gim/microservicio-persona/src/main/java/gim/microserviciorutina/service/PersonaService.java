@@ -1,11 +1,11 @@
-package gim.microserviciopersona.service;
+package gim.microserviciorutina.service;
 
-import gim.microserviciopersona.dto.ActualizarPerfilDTO;
-import gim.microserviciopersona.dto.LoginDTO;
-import gim.microserviciopersona.dto.PersonaPerfilDTO;
-import gim.microserviciopersona.dto.RegistrarDTO;
-import gim.microserviciopersona.entity.Persona;
-import gim.microserviciopersona.repository.PersonaRepository;
+import gim.microserviciorutina.dto.ActualizarPerfilDTO;
+import gim.microserviciorutina.dto.LoginDTO;
+import gim.microserviciorutina.dto.PersonaPerfilDTO;
+import gim.microserviciorutina.dto.RegistrarDTO;
+import gim.microserviciorutina.entity.Persona;
+import gim.microserviciorutina.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
