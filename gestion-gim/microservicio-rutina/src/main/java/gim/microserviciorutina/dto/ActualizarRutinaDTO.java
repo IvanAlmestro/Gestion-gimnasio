@@ -5,12 +5,10 @@ import gim.microserviciorutina.enums.Objetivo;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDate;
 @Getter
 @Setter
-public class RutinaDTO {
+public class ActualizarRutinaDTO {
 
-    private Long id;
 
     private String nombre;
 
@@ -18,17 +16,12 @@ public class RutinaDTO {
 
     private Objetivo objetivo;
 
-    private LocalDate fechaCreacion;
-
     private Long idUsuario;
 
-    public RutinaDTO(Rutina datos) {
-        this.id= datos.getIdRutina();
+    public ActualizarRutinaDTO(Rutina datos) {
         this.nombre =datos.getNombre();
         this.descripcion = datos.getDescripcion();
         this.objetivo = datos.getObjetivo();
-        this.fechaCreacion = datos.getFechaCreacion();
         this.idUsuario = datos.getIdUsuario();
     }
-
 }

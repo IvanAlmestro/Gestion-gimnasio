@@ -1,24 +1,32 @@
 package gim.microserviciorutina.entity;
 
+import gim.microserviciorutina.enums.Objetivo;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDate;
 
 @Entity
-@Data
+@Table(name = "rutinas")
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Rutina {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @Column
+    private Long idRutina;
+
     private String nombre;
+
     private String descripcion;
-    private String objetivo; // esto estaria piola que sea un enum
+
+    @Enumerated(EnumType.STRING)
+    private Objetivo objetivo;
+
     private LocalDate fechaCreacion;
+
     private Long idUsuario;
 
 

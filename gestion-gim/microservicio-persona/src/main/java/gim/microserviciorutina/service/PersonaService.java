@@ -63,6 +63,7 @@ public class PersonaService {
         persona.setAltura(datos.getAltura());
         persona.setPeso(datos.getPeso());
         persona.setObjetivo(datos.getObjetivo());
+        // aca lo guardo en variable pero no es necesario (para ver la diferencia a RutinaService)
         Persona pActualizada = personaRepository.save(persona);
         return new PersonaPerfilDTO(pActualizada);
 
