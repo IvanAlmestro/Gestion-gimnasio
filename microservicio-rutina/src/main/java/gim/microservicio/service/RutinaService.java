@@ -51,7 +51,7 @@ public class RutinaService {
         try{
             restTemplate.getForObject(url, Object.class);
         }catch (Exception e){
-            throw new RuntimeException("El usuario no existe");
+            throw new RuntimeException("El usuario con ese ID no existe");
         }
 
         Rutina rutinaNueva = new Rutina();
@@ -68,7 +68,7 @@ public class RutinaService {
 
     public RutinaDTO actualizarRutina(ActualizarRutinaDTO datos, Long id){
         Rutina rutina = rutinaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Rutina con Id no encontrado"));
+                .orElseThrow(() -> new RuntimeException("No existe rutina con ese ID"));
 
         rutina.setNombre(datos.getNombre());
         rutina.setDescripcion(datos.getDescripcion());

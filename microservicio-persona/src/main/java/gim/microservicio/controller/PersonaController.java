@@ -25,6 +25,7 @@ public class PersonaController {
         return service.obtenerPersonas();
     }
 
+    //aclaracion: otro posible nombre seria obtenerPersonaPorID
     @GetMapping("/{id}")
     public PersonaPerfilDTO obtenerPerfil(@PathVariable Long id){
         return service.obtenerPerfil(id);
@@ -39,8 +40,6 @@ public class PersonaController {
     public PersonaPerfilDTO login(@RequestBody LoginDTO datos){
         return service.login(datos);
     }
-
-
 
     @PutMapping("/{id}")
     public PersonaPerfilDTO actualizarPerfil(
