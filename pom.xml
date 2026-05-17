@@ -15,7 +15,7 @@
     </parent>
 
     <groupId>gim</groupId>
-    <artifactId>gestion-gim</artifactId>
+    <artifactId>gestion-gimnasio</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <packaging>pom</packaging>

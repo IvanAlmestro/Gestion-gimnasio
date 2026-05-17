@@ -24,6 +24,7 @@ public class RegistrarDTO {
     private String email;
 
     @Size(min = 6)
+    @NotBlank
     private String password;
 
     private String objetivo;

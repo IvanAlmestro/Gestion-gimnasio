@@ -5,6 +5,9 @@ import gim.microservicio.dto.LoginDTO;
 import gim.microservicio.dto.PersonaPerfilDTO;
 import gim.microservicio.dto.RegistrarDTO;
 import gim.microservicio.entity.Persona;
+import gim.microservicio.exception.custom.DuplicateEmailException;
+import gim.microservicio.exception.custom.InvalidCredentialsException;
+import gim.microservicio.exception.custom.PersonaNotFoundException;
 import gim.microservicio.repository.PersonaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,14 +28,14 @@ public class PersonaService {
     }
     public PersonaPerfilDTO obtenerPerfil(Long id){
         Persona personaPerfil = personaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Id no encontrado"));
+                .orElseThrow(() -> new PersonaNotFoundException("No existe persona con ese ID"));
 
         return new PersonaPerfilDTO(personaPerfil);
     }
 
     public PersonaPerfilDTO actualizarPerfil(Long id, ActualizarPerfilDTO datos){
         Persona persona = personaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Id no encontrado"));
+                .orElseThrow(() -> new PersonaNotFoundException("No existe persona con ese ID"));
         persona.setNombre(datos.getNombre());
         persona.setApellido(datos.getApellido());
         persona.setAltura(datos.getAltura());
@@ -48,16 +51,16 @@ public class PersonaService {
         if(personaRepository.existsById(id))
             personaRepository.deleteById(id);
         else {
-            throw new RuntimeException("No existe la persona con el DNI que se intenta eliminar ");
+            throw new PersonaNotFoundException("No existe la persona con el DNI que se intenta eliminar ");
         }
     }
     public PersonaPerfilDTO login(LoginDTO datos){
 
         Persona persona = personaRepository.findByEmail(datos.getEmail())
-                .orElseThrow(() -> new RuntimeException("Credenciales inválidas"));
+                .orElseThrow(() -> new InvalidCredentialsException("Credenciales inválidas"));
         // despues encriptar password
         if(!persona.getPassword().equals(datos.getPassword())){
-            throw new RuntimeException("Credenciales inválidas ");
+            throw new InvalidCredentialsException("Credenciales inválidas ");
         }
 
         return new PersonaPerfilDTO(persona);
@@ -65,7 +68,7 @@ public class PersonaService {
 
     public PersonaPerfilDTO registrar(RegistrarDTO datos){
         if(personaRepository.existsByEmail(datos.getEmail())){
-            throw new RuntimeException("Error: Email ya registrado, intente con otro");
+            throw new DuplicateEmailException("Error: Email ya registrado, intente con otro");
         }
 
         Persona persona = new Persona();

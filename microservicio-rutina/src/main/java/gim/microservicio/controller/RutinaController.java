@@ -27,6 +27,7 @@ public class RutinaController {
     public List<RutinaDTO> obtenerRutinas(){
         return service.obtenerRutinas();
     }
+
     @GetMapping("/{id}")
     public RutinaDTO obtenerRutinaId(@PathVariable Long id){
         return service.obtenerRutina(id);

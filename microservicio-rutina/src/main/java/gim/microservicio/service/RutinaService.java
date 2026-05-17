@@ -4,6 +4,8 @@ import gim.microservicio.dto.ActualizarRutinaDTO;
 import gim.microservicio.dto.CrearRutinaDTO;
 import gim.microservicio.dto.RutinaDTO;
 import gim.microservicio.entity.Rutina;
+import gim.microservicio.exception.custom.PersonaNotFoundException;
+import gim.microservicio.exception.custom.RutinaNotFoundException;
 import gim.microservicio.repository.RutinaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -33,7 +35,7 @@ public class RutinaService {
 
     public RutinaDTO obtenerRutina(Long id){
         Rutina rutina = rutinaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No existe rutina con ese ID"));
+                .orElseThrow(() -> new RutinaNotFoundException("No existe rutina con ese ID"));
 
         return new RutinaDTO(rutina);
     }
@@ -51,7 +53,7 @@ public class RutinaService {
         try{
             restTemplate.getForObject(url, Object.class);
         }catch (Exception e){
-            throw new RuntimeException("El usuario con ese ID no existe");
+            throw new PersonaNotFoundException("El usuario con ese ID no existe");
         }
 
         Rutina rutinaNueva = new Rutina();
@@ -68,11 +70,18 @@ public class RutinaService {
 
     public RutinaDTO actualizarRutina(ActualizarRutinaDTO datos, Long id){
         Rutina rutina = rutinaRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("No existe rutina con ese ID"));
+                .orElseThrow(() -> new RutinaNotFoundException("No existe rutina con ese ID"));
 
-        rutina.setNombre(datos.getNombre());
-        rutina.setDescripcion(datos.getDescripcion());
-        rutina.setObjetivo(datos.getObjetivo());
+        if(datos.getNombre() != null){
+            rutina.setNombre(datos.getNombre());
+        }
+        if(datos.getDescripcion() != null){
+            rutina.setDescripcion(datos.getDescripcion());
+        }
+        if(datos.getObjetivo() != null){
+            rutina.setObjetivo(datos.getObjetivo());
+        }
+
 
         Rutina rutinaActualizada = rutinaRepository.save(rutina);
 
@@ -81,7 +90,7 @@ public class RutinaService {
 
     public void eliminarRutina(Long id){
         if(!rutinaRepository.existsById(id)){
-            throw new RuntimeException("No existe rutina con ese ID");
+            throw new RutinaNotFoundException("No existe rutina con ese ID");
         }
         rutinaRepository.deleteById(id);
     }
