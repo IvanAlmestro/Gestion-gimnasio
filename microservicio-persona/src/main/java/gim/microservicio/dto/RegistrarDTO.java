@@ -14,9 +14,11 @@ import java.time.LocalDate;
 public class RegistrarDTO {
 
     @NotBlank
+    @Size(min=3, max=50)
     private String nombre;
 
     @NotBlank
+    @Size(min=3, max=50)
     private String apellido;
 
     @Email

@@ -4,6 +4,9 @@ import gim.microservicio.dto.ActualizarRutinaDTO;
 import gim.microservicio.dto.CrearRutinaDTO;
 import gim.microservicio.dto.RutinaDTO;
 import gim.microservicio.service.RutinaService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,33 +22,37 @@ public class RutinaController {
     }
 
     @PostMapping
-    public RutinaDTO crearRutina(@RequestBody CrearRutinaDTO datos){
-        return service.crearRutina(datos);
+    public ResponseEntity<RutinaDTO> crearRutina(@Valid @RequestBody CrearRutinaDTO datos){
+
+        RutinaDTO nueva = service.crearRutina(datos);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(nueva);
     }
 
     @GetMapping
-    public List<RutinaDTO> obtenerRutinas(){
-        return service.obtenerRutinas();
+    public ResponseEntity<List<RutinaDTO>> obtenerRutinas(){
+        return ResponseEntity.ok(service.obtenerRutinas());
     }
 
     @GetMapping("/{id}")
-    public RutinaDTO obtenerRutinaId(@PathVariable Long id){
-        return service.obtenerRutina(id);
+    public ResponseEntity<RutinaDTO> obtenerRutinaId(@PathVariable Long id){
+        return ResponseEntity.ok(service.obtenerRutina(id));
     }
 
     @GetMapping("/usuario/{idUsuario}")
-    public List<RutinaDTO> obtenerRutinasUsuario(@PathVariable Long idUsuario){
-        return service.obtenerRutinasUsuario(idUsuario);
+    public ResponseEntity<List<RutinaDTO>> obtenerRutinasUsuario(@PathVariable Long idUsuario){
+        return ResponseEntity.ok(service.obtenerRutinasUsuario(idUsuario));
     }
 
     @PutMapping("/{id}")
-    public RutinaDTO actualizarRutina(@RequestBody ActualizarRutinaDTO datos,@PathVariable Long id){
-        return service.actualizarRutina(datos, id);
+    public ResponseEntity<RutinaDTO> actualizarRutina(@PathVariable Long id, @Valid @RequestBody ActualizarRutinaDTO datos){
+        return ResponseEntity.ok(service.actualizarRutina(datos, id));
     }
 
     @DeleteMapping("/{id}")
-    public void eliminarRutina(@PathVariable Long id){
+    public ResponseEntity<Void> eliminarRutina(@PathVariable Long id){
         service.eliminarRutina(id);
+        return ResponseEntity.noContent().build();
     }
 }
 
