@@ -24,9 +24,8 @@ function LoginPage(){
             localStorage.setItem("persona", JSON.stringify(response.data.perfil));
             setMensaje("Login exitoso");
 
-
             navigate("/dashboard");
-
+            window.location.reload();
         }catch(error){
             console.log(error);
 

@@ -18,10 +18,11 @@ public class Rutina {
     @Column(name="id_rutina")
     private Long id;
 
+    @Column
     private String nombre;
-
+    @Column
     private String descripcion;
-
+    @Column
     @Enumerated(EnumType.STRING)
     private Objetivo objetivo;
 
