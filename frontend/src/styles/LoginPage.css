@@ -1,10 +1,12 @@
 .login-container {
-    width: 350px;
+    width: 80%;
+
     padding: 2rem;
     border-radius: 16px;
     background-color: rgba(255,255,255,0.08);
     backdrop-filter: blur(10px);
     box-shadow: 0 0 30px rgba(0,0,0,0.5);
+    margin-top: 50%
 }
 .login-container p{
     text-align: center;

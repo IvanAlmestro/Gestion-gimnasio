@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/Navbar.css";
-
+import logoGym from "../assets/logogym.png";
 
 function Navbar() {
 
@@ -16,7 +16,14 @@ function Navbar() {
     return (
 
         <nav className="navbar">
-            <h2>GymApp</h2>
+            <Link to="/dashboard">
+                <h2>GymApp</h2>
+            </Link>
+
+            <Link to="/dashboard">
+                <img src={logoGym} alt="logo" className="img-logo"></img>
+            </Link>
+
             <div className="nav-links">
 
                 <Link to="/dashboard">

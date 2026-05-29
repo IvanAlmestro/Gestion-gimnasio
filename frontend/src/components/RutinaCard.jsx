@@ -17,6 +17,7 @@ function RutinaCard({ rutina }) {
                 {rutina.objetivo}
             </span>
 
+            <span> Ver Ejercicios </span>
         </div>
     )
 }

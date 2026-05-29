@@ -1,60 +1,38 @@
 .rutina-card {
-
     width: 320px;
-
     padding: 1.5rem;
-
     border-radius: 18px;
-
+    text-align: center;
     background: rgba(255,255,255,0.08);
-
     backdrop-filter: blur(10px);
-
     box-shadow: 0 0 20px rgba(0,0,0,0.4);
-
     transition: 0.3s ease;
-
     border: 1px solid rgba(255,255,255,0.1);
 }
 
 .rutina-card:hover {
-
     transform: translateY(-5px);
-
-    box-shadow: 0 0 30px rgba(220,38,38,0.4);
+    box-shadow: 0 0 30px rgba(228, 34, 34, 0.4);
 }
 
 .rutina-card h2 {
-
     color: white;
-
     margin-bottom: 10px;
-
     font-size: 1.4rem;
 }
 
 .descripcion {
-
     color: #d1d5db;
-
     margin-bottom: 15px;
-
     line-height: 1.5;
 }
 
 .objetivo {
-
     display: inline-block;
-
-    padding: 8px 14px;
-
-    border-radius: 999px;
-
-    background-color: #dc2626;
-
+    padding: 6px 12px;
+    border-radius: 20px;
+    background-color: rgba(218, 52, 52, 0.83);
     color: white;
-
     font-size: 0.9rem;
-
     font-weight: bold;
 }
