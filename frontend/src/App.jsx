@@ -1,36 +1,35 @@
 import { useState } from 'react'
-import './styles/App.css'
-import axios from "axios"
+import './styles/index.css'
 import {Routes, Route, Navigate} from "react-router-dom";
 import LoginPage from "./pages/LoginPage.jsx";
-import DashboardPage from "./pages/DashboardPage.jsx";
-import Navbar from "./components/Navbar.jsx";
-import RutinasPage from "./pages/RutinasPage.jsx";
-
-
-
+import MainLayout from "./components/MainLayout.jsx";
 
 function App() {
     const token = localStorage.getItem("token");
 
     return (
-        <div className="page">
-
-            {token && <Navbar/> }
-
-            <Routes>
-                <Route
-                    path="/login" element={<LoginPage />}
-                />
-                <Route
-                    path="/dashboard" element={token ? <DashboardPage/> : <Navigate to="/login"/>}
-                />
-                <Route
-                    path="/rutinas" element={token ? <RutinasPage/> : <Navigate to="/login"/>}
-                />
-            </Routes>
-
-        </div>
+        <Routes>
+            <Route
+                path="/login" 
+                element={token ? <Navigate to="/dashboard" /> : <LoginPage />}
+            />
+            <Route
+                path="/dashboard" 
+                element={token ? <MainLayout initialView="dashboard" /> : <Navigate to="/login"/>}
+            />
+            <Route
+                path="/rutinas" 
+                element={token ? <MainLayout initialView="rutinas" /> : <Navigate to="/login"/>}
+            />
+            <Route
+                path="/perfil" 
+                element={token ? <MainLayout initialView="perfil" /> : <Navigate to="/login"/>}
+            />
+            <Route
+                path="*" 
+                element={<Navigate to={token ? "/dashboard" : "/login"} />}
+            />
+        </Routes>
     )
 }
 
