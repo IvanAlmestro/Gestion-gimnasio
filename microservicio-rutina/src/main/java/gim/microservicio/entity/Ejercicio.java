@@ -1,8 +1,10 @@
 package gim.microservicio.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
+@Data
 public class Ejercicio {
     @GeneratedValue
     @Id

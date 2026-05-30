@@ -16,15 +16,19 @@ public class EjercicioService {
     public List<Ejercicio> obtenerEjercicios(){
         return ejercicioRepository.findAll();
     }
+
     public Optional<Ejercicio> obtenerEjercicio(Long id){
         if(ejercicioRepository.findById(id).isEmpty()){
             throw new RuntimeException("No existe ejercicio con ese ID");
         }
-        return ejercicioRepository.findById(id);
+
+        return  ejercicioRepository.findById(id);
     }
+
     public Ejercicio crearEjercicio(Ejercicio ejercicio){
         return ejercicioRepository.save(ejercicio);
     }
+
     public void eliminarEjercicio(Long id){
         if(ejercicioRepository.existsById(id)){
             ejercicioRepository.deleteById(id);
