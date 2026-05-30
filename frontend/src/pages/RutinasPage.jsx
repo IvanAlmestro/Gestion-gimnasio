@@ -22,8 +22,8 @@ function RutinasPage() {
         <div>
             <form>
                 <input name="nombre" placeholder="nombre"/>
-                <input name="nombre" placeholder="nombre"/>
-                <input name="nombre" placeholder="nombre"/>
+                <input name="descripcion" placeholder="descripcion"/>
+                <input name="objetivo" placeholder="objetivo"/>
                 <input name="nombre" placeholder="nombre"/>
                 <button className="btn btn-primary">Guardar</button>
             </form>

@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "rutinas")
@@ -25,6 +26,9 @@ public class Rutina {
     @Column
     @Enumerated(EnumType.STRING)
     private Objetivo objetivo;
+
+    @OneToMany(mappedBy = "rutina")
+    private List<Ejercicio> ejercicios;
 
     private LocalDate fechaCreacion;
 

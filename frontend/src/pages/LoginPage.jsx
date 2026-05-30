@@ -51,6 +51,9 @@ function LoginPage(){
                 />
                 <button type="submit">Ingresar</button>
                 <p>{mensaje}</p>
+
+                <span>¿Todavía no te registraste?</span>
+                <a>Crear Cuenta</a>
             </div>
         </form>
     )

@@ -16,6 +16,7 @@ function Navbar() {
     return (
 
         <nav className="navbar">
+
             <Link to="/dashboard">
                 <h2>GymApp</h2>
             </Link>
