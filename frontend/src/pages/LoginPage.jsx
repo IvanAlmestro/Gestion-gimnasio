@@ -1,4 +1,4 @@
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import {useState} from "react";
 import api from "../services/api";
 import "../styles/LoginPage.css"
@@ -52,8 +52,9 @@ function LoginPage(){
                 <button type="submit">Ingresar</button>
                 <p>{mensaje}</p>
 
-                <span>¿Todavía no te registraste?</span>
-                <a>Crear Cuenta</a>
+                <Link to="/register">
+                    ¿No tenés cuenta? Registrate
+                </Link>
             </div>
         </form>
     )

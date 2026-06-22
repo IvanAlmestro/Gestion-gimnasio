@@ -1,0 +1,64 @@
+.app-header {
+    height: 80px;
+    background-color: #111827;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 80px;
+}
+
+.header-date {
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.header-user {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.notification {
+    position: relative;
+    background-color: #111827;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.notification span {
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+    font-size: 10px;
+    color: white;
+    background-color: blue;
+    border-radius: 50%;
+    padding: 1px 4px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background-color: #cbd5e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-name {
+    margin: 0;
+    font-weight: 600;
+}
+
+.user-role {
+    margin: 0;
+    color: #fde047;
+    font-size: 12px;
+}
