@@ -14,7 +14,11 @@ import java.util.Optional;
 public class EjercicioController {
     private EjercicioService ejercicioService;
 
-    public ResponseEntity<List<Ejercicio>> obtenerEjercicios(@RequestBody Ejercicio ejercicio){
+    public EjercicioController(EjercicioService ejercicioService){
+        this.ejercicioService = ejercicioService;
+    }
+    @GetMapping
+    public ResponseEntity<List<Ejercicio>> obtenerEjercicios(){
 
         return ResponseEntity.ok(ejercicioService.obtenerEjercicios());
     }

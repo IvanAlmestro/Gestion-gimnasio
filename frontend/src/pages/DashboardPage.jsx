@@ -9,6 +9,7 @@ import WeightProgressCard from "../components/dashboard/WeightProgressCard.jsx";
 function DashboardPage() {
     const [rutinas, setRutinas] = useState([]);
 
+
     const [persona] = useState(() => {
         const personaStorage = localStorage.getItem("persona");
 

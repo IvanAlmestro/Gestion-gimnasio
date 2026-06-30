@@ -4,9 +4,10 @@ import axios from "axios"
 import {Routes, Route, Navigate} from "react-router-dom";
 import LoginPage from "./pages/LoginPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
-import RutinasPage from "./pages/RutinasPage.jsx";
+import RoutinesPage from "./pages/RoutinesPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import AppLayout from "./layouts/AppLayout.jsx";
+import ExercisesPage from "./pages/ExercisesPage.jsx";
 
 function ProtectedRoute({ children }) {
     const token = localStorage.getItem("token");
@@ -34,7 +35,8 @@ function App() {
                 }
             >
                 <Route path="/dashboard" element={<DashboardPage />} />
-                <Route path="/rutinas" element={<RutinasPage />} />
+                <Route path="/rutinas" element={<RoutinesPage />} />
+                <Route path="/ejercicios" element={<ExercisesPage />} />
             </Route>
         </Routes>
     );

@@ -1,0 +1,89 @@
+.exercises-page {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding-top: 48px;
+}
+
+.exercises-header {
+    margin-bottom: 32px;
+}
+
+.exercises-header h1 {
+    color: #fde047;
+    font-size: 32px;
+    margin-bottom: 28px;
+}
+
+.exercise-search {
+    width: 260px;
+    padding: 14px 18px;
+    border-radius: 12px;
+    background: #182235;
+    color: #cbd5e1;
+    border: 1px solid #334155;
+}
+
+.exercise-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.filter-button {
+    min-width: 110px;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 1px solid #243247;
+    background: #182235;
+    color: #f8fafc;
+    cursor: pointer;
+}
+
+.filter-button.active {
+    border-color: #06b6d4;
+    background: #1e3a5f;
+    color: #e0f2fe;
+}
+
+.exercise-count {
+    color: #94a3b8;
+    margin-bottom: 36px;
+}
+
+.exercise-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+}
+
+.exercise-card {
+    min-height: 140px;
+    padding: 22px;
+    border-radius: 12px;
+    background: #182235;
+    border: 1px solid #334155;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+    text-align: center;
+}
+
+.exercise-card h3 {
+    margin: 0 0 18px;
+    color: #f8fafc;
+    font-size: 16px;
+}
+
+.exercise-card p {
+    color: #fde047;
+    margin-bottom: 18px;
+}
+
+.exercise-card-button {
+    background: #1e40af;
+    color: #f8fafc;
+    border: 1px solid #3b82f6;
+    border-radius: 8px;
+    padding: 6px 18px;
+    cursor: pointer;
+}

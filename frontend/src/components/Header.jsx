@@ -5,7 +5,7 @@ function Header() {
 
     return (
         <header className="app-header">
-            <p className="header-date">Martes, 2 de junio</p>
+            <p className="header-date">Martes, 30 de junio</p>
 
             <div className="header-user">
                 <div className="notification">
@@ -15,7 +15,7 @@ function Header() {
 
                 <div className="user-info">
                     <div className="user-avatar">
-                        👤
+                        <img srcSet="../assets/user-img.jpg" />
                     </div>
 
                     <div>

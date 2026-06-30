@@ -1,5 +1,5 @@
-import "../styles/RutinaCard.css"
-function RutinaCard({ rutina }) {
+import "../styles/RoutineCard.css"
+function RoutineCard({ rutina }) {
 
     return (
 
@@ -22,4 +22,4 @@ function RutinaCard({ rutina }) {
     )
 }
 
-export default RutinaCard;
+export default RoutineCard;

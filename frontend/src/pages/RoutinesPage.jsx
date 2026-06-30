@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import RutinaCard from "../components/RutinaCard.jsx";
-import "../styles/RutinasPage.css";
+import RoutineCard from "../components/RoutineCard.jsx";
+import "../styles/RoutinePage.css";
 
-function RutinasPage() {
+function RoutinesPage() {
     const [rutinas, setRutinas] = useState([]);
 
     useEffect(() => {
-        async function fetchRutinas() {
+        async function fetchRoutines() {
             try {
                 const response = await fetch("http://localhost:8081/rutinas");
                 const data = await response.json();
@@ -15,7 +15,7 @@ function RutinasPage() {
                 console.log(error);
             }
         }
-        fetchRutinas();
+        fetchRoutines();
     }, []);
 
     return (
@@ -25,7 +25,7 @@ function RutinasPage() {
 
                 {rutinas.map((rutina) => (
 
-                    <RutinaCard
+                    <RoutineCard
                         key={rutina.id}
                         rutina={rutina}
                     />
@@ -39,4 +39,4 @@ function RutinasPage() {
     )
 }
 
-export default RutinasPage;
+export default RoutinesPage;
