@@ -1,4 +1,5 @@
 import "../styles/Header.css";
+import imgUser from "../assets/user-img.jpg";
 
 function Header() {
     const persona = JSON.parse(localStorage.getItem("persona"));
@@ -15,7 +16,7 @@ function Header() {
 
                 <div className="user-info">
                     <div className="user-avatar">
-                        <img srcSet="../assets/user-img.jpg" />
+                        <img src={imgUser} alt="imgUser" className="img-user"/>
                     </div>
 
                     <div>

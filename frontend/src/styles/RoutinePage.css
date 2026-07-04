@@ -1,12 +1,150 @@
-.rutinas-container {
+.rutinas-page {
+    width: 100%;
+    max-width: 1050px;
+    margin: 0 auto;
+    padding-top: 56px;
+}
+
+.rutinas-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 48px;
+}
+
+.rutinas-header h1 {
+    margin: 0 0 18px;
+    color: #fde047;
+    font-size: 34px;
+    font-weight: 800;
+}
+
+.rutinas-header p {
+    margin: 0;
+    color: #f8fafc;
+    font-size: 15px;
+}
+
+.new-routine-button {
+    margin-top: 28px;
+    padding: 12px 28px;
+    border-radius: 8px;
+    border: 2px solid #06b6d4;
+    background: transparent;
+    color: #67e8f9;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.new-routine-button:hover {
+    background: rgba(6, 182, 212, 0.12);
+}
+
+.rutinas-filters {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.routine-filter {
+    min-width: 120px;
+    height: 38px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: #182235;
+    color: #cbd5e1;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.routine-filter.active {
+    border-color: #06b6d4;
+    color: #e0f2fe;
+    background: #1e3a5f;
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.18);
+}
+
+.rutinas-count {
+    margin: 0 0 36px;
+    color: #94a3b8;
+    font-size: 14px;
+}
+
+.rutinas-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 48px;
+}
+
+.routine-card {
+    min-height: 220px;
+    padding: 26px 24px;
+    border-radius: 6px;
+    background: #182235;
+    border: 1px solid #334155;
+    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
 
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
 
-    flex-wrap: wrap;
-
-    gap: 25px;
-
+.routine-title {
+    display: flex;
+    align-items: center;
     justify-content: center;
+    gap: 8px;
+    margin-bottom: 22px;
+}
 
-    margin-top: 40px;
+.routine-icon {
+    font-size: 22px;
+}
+
+.routine-title h3 {
+    margin: 0;
+    color: #f8fafc;
+    font-size: 20px;
+    font-weight: 800;
+}
+
+.routine-objective {
+    margin-bottom: 22px;
+    color: #fde047;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.routine-info {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 28px;
+}
+
+.routine-info p {
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 14px;
+}
+
+.routine-button {
+    margin-top: auto;
+    min-width: 118px;
+    height: 36px;
+    border-radius: 7px;
+    background: #06b6d4;
+    color: #020617;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 700;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.routine-button:hover {
+    background: #22d3ee;
 }

@@ -1,5 +1,6 @@
 package gim.microservicio.repository;
 
+import gim.microservicio.dto.EjercicioDTO;
 import gim.microservicio.entity.Ejercicio;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

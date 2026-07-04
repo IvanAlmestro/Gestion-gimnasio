@@ -50,6 +50,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: clip;
 }
 
 .user-name {
@@ -61,4 +62,10 @@
     margin: 0;
     color: #fde047;
     font-size: 12px;
+}
+.img-user{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+
 }

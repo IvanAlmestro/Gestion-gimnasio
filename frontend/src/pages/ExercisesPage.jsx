@@ -14,15 +14,13 @@ function ExercisesPage() {
                 if (!response.ok) {
                     throw new Error("Error al obtener ejercicios");
                 }
-
                 const data = await response.json();
-
                 setExercises(data);
+
             } catch (error) {
                 console.log(error);
             }
         }
-
         fetchExercises();
     }, []);
 
@@ -70,7 +68,7 @@ function ExercisesPage() {
             </div>
 
             <p className="exercise-count">
-                {filteredExercises.length} ejercicios encontrados
+                {filteredExercises.length} ejercicios encontrados.
             </p>
 
             <div className="exercise-grid">

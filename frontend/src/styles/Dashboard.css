@@ -3,31 +3,24 @@
     max-width: 1100px;
     margin: 0 auto;
 }
-
-
 .dashboard-header-text {
     margin-bottom: 36px;
 }
-
 .dashboard-header-text h1 {
     color: #f8fafc;
     font-size: 32px;
     margin-bottom: 8px;
 }
-
 .dashboard-header-text p {
     color: #cbd5e1;
     font-size: 15px;
 }
-
-
 .dashboard-stats {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 56px;
     margin-bottom: 48px;
 }
-
 .stat-card,
 .next-workout-card,
 .small-card,
@@ -50,13 +43,11 @@
     color: #cbd5e1;
     margin-bottom: 14px;
 }
-
 .stat-card p {
     margin: 8px 0 0;
     color: #cbd5e1;
     font-size: 14px;
 }
-
 .stat-card {
     min-height: 140px;
     padding: 10px;
@@ -86,25 +77,24 @@
 
     min-height: 200px;
 }
-
+/*separacion detalles con icono de proximo entrenamiento card */
+.next-workout-card span{
+    margin-left: 1em;
+}
 /*botones VER*/
 .primary-button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
     min-width: 72px;
     height: 34px;
     padding: 0 18px;
-
     background: #06b6d4;
     color: #020617;
     text-decoration: none;
-
     border-radius: 8px;
     font-weight: 600;
     font-size: 14px;
-
     border: none;
     box-shadow: 0 0 14px rgba(6, 182, 212, 0.25);
 }
@@ -124,7 +114,6 @@
     padding: 28px;
     display: flex;
     flex-direction: column;
-
     align-items: center;
     justify-content: start;
 }
@@ -142,7 +131,6 @@
     min-height: 140px;
     padding: 22px;
     text-align: center;
-
 }
 .small-card h3 {
     margin-bottom: 1em;
@@ -201,7 +189,5 @@
 }
 /*efecto para cards */
 .dashboard-page article:hover{
-
     box-shadow: rgb(6 182 212 / 0.3) 3px 3px 6px;
-
 }

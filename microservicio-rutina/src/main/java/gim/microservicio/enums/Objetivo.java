@@ -1,7 +1,10 @@
 package gim.microservicio.enums;
 
 public enum Objetivo {
+    ADAPTACION,
     HIPERTROFIA,
     FUERZA,
-    DEFINICION
+    DEFINICION,
+    RESISTENCIA,
+    MOVILIDAD
 }

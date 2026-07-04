@@ -1,5 +1,6 @@
 package gim.microservicio.service;
 
+import gim.microservicio.dto.EjercicioDTO;
 import gim.microservicio.entity.Ejercicio;
 import gim.microservicio.repository.EjercicioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,39 +14,37 @@ public class EjercicioService {
     @Autowired
     private EjercicioRepository ejercicioRepository;
 
-    public List<Ejercicio> obtenerEjercicios(){
-        return ejercicioRepository.findAll();
+    public List<EjercicioDTO> obtenerEjercicios() {
+        return ejercicioRepository.findAll()
+                .stream()
+                .map(EjercicioDTO::new)
+                .toList();
     }
+    public EjercicioDTO obtenerEjercicio(Long id) {
+        Ejercicio ejercicio = ejercicioRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No existe ejercicio con ese ID"));
 
-    public Optional<Ejercicio> obtenerEjercicio(Long id){
-        if(ejercicioRepository.findById(id).isEmpty()){
-            throw new RuntimeException("No existe ejercicio con ese ID");
-        }
-
-        return  ejercicioRepository.findById(id);
+        return new EjercicioDTO(ejercicio);
     }
-
-    public Ejercicio crearEjercicio(Ejercicio ejercicio){
+    public Ejercicio crearEjercicio(Ejercicio ejercicio) {
         return ejercicioRepository.save(ejercicio);
     }
-
-    public void eliminarEjercicio(Long id){
-        if(ejercicioRepository.existsById(id)){
+    public void eliminarEjercicio(Long id) {
+        if (ejercicioRepository.existsById(id)) {
             ejercicioRepository.deleteById(id);
-        }else{
+        } else {
             throw new RuntimeException("No existe ejercicio con ese ID");
         }
-
     }
     public Ejercicio actualizarEjercicio(Long id, Ejercicio ejercicioActualizado) {
-
         Ejercicio ejercicio = ejercicioRepository.findById(id)
-                .orElseThrow(() ->
-                        new RuntimeException("Ejercicio no encontrado"));
+                .orElseThrow(() -> new RuntimeException("Ejercicio no encontrado"));
 
         ejercicio.setNombre(ejercicioActualizado.getNombre());
         ejercicio.setSeries(ejercicioActualizado.getSeries());
         ejercicio.setRepeticiones(ejercicioActualizado.getRepeticiones());
+        ejercicio.setDescanso(ejercicioActualizado.getDescanso());
+        ejercicio.setGrupoMuscular(ejercicioActualizado.getGrupoMuscular());
 
         return ejercicioRepository.save(ejercicio);
     }

@@ -1,5 +1,6 @@
 package gim.microservicio.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -14,6 +15,7 @@ public class Ejercicio {
     private Integer repeticiones;
     private String descanso;
     private String grupoMuscular;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name= "rutina_id")
     private Rutina rutina;

@@ -1,9 +1,8 @@
 .login-container {
     width: 80%;
-
     padding: 2rem;
     border-radius: 16px;
-    background-color: rgba(255,255,255,0.08);
+    background-color: #182235;
     backdrop-filter: blur(10px);
     box-shadow: 0 0 30px rgba(0,0,0,0.5);
     margin-top: 10em;
@@ -17,26 +16,25 @@
     width: 100%;
     padding: 12px;
     margin-top: 10px;
-    border: none;
-    border-radius: 8px;
-    background-color: #1f2937;
+    border: 1px solid #435874;
+    border-radius: 10px;
+    background-color: #1E293B;
     color: white;
 }
 .login-container h2{
     text-align: center;
-
 }
 .login-container button{
     width: 100%;
     padding: 12px;
     margin-top: 15px;
-    border: none;
+    border: 1px solid #3B82F6;
     border-radius: 8px;
-    background-color: #dc2626;
-    color: white;
+    background-color: #1E3A8A;
+    color: #E0F2FE;
     cursor: pointer;
 }
 .login-container button:hover{
 
-    background-color: #850d0d;
+    background-color: #173ba8;
 }
