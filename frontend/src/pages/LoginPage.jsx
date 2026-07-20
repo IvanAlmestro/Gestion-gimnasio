@@ -1,63 +1,67 @@
-import {Link, useNavigate} from 'react-router-dom';
-import {useState} from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import api from "../services/api";
-import "../styles/LoginPage.css"
+import "../styles/LoginPage.css";
 
-function LoginPage(){
+function LoginPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [mensaje, setMensaje] = useState("");
     const navigate = useNavigate();
 
-    const handleLogin = async (e) =>{
-
+    const handleLogin = async (e) => {
         e.preventDefault();
-        console.log(email);
-        console.log(password);
-        try{
+
+        try {
             const response = await api.post("/personas/login", {
                 email,
                 password
             });
-            console.log(response.data);
+
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("persona", JSON.stringify(response.data.perfil));
+
             setMensaje("Login exitoso");
 
             navigate("/dashboard");
-            window.location.reload();
-        }catch(error){
+        } catch (error) {
             console.log(error);
-
-            setMensaje("Credenciales inválidas")
+            setMensaje("Credenciales inválidas");
         }
-    }
+    };
 
     return (
-        <form onSubmit={handleLogin} >
-            <div className="login-container">
-                <h2>Ingrese sus datos</h2>
+        <section className="login-page">
+            <form className="login-container" onSubmit={handleLogin}>
+                <h1>OX SPORTS</h1>
+                <h2>Potenciá tus entrenamientos</h2>
+
                 <input
-                    placeholder="email"
+                    placeholder="Email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="input-login"
                 />
+
                 <input
-                    placeholder="contraseña"
+                    placeholder="Contraseña"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className="input-login"
                 />
-                <button type="submit">Ingresar</button>
-                <p>{mensaje}</p>
 
-                <Link to="/register">
+                <button type="submit">Ingresar</button>
+
+                {mensaje && <p className="login-message">{mensaje}</p>}
+
+                <Link className="login-link" to="/register">
                     ¿No tenés cuenta? Registrate
                 </Link>
-            </div>
-        </form>
-    )
+            </form>
+        </section>
+    );
 }
 
 export default LoginPage;

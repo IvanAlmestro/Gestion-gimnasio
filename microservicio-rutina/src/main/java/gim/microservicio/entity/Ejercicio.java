@@ -14,6 +14,7 @@ public class Ejercicio {
     private Integer series;
     private Integer repeticiones;
     private String descanso;
+    private Integer rir;
     private String grupoMuscular;
     @JsonIgnore
     @ManyToOne

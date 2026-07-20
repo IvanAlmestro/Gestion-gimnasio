@@ -4,6 +4,7 @@ import gim.microservicio.security.JWTFilter;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,38 +26,36 @@ public class SecurityConfig {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http)
-            throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .csrf(csrf -> csrf.disable())
+                .csrf(csrf -> csrf.disable()) // Solo necesitas desactivarlo una vez
 
                 .authorizeHttpRequests(auth -> auth
+                        // 1. Permitir peticiones preflight (CORS) a nivel de seguridad
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+
                         .requestMatchers(
                                 "/personas/login",
-                                "/personas/register"
+                                "/personas/register",
+                                "/error" // 2. IMPORTANTE: Excluir la ruta de errores para no enmascarar fallos
                         ).permitAll()
 
                         .anyRequest().authenticated()
                 )
 
-                .cors(cors -> {})
+                // Integrar la configuración de CORS
+                .cors(cors -> {
+                })
 
-                .csrf(csrf -> csrf.disable())
-
-                .addFilterBefore(jwtFilter,
-                        UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
 
                 .exceptionHandling(ex -> ex
-                        .authenticationEntryPoint(
-                                (request, response, authException) ->
-                                        response.sendError(
-                                                HttpServletResponse.SC_UNAUTHORIZED,
-                                                "No autenticado"
-                                        )
+                        .authenticationEntryPoint((request, response, authException) ->
+                                response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "No autenticado")
                         )
                 );
+
         return http.build();
-    }
-}
+    }}
 

@@ -1,77 +1,89 @@
-import {useState} from "react";
-import {useNavigate} from 'react-router-dom';
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../services/api.js";
+import "../styles/LoginPage.css";
 
-function RegisterPage(){
-
+function RegisterPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [nombre, setNombre] = useState("");
+    const [apellido, setApellido] = useState("");
     const [mensaje, setMensaje] = useState("");
-    const [apellido,setApellido] = useState("");
+
     const navigate = useNavigate();
 
-    const handleRegister = async (e) =>{
-
+    const handleRegister = async (e) => {
         e.preventDefault();
-        console.log(nombre);
-        console.log(email);
-        console.log(password);
-        try{
-            const response = await api.post("/personas/register", {
+
+        try {
+            await api.post("/personas/register", {
                 nombre,
                 apellido,
                 email,
                 password
             });
-            console.log(response.data);
+
             setMensaje("Registro exitoso");
 
             navigate("/login");
-
-        }catch(error){
+        } catch (error) {
             console.log(error);
             console.log(error.response);
             console.log(error.response?.data);
             console.log(error.response?.status);
 
-            setMensaje("Error en el registro")
+            setMensaje("Error en el registro");
         }
-    }
+    };
 
     return (
+        <section className="login-page">
+            <form className="login-container register-container" onSubmit={handleRegister}>
+                <h1>OX SPORTS</h1>
+                <h2>Potenciá tus entrenamientos</h2>
 
-            <div className="login-container">
-                <h2>Crear Cuenta</h2>
-
+                <label>Nombre</label>
                 <input
-                    placeholder="nombre"
-                    type="name"
+                    placeholder="Ej: Ivan"
+                    type="text"
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
                 />
+
+                <label>Apellido</label>
                 <input
-                    placeholder="apellido"
-                    type="String"
+                    placeholder="Ej: Suarez"
+                    type="text"
                     value={apellido}
                     onChange={(e) => setApellido(e.target.value)}
                 />
+
+                <label>Email</label>
                 <input
-                    placeholder="email"
+                    placeholder="Ej: ivan@email.com"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
+
+                <label>Contraseña</label>
                 <input
-                    placeholder="contraseña"
+                    placeholder="Minimo 6 caracteres"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <p>{mensaje}</p>
-                <button onClick={handleRegister}>Registrarse</button>
-            </div>
 
-    )
+                <button type="submit">Registrarse</button>
+
+                {mensaje && <p className="login-message">{mensaje}</p>}
+
+                <Link className="login-link" to="/login">
+                    ¿Ya tenés cuenta? Iniciar sesión
+                </Link>
+            </form>
+        </section>
+    );
 }
+
 export default RegisterPage;

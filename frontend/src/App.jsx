@@ -1,6 +1,4 @@
-import { useState } from 'react'
 import './styles/App.css'
-import axios from "axios"
 import {Routes, Route, Navigate} from "react-router-dom";
 import LoginPage from "./pages/LoginPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
@@ -8,6 +6,8 @@ import RoutinesPage from "./pages/RoutinesPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import AppLayout from "./layouts/AppLayout.jsx";
 import ExercisesPage from "./pages/ExercisesPage.jsx";
+import PerfilPage from "./pages/ProfilePage.jsx"
+import RoutineDetailPage from "./pages/RoutineDetailPage.jsx";
 
 function ProtectedRoute({ children }) {
     const token = localStorage.getItem("token");
@@ -27,16 +27,15 @@ function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/register" element={<RegisterPage />} />
 
-            <Route
-                element={
-                    <ProtectedRoute>
-                        <AppLayout />
-                    </ProtectedRoute>
-                }
-            >
+            <Route element={<ProtectedRoute>
+                                <AppLayout />
+                            </ProtectedRoute>}>
+
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/rutinas" element={<RoutinesPage />} />
+                <Route path="/rutinas/:id" element={<RoutineDetailPage />} />
                 <Route path="/ejercicios" element={<ExercisesPage />} />
+                <Route path="/perfil" element={<PerfilPage />} />
             </Route>
         </Routes>
     );

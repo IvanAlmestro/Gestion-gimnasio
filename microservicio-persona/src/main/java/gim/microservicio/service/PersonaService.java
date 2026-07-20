@@ -99,8 +99,7 @@ public class PersonaService {
         persona.setApellido(datos.getApellido());
         persona.setEmail(datos.getEmail());
         //hashing
-        persona.setPassword(
-                passwordEncoder.encode(datos.getPassword()));
+        persona.setPassword(passwordEncoder.encode(datos.getPassword()));
         persona.setPeso(datos.getPeso());
         persona.setAltura(datos.getAltura());
         persona.setObjetivo(datos.getObjetivo());

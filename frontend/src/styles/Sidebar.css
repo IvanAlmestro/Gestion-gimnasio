@@ -23,7 +23,6 @@
 }
 .sidebar-link:hover{
     background: #085eab;
-    font-size: 1.1em;
 }
 .sidebar-link.active {
     background-color: #8a4f1d;
@@ -41,5 +40,4 @@
 .logout-button:hover{
     background-color: #b01f06;
     color : #ffb5b5;
-    font-size: 0.9em;
 }

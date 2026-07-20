@@ -3,10 +3,16 @@ import imgUser from "../assets/user-img.jpg";
 
 function Header() {
     const persona = JSON.parse(localStorage.getItem("persona"));
+    const fechaActual = new Date().toLocaleDateString("es-AR", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+        });
+    const fechaMayus = fechaActual.charAt(0).toUpperCase() + fechaActual.slice(1);
 
     return (
         <header className="app-header">
-            <p className="header-date">Martes, 30 de junio</p>
+            <p className="header-date">{fechaMayus}</p>
 
             <div className="header-user">
                 <div className="notification">

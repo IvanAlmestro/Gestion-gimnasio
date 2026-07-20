@@ -5,6 +5,8 @@ import gim.microservicio.entity.Persona;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 
@@ -16,6 +18,7 @@ public class PersonaPerfilDTO {
     private Double altura;
     private Double peso;
     private String objetivo;
+    private LocalDate fechaRegistro;
 
     public PersonaPerfilDTO(Persona persona){
         this.id = persona.getId();
@@ -25,6 +28,7 @@ public class PersonaPerfilDTO {
         this.altura = persona.getAltura();
         this.peso = persona.getPeso();
         this.objetivo = persona.getObjetivo();
+        this.fechaRegistro = persona.getFechaRegistro();
 
     }
 }
