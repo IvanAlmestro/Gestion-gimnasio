@@ -32,13 +32,13 @@ function RoutineIdCard({
 
                 <tbody>
 
-                {exercises.map((exercise) => (
+                {exercises?.map((exercise) => (
 
                     <tr key={exercise.id}>
                         <td>{exercise.nombre}</td>
                         <td>{exercise.series}</td>
-                        <td>{exercise.repeticiones}</td>
-                        <td>{exercise.rir}</td>
+                        <td>{exercise.repeticiones-2 + " - " + exercise.repeticiones}</td>
+                        <td>{exercise.rir || "-"}</td>
                     </tr>
 
                 ))}

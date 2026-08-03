@@ -15,7 +15,7 @@ function RoutineCard({ rutina }) {
             </span>
 
             <div className="routine-info">
-                <p>🔥 {rutina.cantidadEjercicios || 5} ejercicios</p>
+                <p>🔥 {rutina.lenght || 5} ejercicios</p>
                 <p>🕒 {rutina.duracion || "60 min aprox"}</p>
             </div>
 

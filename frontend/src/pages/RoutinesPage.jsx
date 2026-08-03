@@ -5,6 +5,7 @@ import "../styles/RoutinePage.css";
 function RutinasPage() {
     const [rutinas, setRutinas] = useState([]);
     const [selectedFilter, setSelectedFilter] = useState("TODAS");
+    const [ejercicios, setEjercicios] = useState([]);
 
     useEffect(() => {
         async function fetchRutinas() {
@@ -16,7 +17,7 @@ function RutinasPage() {
                 }
 
                 const data = await response.json();
-
+                /*setEjercicios(data.ejercicios)*/
                 setRutinas(data);
             } catch (error) {
                 console.log(error);
@@ -80,6 +81,7 @@ function RutinasPage() {
                     <RoutineCard
                         key={rutina.id || rutina.idRutina}
                         rutina={rutina}
+
                     />
                 ))}
             </div>

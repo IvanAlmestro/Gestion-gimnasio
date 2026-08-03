@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import {use, useEffect, useState} from "react";
 import RoutineIdCard from "../components/routines/RoutineIdCard.jsx";
 import "../styles/RoutinePage.css";
 import { useParams } from "react-router-dom";
@@ -8,17 +8,20 @@ function RoutineDetailPage() {
     const [exercises, setExercises] = useState([]);
     /* const [selectedFilter, setSelectedFilter] = useState("first");*/
     const [nombreRutina, setNombreRutina] = useState();
+    const[objetivo, setObjetivo] = useState();
+    const[duracion, setDuracion] = useState();
     const { id } = useParams();
 
 
     useEffect(() => {
         const token = localStorage.getItem('token'); // <- Ajusta esto según tu proyecto
         console.log("Token a enviar:", token);
+
         const fetchRutina = async () => {
             try {
                 // 1. Obtén tu token de donde lo estés guardando (ej. localStorage, sessionStorage, o un Context)
                 const token = localStorage.getItem('token'); // <- Ajusta esto según tu proyecto
-                const response = await fetch(`http://localhost:8080/rutinas/${id}`, {
+                const response = await fetch(`http://localhost:8081/rutinas/${id}`, {
                     method: 'GET',
                     headers: {
                         'Authorization': `Bearer ${token}`,
@@ -39,7 +42,14 @@ function RoutineDetailPage() {
 
 
                 console.log(data);
+                setNombreRutina(data.nombre)
+                setObjetivo(data.objetivo)
                 setExercises(data.ejercicios);
+
+                /*Cálculo dinámico de tiempo estimado de rutina*/
+                const totalSeries = data.ejercicios?.reduce((acc, ej) => acc + ej.series, 0) || 0;
+                const tiempoEstimado = totalSeries > 0 ? totalSeries * 3 : 90;
+                setDuracion(`${tiempoEstimado} min`);
 
             } catch (error) {
                 console.error("Ocurrió un error:", error.message);
@@ -66,9 +76,9 @@ function RoutineDetailPage() {
 
             </div>
             <RoutineIdCard
-                title="Push Day"
-                objective="HIPERTROFIA"
-                duration="60 min"
+                title={nombreRutina}
+                objective= {objetivo}
+                duration={duracion}
                 exercises={exercises}
             />
 

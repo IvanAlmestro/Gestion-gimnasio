@@ -2,12 +2,14 @@ package gim.microservicio.service;
 
 import gim.microservicio.dto.ActualizarRutinaDTO;
 import gim.microservicio.dto.CrearRutinaDTO;
+import gim.microservicio.dto.EjercicioDTO;
 import gim.microservicio.dto.RutinaDTO;
 import gim.microservicio.entity.Rutina;
 import gim.microservicio.exception.custom.PersonaNotFoundException;
 import gim.microservicio.exception.custom.RutinaNotFoundException;
 import gim.microservicio.repository.RutinaRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
@@ -32,7 +34,7 @@ public class RutinaService {
                 .map(RutinaDTO::new)
                 .toList();
     }
-
+    @Transactional(readOnly = true)
     public RutinaDTO obtenerRutina(Long id){
         Rutina rutina = rutinaRepository.findById(id)
                 .orElseThrow(() -> new RutinaNotFoundException("No existe rutina con ese ID"));
