@@ -1,5 +1,6 @@
 import "../styles/Header.css";
 import imgUser from "../assets/user-img.jpg";
+import {Link} from "react-router-dom";
 
 function Header() {
     const persona = JSON.parse(localStorage.getItem("persona"));
@@ -21,16 +22,19 @@ function Header() {
                 </div>
 
                 <div className="user-info">
-                    <div className="user-avatar">
-                        <img src={imgUser} alt="imgUser" className="img-user"/>
-                    </div>
-
+                    <Link to="/perfil">
+                        <div className="user-avatar">
+                            <img src={imgUser} alt="imgUser" className="img-user"/>
+                        </div>
+                    </Link>
                     <div>
+
                         <p className="user-name">
                             {persona?.nombre || "Iván Almestro"}
                         </p>
                         <p className="user-role">Alumno</p>
                     </div>
+
                 </div>
             </div>
         </header>

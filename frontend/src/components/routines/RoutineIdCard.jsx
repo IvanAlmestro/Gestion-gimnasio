@@ -35,7 +35,7 @@ function RoutineIdCard({
                 {exercises?.map((exercise) => (
 
                     <tr key={exercise.id}>
-                        <td>{exercise.nombre}</td>
+                        <td className="td-nombre">{exercise.nombre}</td>
                         <td>{exercise.series}</td>
                         <td>{exercise.repeticiones-2 + " - " + exercise.repeticiones}</td>
                         <td>{exercise.rir || "-"}</td>
@@ -47,7 +47,7 @@ function RoutineIdCard({
 
             </table>
 
-            <button>
+            <button className="btn-comenzar">
                 Comenzar {title}
             </button>
 

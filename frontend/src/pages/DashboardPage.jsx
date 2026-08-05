@@ -8,6 +8,7 @@ import WeightProgressCard from "../components/dashboard/WeightProgressCard.jsx";
 
 function DashboardPage() {
     const [rutinas, setRutinas] = useState([]);
+    const [rutinaUser, setRutinaUser] = useState();
 
 
     const [persona] = useState(() => {

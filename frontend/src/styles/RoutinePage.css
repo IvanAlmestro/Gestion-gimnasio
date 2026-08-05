@@ -155,7 +155,7 @@
     width: 900px;
     background:#232D42;
     border-radius:18px;
-    padding:35px;
+    padding:40px 80px 40px 80px;
 
     display:flex;
     flex-direction:column;
@@ -197,6 +197,7 @@
     border-collapse:collapse;
     color:white;
 
+
 }
 
 .routine-id-card th{
@@ -208,7 +209,7 @@
 
 .routine-id-card td{
 
-    padding:18px;
+    padding:20px;
     text-align:center;
     border-bottom:1px solid #313C52;
 
@@ -225,4 +226,35 @@
 td{
     font-weight: lighter;
     color: #D5D4D4;
+}
+td.td-nombre{
+    text-align: left;
+
+}
+article .btn-comenzar{
+    border: 1px solid #3B82F6;
+    background-color: #1E40AF;
+    color: #F8FAFC;
+    font-family: 'Poppins', sans-serif;
+}
+.app-content{
+    display: flex;
+    justify-content: center;
+}
+.title-rutine{
+    text-align: center;
+}
+h1{
+    color: #FFDC7B;
+}
+
+.btn-back {
+    cursor: pointer;
+    text-decoration: none;
+    color: #a0a0a0;
+    font-weight: 500;
+
+}
+.btn-back:hover {
+    color: #ffffff;
 }

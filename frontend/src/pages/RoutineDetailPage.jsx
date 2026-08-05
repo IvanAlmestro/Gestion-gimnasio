@@ -1,7 +1,8 @@
 import {use, useEffect, useState} from "react";
 import RoutineIdCard from "../components/routines/RoutineIdCard.jsx";
 import "../styles/RoutinePage.css";
-import { useParams } from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
+import routinesPage from "./RoutinesPage.jsx";
 
 function RoutineDetailPage() {
 
@@ -14,13 +15,13 @@ function RoutineDetailPage() {
 
 
     useEffect(() => {
-        const token = localStorage.getItem('token'); // <- Ajusta esto según tu proyecto
-        console.log("Token a enviar:", token);
+        const token = localStorage.getItem('token');
+
 
         const fetchRutina = async () => {
             try {
                 // 1. Obtén tu token de donde lo estés guardando (ej. localStorage, sessionStorage, o un Context)
-                const token = localStorage.getItem('token'); // <- Ajusta esto según tu proyecto
+                const token = localStorage.getItem('token');
                 const response = await fetch(`http://localhost:8081/rutinas/${id}`, {
                     method: 'GET',
                     headers: {
@@ -68,9 +69,14 @@ function RoutineDetailPage() {
  */
     return (
         <section>
+            <Link to="/rutinas" className="btn-back">
+                ⬅ Volver a mis rutinas
+            </Link>
+
+
             <div>
                 <div>
-                    <h1>{nombreRutina}</h1>
+                    <h1 className="title-rutine">Rutina: {nombreRutina}</h1>
                 </div>
 
 
