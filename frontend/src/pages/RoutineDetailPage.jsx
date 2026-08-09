@@ -11,6 +11,7 @@ function RoutineDetailPage() {
     const [nombreRutina, setNombreRutina] = useState();
     const[objetivo, setObjetivo] = useState();
     const[duracion, setDuracion] = useState();
+    const[routineId, setRoutineId] = useState();
     const { id } = useParams();
 
 
@@ -46,7 +47,7 @@ function RoutineDetailPage() {
                 setNombreRutina(data.nombre)
                 setObjetivo(data.objetivo)
                 setExercises(data.ejercicios);
-
+                setRoutineId(data.id);
                 /*Cálculo dinámico de tiempo estimado de rutina*/
                 const totalSeries = data.ejercicios?.reduce((acc, ej) => acc + ej.series, 0) || 0;
                 const tiempoEstimado = totalSeries > 0 ? totalSeries * 3 : 90;
@@ -86,6 +87,7 @@ function RoutineDetailPage() {
                 objective= {objetivo}
                 duration={duracion}
                 exercises={exercises}
+                routineId={routineId}
             />
 
         </section>

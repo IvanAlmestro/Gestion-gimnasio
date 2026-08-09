@@ -1,8 +1,10 @@
 package gim.microservicio.controller;
 
 import gim.microservicio.dto.ActualizarRutinaDTO;
+import gim.microservicio.dto.ComenzarRutinaDTO;
 import gim.microservicio.dto.CrearRutinaDTO;
 import gim.microservicio.dto.RutinaDTO;
+import gim.microservicio.service.RegistroEntrenamientoService;
 import gim.microservicio.service.RutinaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -16,9 +18,11 @@ import java.util.List;
 public class RutinaController {
 
     private final RutinaService service;
+    private final RegistroEntrenamientoService registroService;
 
-    public RutinaController(RutinaService service){
+    public RutinaController(RutinaService service, RegistroEntrenamientoService registroService){
         this.service = service;
+        this.registroService = registroService;
     }
 
     @PostMapping
@@ -53,6 +57,16 @@ public class RutinaController {
     public ResponseEntity<Void> eliminarRutina(@PathVariable Long id){
         service.eliminarRutina(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/comenzar")
+    public ResponseEntity<String> comenzarRutina(@RequestBody ComenzarRutinaDTO request) {
+
+        // Llamamos al cerebro para que guarde todox
+        registroService.registrarInicio(request.getUsuarioId(), request.getRutinaId());
+
+        // Le avisamos a React que todox salió bien (Status 200 OK)
+        return ResponseEntity.ok("¡Entrenamiento registrado con éxito!");
     }
 }
 

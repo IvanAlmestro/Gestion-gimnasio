@@ -1,9 +1,20 @@
+import {Link, useNavigate} from "react-router-dom";
+
 function RoutineIdCard({
                            title,
                            objective,
                            duration,
-                           exercises
-                       }) {
+                           exercises,
+                           routineId}) {
+    const navigate = useNavigate();
+
+    const handleComenzar = () => {
+        // 💡 Acá en el futuro meteremos el fetch (POST) al backend
+        // para guardar en la base de datos que el entrenamiento empezó.
+
+        // Por ahora, solo hacemos que nos lleve a la otra pantalla:
+        navigate(`/entrenamiento/${routineId}`);
+    };
     return (
         <article className="routine-id-card">
 
@@ -47,7 +58,7 @@ function RoutineIdCard({
 
             </table>
 
-            <button className="btn-comenzar">
+            <button onClick={handleComenzar} className="btn-comenzar">
                 Comenzar {title}
             </button>
 

@@ -8,6 +8,7 @@ import AppLayout from "./layouts/AppLayout.jsx";
 import ExercisesPage from "./pages/ExercisesPage.jsx";
 import PerfilPage from "./pages/ProfilePage.jsx"
 import RoutineDetailPage from "./pages/RoutineDetailPage.jsx";
+import ActiveWorkoutPage from "./pages/ActiveWorkoutPage.jsx";
 
 function ProtectedRoute({ children }) {
     const token = localStorage.getItem("token");
@@ -34,6 +35,7 @@ function App() {
                 <Route path="/dashboard" element={<DashboardPage />} />
                 <Route path="/rutinas" element={<RoutinesPage />} />
                 <Route path="/rutinas/:id" element={<RoutineDetailPage />} />
+                <Route path="/entrenamiento/:id" element={<ActiveWorkoutPage />} />
                 <Route path="/ejercicios" element={<ExercisesPage />} />
                 <Route path="/perfil" element={<PerfilPage />} />
             </Route>
