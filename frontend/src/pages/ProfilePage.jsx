@@ -1,24 +1,25 @@
-import { useState } from "react";
+import { useAuth } from "../hooks/useAuth";
 import imgperfil from "../assets/user-img.jpg";
-import "../styles/Profile.css";
 import ProfileCardStats from "../components/profile/ProfileCardStats.jsx";
 import ProfileCardInfo from "../components/profile/ProfileCardInfo.jsx";
+import "../styles/Profile.css";
 
 function ProfilePage() {
-    const [persona] = useState(() => {
-        const personaStorage = localStorage.getItem("persona");
-
-        return personaStorage
-            ? JSON.parse(personaStorage)
-            : null;
-    });
+    // En lugar de leer el localStorage a mano, lo traemos de nuestro hook global
+    const { persona } = useAuth();
 
     return (
         <section className="profile-page">
             <div className="profile-content">
+
                 <div className="profile-img-text">
                     <div className="profile-img-wrapper">
-                        <img src={imgperfil} className="img-profile" alt="Foto de perfil" />
+                        <img
+                            src={imgperfil}
+                            className="img-profile"
+                            alt="Foto de perfil"
+                        />
+                        {/* TODO: A futuro, conectar este botón con un input type="file" y AWS S3 o tu BD */}
                         <button className="profile-camera-button">📷</button>
                     </div>
 
@@ -70,6 +71,7 @@ function ProfilePage() {
                         info={persona?.altura ? `${persona.altura} metros` : "No ingresaste altura"}
                     />
                 </div>
+
             </div>
         </section>
     );

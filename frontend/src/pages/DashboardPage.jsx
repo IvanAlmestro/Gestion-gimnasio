@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useDashboard } from "../hooks/useDashboard";
 import "../styles/Dashboard.css";
 
 import StatCard from "../components/dashboard/StatCard.jsx";
@@ -7,37 +7,10 @@ import SmallInfoCard from "../components/dashboard/SmallInfoCard.jsx";
 import WeightProgressCard from "../components/dashboard/WeightProgressCard.jsx";
 
 function DashboardPage() {
-    const [rutinas, setRutinas] = useState([]);
-    const [rutinaUser, setRutinaUser] = useState();
+    const { rutinas, persona, loading, error } = useDashboard();
 
-
-    const [persona] = useState(() => {
-        const personaStorage = localStorage.getItem("persona");
-
-        return personaStorage
-            ? JSON.parse(personaStorage)
-            : null;
-    });
-
-    useEffect(() => {
-        async function fetchRutinas() {
-            try {
-                const response = await fetch("http://localhost:8081/rutinas");
-
-                if (!response.ok) {
-                    throw new Error("Error al obtener rutinas");
-                }
-
-                const data = await response.json();
-
-                setRutinas(data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-
-        fetchRutinas();
-    }, []);
+    if (loading) return <div>Cargando tu panel...</div>;
+    if (error) return <div>Ocurrió un error: {error}</div>;
 
     return (
         <section className="dashboard-page">

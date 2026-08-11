@@ -17,11 +17,8 @@
 
 .exercise-search {
     width: 260px;
-    padding: 14px 18px;
-    border-radius: 12px;
     background: #182235;
     color: #cbd5e1;
-    border: 1px solid #334155;
 }
 
 .exercise-filters {
@@ -86,4 +83,13 @@
     border-radius: 8px;
     padding: 6px 18px;
     cursor: pointer;
+}
+.search-input{
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+    color:white;
+    background-color: #182235;
+    border: 1px solid #334155;
+    border-radius: 10px;
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import api from "../services/api.js";
+import { useAuth } from "../hooks/useAuth";
 import "../styles/LoginPage.css";
 
 function RegisterPage() {
@@ -8,38 +8,34 @@ function RegisterPage() {
     const [password, setPassword] = useState("");
     const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
-    const [mensaje, setMensaje] = useState("");
+    const [mensajeExito, setMensajeExito] = useState("");
 
     const navigate = useNavigate();
+    const { register, loading, error } = useAuth();
 
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        try {
-            await api.post("/personas/register", {
-                nombre,
-                apellido,
-                email,
-                password
-            });
+        // 1. Validación Frontend estricta
+        if (!nombre || !apellido || !email || !password) return;
+        if (password.length < 6) {
+            alert("La contraseña debe tener al menos 6 caracteres"); // A futuro cambiamos por un toast
+            return;
+        }
 
-            setMensaje("Registro exitoso");
+        // 2. Llamada limpia a la lógica de negocio
+        const success = await register(nombre, apellido, email, password);
 
-            navigate("/login");
-        } catch (error) {
-            console.log(error);
-            console.log(error.response);
-            console.log(error.response?.data);
-            console.log(error.response?.status);
-
-            setMensaje("Error en el registro");
+        if (success) {
+            setMensajeExito("¡Registro exitoso! Redirigiendo...");
+            setTimeout(() => navigate("/login"), 1500); // Pequeña pausa para que vea el mensaje
         }
     };
 
     return (
         <section className="login-page">
             <form className="login-container register-container" onSubmit={handleRegister}>
-                <h1>OX SPORTS</h1>
+                <h1>Limitless</h1>
                 <h2>Potenciá tus entrenamientos</h2>
 
                 <label>Nombre</label>
@@ -48,6 +44,8 @@ function RegisterPage() {
                     type="text"
                     value={nombre}
                     onChange={(e) => setNombre(e.target.value)}
+                    className="input-login"
+                    required
                 />
 
                 <label>Apellido</label>
@@ -56,6 +54,8 @@ function RegisterPage() {
                     type="text"
                     value={apellido}
                     onChange={(e) => setApellido(e.target.value)}
+                    className="input-login"
+                    required
                 />
 
                 <label>Email</label>
@@ -64,6 +64,8 @@ function RegisterPage() {
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="input-login"
+                    required
                 />
 
                 <label>Contraseña</label>
@@ -72,15 +74,20 @@ function RegisterPage() {
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className="input-login"
+                    required
+                    minLength={6}
                 />
 
-                <button type="submit">Registrarse</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? "Registrando..." : "Registrarse"}
+                </button>
 
-                {mensaje && <p className="login-message">{mensaje}</p>}
+                {/* Manejo de feedback al usuario */}
+                {error && <p className="login-message error">{error}</p>}
+                {mensajeExito && <p className="login-message success">{mensajeExito}</p>}
 
-                <Link className="login-link" to="/login">
-                    ¿Ya tenés cuenta? Iniciar sesión
-                </Link>
+                <Link className="login-link" to="/login">¿Ya tenés cuenta? Iniciar sesión</Link>
             </form>
         </section>
     );

@@ -1,0 +1,246 @@
+/* --- Contenedor General y Textos --- */
+.active-workout-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #ffffff;
+    padding: 2rem;
+}
+.workout-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    width: 100%;
+    /* Aumentamos de 600px a 800px para que el botón "Volver" tenga espacio para respirar */
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-volver {
+    position: absolute;
+    left: 10px; /* Lo despegamos un poco del borde izquierdo */
+    top: 5px; /* Lo alineamos sutilmente con el título */
+    color: #64b5f6;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+
+/* --- Tarjeta Principal --- */
+.exercise-card {
+    background-color: #22293d; /* Azul oscuro del fondo */
+    border-radius: 16px;
+    padding: 2rem;
+    width: 100%;
+    max-width: 600px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.exercise-title {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+}
+.title-yellow{
+    margin-bottom: 10px;
+}
+
+.badge-pecho {
+    background-color: #313a52;
+    color: #a0aabf;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    margin-bottom: 1.5rem;
+}
+
+.exercise-info {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #e0e0e0;
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.highlight {
+    color: #ffd54f;
+    font-weight: 600;
+}
+
+
+/* --- Tabla con Grid --- */
+.workout-table {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.table-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    text-align: center;
+    font-size: 0.8rem;
+    color: #e0e0e0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #3a4560;
+}
+
+.table-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 10px;
+    align-items: center;
+}
+
+/* --- Inputs simulando botones --- */
+.serie-number,
+.input-wrapper {
+    background-color: transparent;
+    border: 1px solid #3a4560;
+    border-radius: 8px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    padding: 0 12px; /* Agregamos espacio interno a los costados */
+    color: #ffffff;
+    font-size: 0.95rem;
+}
+
+/* El número de la serie sí va 100% centrado */
+.serie-number {
+    justify-content: center;
+}
+
+.input-wrapper input {
+    background: transparent;
+    border: none;
+    color: #ffffff;
+    flex: 1; /* Le dice al input que tome todo el espacio disponible en el medio */
+    width: 100%;
+    text-align: center;
+    font-family: inherit;
+    outline: none;
+    /* Truco visual: compensa el espacio del 'kg' para que el número se siga viendo en el centro absoluto */
+    margin-left: 18px;
+}
+
+/* Ocultar flechas en los inputs numéricos */
+.input-wrapper input::-webkit-outer-spin-button,
+.input-wrapper input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Esta clase controla el "kg" */
+.unit {
+    color: #a0aabf; /* Un gris sutil para que no compita con el número */
+    font-size: 0.85rem;
+    pointer-events: none; /* Si el usuario hace clic justo en "kg", igual selecciona el input */
+}
+
+/* --- Botones Inferiores --- */
+.card-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: flex-end;
+    margin-top: 1rem;
+}
+
+.btn-agregar {
+    background-color: #3b5bdb;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.next-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-siguiente {
+    background-color: transparent;
+    border: 1px solid #3b5bdb;
+    color: white;
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-siguiente:hover {
+    background-color: #3b5bdb;
+}
+
+.save-status {
+    color: #4caf50;
+    font-size: 0.7rem;
+}
+/* --- Barra de Progreso --- */
+.workout-progress-container {
+    width: 35%;
+    max-width: 300px;
+    margin-top: 2rem;
+    text-align: center;
+}
+
+.workout-progress-bar {
+    height: 24px;
+    background-color: #1a2033;
+    border: 1px solid #36415a;
+    border-radius: 12px;
+    margin-bottom: 0.5rem;
+}
+
+.workout-progress-fill {
+    height: 100%;
+    background-color: #5c7cfa;
+    border-radius: 10px;
+
+    /* Glow suave y elegante */
+    box-shadow: 0px 0px 15px rgba(92, 124, 250, 0.4);
+    transition: width 0.3s ease-in-out;
+}
+
+.workout-progress-text {
+    font-size: 0.75rem;
+    color: #a0aabf;
+    margin: 0;
+}
+/* --- Tarjeta de Finalización --- */
+.finish-card-content {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.finish-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.finish-text {
+    color: #a0aabf;
+    margin-bottom: 2rem;
+}
+
+.btn-volver-inicio {
+    padding: 12px 40px;
+    font-size: 1.1rem;
+    display: inline-block;
+    text-decoration: none;
+}
