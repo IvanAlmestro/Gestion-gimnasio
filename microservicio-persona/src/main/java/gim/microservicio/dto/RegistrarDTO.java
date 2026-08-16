@@ -31,7 +31,7 @@ public class RegistrarDTO {
 
     private String objetivo;
 
-    private Double peso;
+    private Double pesoInicial;
 
     private Double altura;
 }

@@ -28,7 +28,8 @@ public class Persona {
     private String password;
     private String objetivo;
 
-    private Double peso;
+    private Double pesoInicial; // Se guarda cuando se registra y no se toca más
+    private Double pesoActual;  // Es el que se va actualizando
     private Double altura;
 
     private LocalDate fechaRegistro;

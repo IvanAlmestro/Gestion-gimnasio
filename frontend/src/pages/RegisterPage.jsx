@@ -9,6 +9,7 @@ function RegisterPage() {
     const [nombre, setNombre] = useState("");
     const [apellido, setApellido] = useState("");
     const [mensajeExito, setMensajeExito] = useState("");
+    const [pesoInicial, setPesoInicial] = useState("");
 
     const navigate = useNavigate();
     const { register, loading, error } = useAuth();
@@ -17,14 +18,13 @@ function RegisterPage() {
         e.preventDefault();
 
         // 1. Validación Frontend estricta
-        if (!nombre || !apellido || !email || !password) return;
+        if (!nombre || !apellido || !email || !password || !pesoInicial) return;
         if (password.length < 6) {
             alert("La contraseña debe tener al menos 6 caracteres"); // A futuro cambiamos por un toast
             return;
         }
-
         // 2. Llamada limpia a la lógica de negocio
-        const success = await register(nombre, apellido, email, password);
+        const success = await register(nombre, apellido, email, password, pesoInicial);
 
         if (success) {
             setMensajeExito("¡Registro exitoso! Redirigiendo...");
@@ -56,6 +56,15 @@ function RegisterPage() {
                     onChange={(e) => setApellido(e.target.value)}
                     className="input-login"
                     required
+                />
+                <label>Peso (kg)</label>
+                <input
+                    type="number"
+                    step="0.1"
+                    value={pesoInicial}
+                    onChange={(e) => setPesoInicial(e.target.value)}
+                    required // 👈 Esto hace que el navegador no te deje enviar el form vacío
+                    placeholder="Ej: 80.5"
                 />
 
                 <label>Email</label>

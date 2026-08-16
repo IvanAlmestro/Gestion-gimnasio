@@ -53,8 +53,8 @@ public class PersonaService {
         if(datos.getAltura() != null)
             persona.setAltura(datos.getAltura());
 
-        if(datos.getPeso() != null)
-            persona.setPeso(datos.getPeso());
+        if(datos.getPesoActual() != null)
+            persona.setPesoActual(datos.getPesoActual());
 
         if(datos.getObjetivo() != null)
             persona.setObjetivo(datos.getObjetivo());
@@ -100,7 +100,8 @@ public class PersonaService {
         persona.setEmail(datos.getEmail());
         //hashing
         persona.setPassword(passwordEncoder.encode(datos.getPassword()));
-        persona.setPeso(datos.getPeso());
+        persona.setPesoInicial(datos.getPesoInicial());
+        persona.setPesoActual(datos.getPesoInicial());
         persona.setAltura(datos.getAltura());
         persona.setObjetivo(datos.getObjetivo());
 

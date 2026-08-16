@@ -16,7 +16,8 @@ public class PersonaPerfilDTO {
     private String apellido;
     private String email;
     private Double altura;
-    private Double peso;
+    private Double pesoActual;
+    private Double pesoInicial;
     private String objetivo;
     private LocalDate fechaRegistro;
 
@@ -26,7 +27,8 @@ public class PersonaPerfilDTO {
         this.apellido = persona.getApellido();
         this.email = persona.getEmail();
         this.altura = persona.getAltura();
-        this.peso = persona.getPeso();
+        this.pesoInicial= persona.getPesoInicial();
+        this.pesoActual = persona.getPesoActual();
         this.objetivo = persona.getObjetivo();
         this.fechaRegistro = persona.getFechaRegistro();
 

@@ -155,8 +155,40 @@
     cursor: pointer;
     font-size: 14px;
     font-weight: 600;
+    margin-left: 25px;
 }
-
 .profile-card-button:hover {
     text-decoration: underline;
+}
+.profile-card-button.cancel {
+    background: transparent;
+    border: none;
+    color: #999;
+    text-decoration: underline;
+}
+.profile-card-button.cancel:hover {
+    color: #ccc;
+}
+
+.profile-input {
+    background-color:#1a1e2d;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-size: 14px;
+    width: 100%;
+    transition: all 0.4s ease;
+}
+.profile-input:focus {
+    outline: none;
+    border-color: #FBBF24;
+    background-color: rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 2px rgba(251, 191, 36, 0.2);
+}
+
+.profile-input option {
+    background-color: #1a1e2d; /* Mismo fondo oscuro de la tarjeta */
+    color: #e2e8f0;
+    padding: 10px;
 }

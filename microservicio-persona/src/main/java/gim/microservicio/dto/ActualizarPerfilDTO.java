@@ -10,6 +10,6 @@ public class ActualizarPerfilDTO {
     private String nombre;
     private String apellido;
     private Double altura;
-    private Double peso;
+    private Double pesoActual;
     private String objetivo;
 }

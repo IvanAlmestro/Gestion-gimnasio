@@ -13,7 +13,10 @@ export const useAuth = () => {
         const data = localStorage.getItem("persona");
         return data ? JSON.parse(data) : null;
     });
-
+    const actualizarPersonaLocal = (nuevosDatos) => {
+        setPersona(nuevosDatos); // Actualiza la pantalla (React)
+        localStorage.setItem("persona", JSON.stringify(nuevosDatos)); // Actualiza el disco (Navegador)
+    };
     const login = async (email, password) => {
         setLoading(true);
         setError("");
@@ -32,12 +35,18 @@ export const useAuth = () => {
         }
     };
 
-    const register = async (nombre, apellido, email, password) => {
+    const register = async (nombre, apellido, email, password, pesoFormulario) => {
         setLoading(true);
         setError("");
 
         try {
-            await authApi.post("/personas/register", { nombre, apellido, email, password });
+            await authApi.post("/personas/register", {
+                nombre: nombre,
+                apellido: apellido,
+                email: email,
+                password: password,
+                pesoInicial: pesoFormulario
+            });
             return true;
         } catch (err) {
             setError(err.response?.data?.message || "Error al registrar el usuario");
@@ -47,6 +56,5 @@ export const useAuth = () => {
         }
     };
 
-    // 2. ¡ACÁ ESTABA EL ERROR! Ahora sí exportamos el token al final
-    return { login, register, loading, error, persona, token };
+    return { login, register, loading, error, persona, token , setPersona: actualizarPersonaLocal};
 };
