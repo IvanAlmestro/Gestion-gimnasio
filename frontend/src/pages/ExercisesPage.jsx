@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import ExerciseCard from "../components/exercises/ExerciseCard.jsx";
 import "../styles/ExercisesPage.css";
+import { rutinasApi } from "../services/api";
 
 // Datos estáticos fuera del componente para no recrearlos en memoria
 const CATEGORIES = [
@@ -19,18 +20,13 @@ function ExercisesPage() {
     useEffect(() => {
         async function fetchExercises() {
             try {
-                // Mantenemos la consistencia de enviar el token
-                const token = localStorage.getItem("token");
-                const response = await fetch("http://localhost:8081/ejercicios", {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
+                // Chau fetch manual, usamos nuestra instancia configurada
+                const response = await rutinasApi.get("/ejercicios");
 
-                if (!response.ok) throw new Error("Error al obtener ejercicios");
-
-                const data = await response.json();
-                setExercises(data);
+                // Axios guarda los datos directo en la propiedad 'data'
+                setExercises(response.data);
             } catch (error) {
-                setError(error.message);
+                setError(error.message || "Error al obtener ejercicios");
             } finally {
                 setLoading(false);
             }

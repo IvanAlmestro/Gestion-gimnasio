@@ -27,26 +27,19 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
         http
-                .csrf(csrf -> csrf.disable()) // Solo necesitas desactivarlo una vez
+                .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
-                        // 1. Permitir peticiones preflight (CORS) a nivel de seguridad
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-
                         .requestMatchers(
                                 "/personas/login",
                                 "/personas/register",
-                                "/error" // 2. IMPORTANTE: Excluir la ruta de errores para no enmascarar fallos
+                                "/error"
                         ).permitAll()
-
                         .anyRequest().authenticated()
                 )
-
-                // Integrar la configuración de CORS
-                .cors(cors -> {
-                })
+                // ELIMINO la línea de .cors(cors -> {})
+                // ELIMINO el permitAll para OPTIONS (lo ataja el gateway)
 
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
 

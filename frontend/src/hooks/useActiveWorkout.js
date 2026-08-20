@@ -14,7 +14,7 @@ export const useActiveWorkout = (id) => {
         const fetchRutina = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const response = await fetch(`http://localhost:8081/rutinas/${id}`, { method: 'GET', headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' } });
+                const response = await fetch(`http://localhost:9000/rutinas/${id}`, { method: 'GET', headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' } });
                 if (!response.ok) { if (response.status === 401) throw new Error("Error 401: No autorizado"); throw new Error(`Error en el servidor: ${response.status}`); }
                 const data = await response.json();
                 setExercises(data.ejercicios);

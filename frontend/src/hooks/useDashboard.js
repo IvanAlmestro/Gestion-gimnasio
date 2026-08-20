@@ -18,7 +18,7 @@ export const useDashboard = () => {
                 const token = localStorage.getItem("token");
 
                 // NOTA: A futuro cambiaremos localhost por import.meta.env.VITE_API_URL
-                const response = await fetch("http://localhost:8081/rutinas", {
+                const response = await fetch("http://localhost:9000/rutinas", {
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
 
