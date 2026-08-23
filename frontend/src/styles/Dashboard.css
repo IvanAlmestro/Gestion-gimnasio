@@ -1,6 +1,6 @@
 .dashboard-page {
     width: 100%;
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 .dashboard-header-text {
@@ -32,9 +32,9 @@
 }
 .stat-card strong, .small-card strong {
     display: block;
-    font-weight: bold;
+    font-weight: 800;
     color: rgb(229 198 88 / 0.87);
-    font-size: 20px;
+    font-size: 1.7rem;
     margin-top: 8px;
 }
 
@@ -69,18 +69,7 @@
     margin: 0;
     font-size: 18px;
 }
-.next-workout-card{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 1em;
 
-    min-height: 200px;
-}
-/*separacion detalles con icono de proximo entrenamiento card */
-.next-workout-card span{
-    margin-left: 1em;
-}
 /*botones VER*/
 .primary-button {
     display: inline-flex;
@@ -112,14 +101,51 @@
 .next-workout-card {
     min-height: 300px;
     padding: 28px;
+    background-color: #182235;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
+    gap: 16px;
 }
-.next-workout-card *{
-    margin-bottom: 30px;
+/* Limpiamos márgenes por defecto de las etiquetas de texto */
+.next-workout-card h2,
+.next-workout-card h3,
+.next-workout-card p {
+    margin: 0;
 }
+
+.next-workout-card h2 {
+    font-size: 1.6rem;
+    color: #e5e7eb; /* Gris clarito */
+}
+
+.next-workout-card h3 {
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: rgb(229 198 88 / 0.87);
+}
+
+.next-workout-card p {
+    color: #9ca3af; /* Gris más oscuro para texto secundario */
+    font-size: 1.1rem;
+}
+
+/* Acomodamos los íconos uno al lado del otro */
+.workout-info {
+    display: flex;
+    gap: 24px;
+    margin-top: 10px;
+    color: #d1d5db;
+    font-size: 1.1rem;
+}
+
+.next-workout-card .primary-button {
+    margin-top: auto;
+    width: 40%;
+    text-align: center;
+}
+
 /*cards de objetivo y racha */
 .side-cards {
     display: flex;
@@ -158,12 +184,44 @@
     margin-bottom: 12px;
     color: #cbd5e1;
 }
-/*grafico*/
-.fake-chart {
-    font-size: 80px;
-    text-align: center;
+.custom-weight-chart {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
+.chart-svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+}
+
+.chart-dot {
+    cursor: pointer;
+    transition: r 0.2s ease, fill 0.2s ease;
+}
+
+.chart-dot:hover {
+    fill: #38bdf8;
+}
+
+.custom-chart-tooltip {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    background-color: #1f2937;
+    border: 1px solid #374151;
+    color: #e5e7eb;
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    pointer-events: none;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+}
 .progress-bar {
     width: 60%;
     height: 25px;

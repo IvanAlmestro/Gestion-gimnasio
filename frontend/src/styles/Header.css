@@ -2,14 +2,22 @@
     height: 80px;
     background-color: #111827;
     display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.header-container {
+    display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 80px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .header-date {
-    color: #94a3b8;
-    font-size: 14px;
+    color: #b3c2dc;
+    font-size: 0.9rem;
 }
 
 .header-user {

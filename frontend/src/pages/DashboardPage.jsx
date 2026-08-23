@@ -9,6 +9,7 @@ import WeightProgressCard from "../components/dashboard/WeightProgressCard.jsx";
 function DashboardPage() {
     const { rutinas, persona, loading, error } = useDashboard();
 
+
     if (loading) return <div>Cargando tu panel...</div>;
     if (error) return <div>Ocurrió un error: {error}</div>;
 

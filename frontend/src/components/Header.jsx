@@ -13,28 +13,30 @@ function Header() {
 
     return (
         <header className="app-header">
-            <p className="header-date">{fechaMayus}</p>
+            <div className="header-container">
+                <p className="header-date">{fechaMayus}</p>
 
-            <div className="header-user">
-                <div className="notification">
-                    🔔
-                    <span>10</span>
-                </div>
-
-                <div className="user-info">
-                    <Link to="/perfil">
-                        <div className="user-avatar">
-                            <img src={imgUser} alt="imgUser" className="img-user"/>
-                        </div>
-                    </Link>
-                    <div>
-
-                        <p className="user-name">
-                            {persona?.nombre || "Iván Almestro"}
-                        </p>
-                        <p className="user-role">Alumno</p>
+                <div className="header-user">
+                    <div className="notification">
+                        🔔
+                        <span>10</span>
                     </div>
 
+                    <div className="user-info">
+                        <Link to="/perfil">
+                            <div className="user-avatar">
+                                <img src={imgUser} alt="imgUser" className="img-user"/>
+                            </div>
+                        </Link>
+                        <div>
+
+                            <p className="user-name">
+                                {persona?.nombre || "Iván Almestro"}
+                            </p>
+                            <p className="user-role">Alumno</p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </header>

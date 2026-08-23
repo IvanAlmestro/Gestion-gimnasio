@@ -1,4 +1,12 @@
+import WeightChart from "./WeightChart.jsx";
+
 function WeightProgressCard() {
+    const datosDePrueba = [
+        { fecha: 'Semana 1', peso: 78.0 },
+        { fecha: 'Semana 2', peso: 78.1 },
+        { fecha: 'Semana 3', peso: 78.2 },
+        { fecha: 'Actual', peso: 78.4 },
+    ];
     return (
         <article className="weight-card">
             <h2>Seguimiento de pesos:</h2>
@@ -11,9 +19,8 @@ function WeightProgressCard() {
                     <p>Meta: <strong>82kg</strong></p>
                 </div>
 
-                <div className="fake-chart">
-                    📈
-                </div>
+
+                <WeightChart historialPesos={datosDePrueba} />
             </div>
 
             <div className="progress-bar">
