@@ -27,7 +27,8 @@ public class RutinaController {
 
     @PostMapping
     public ResponseEntity<RutinaDTO> crearRutina(@Valid @RequestBody CrearRutinaDTO datos){
-
+        System.out.println("¡LLEGÓ EL POST AL MICROSERVICIO!"); // <-- Agregá esto
+        System.out.println("Datos recibidos: " + datos.getNombre()); // <-- Y esto
         RutinaDTO nueva = service.crearRutina(datos);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(nueva);

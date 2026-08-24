@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useRutinas } from "../hooks/useRutinas";
 import RoutineCard from "../components/routines/RoutineCard.jsx";
 import "../styles/RoutinePage.css";
+import CreateRoutine from "../components/routines/CreateRoutine.jsx";
 
 //Datos estáticos y de configuración fuera del render cycle
 const FILTERS = [
@@ -16,8 +17,9 @@ const FILTERS = [
 ];
 
 function RutinasPage() {
-    const { rutinas, loading, error } = useRutinas();
+    const { rutinas,setRutinas, loading, error } = useRutinas();
     const [selectedFilter, setSelectedFilter] = useState("TODAS");
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     const filteredRutinas = selectedFilter === "TODAS"
         ? rutinas
@@ -34,7 +36,7 @@ function RutinasPage() {
                     <p>Gestioná tus planes de entrenamiento</p>
                 </div>
 
-                <button className="new-routine-button">+ Nueva Rutina</button>
+                <button className="new-routine-button" onClick={() => setIsModalOpen(true)}>+ Nueva Rutina</button>
             </div>
 
             <div className="rutinas-filters">
@@ -59,8 +61,12 @@ function RutinasPage() {
                     />
                 ))}
             </div>
+            {isModalOpen && <CreateRoutine onClose={() => setIsModalOpen(false) } onSaveOk={(nuevaRutina) =>setRutinas([...rutinas, nuevaRutina])} />}
+
         </section>
+
     );
+
 }
 
 export default RutinasPage;

@@ -16,5 +16,5 @@ spring:
           - id: ms-rutinas
             uri: http://localhost:8081
             predicates:
-              - Path=/rutinas/**, /ejercicios/**
+              - Path=/rutinas, /rutinas/**, /ejercicios, /ejercicios/**
 

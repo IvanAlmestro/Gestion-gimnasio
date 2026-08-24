@@ -26,6 +26,9 @@ export const useAuth = () => {
 
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("persona", JSON.stringify(response.data.perfil));
+            // Extraemos el id de la respuesta
+            const idUsuario = response.data.perfil.id;
+            localStorage.setItem("idUsuarioLogueado", idUsuario);
 
             navigate("/dashboard");
         } catch (err) {

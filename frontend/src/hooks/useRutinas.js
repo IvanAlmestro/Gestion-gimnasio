@@ -22,5 +22,5 @@ export const useRutinas = () => {
         fetchRutinas();
     }, []);
 
-    return { rutinas, loading, error };
+    return { rutinas,setRutinas, loading, error };
 };

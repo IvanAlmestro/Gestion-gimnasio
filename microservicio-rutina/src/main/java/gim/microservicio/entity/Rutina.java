@@ -21,8 +21,10 @@ public class Rutina {
 
     @Column
     private String nombre;
+
     @Column
     private String descripcion;
+
     @Column
     @Enumerated(EnumType.STRING)
     private Objetivo objetivo;
@@ -33,7 +35,5 @@ public class Rutina {
     private LocalDate fechaCreacion;
 
     private Long idUsuario;
-
-
 
 }
