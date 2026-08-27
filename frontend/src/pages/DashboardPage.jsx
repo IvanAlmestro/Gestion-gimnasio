@@ -7,7 +7,7 @@ import SmallInfoCard from "../components/dashboard/SmallInfoCard.jsx";
 import WeightProgressCard from "../components/dashboard/WeightProgressCard.jsx";
 
 function DashboardPage() {
-    const { rutinas, persona, loading, error } = useDashboard();
+    const { rutinas,ejercicios, persona, loading, error ,deleteRutina} = useDashboard();
 
 
     if (loading) return <div>Cargando tu panel...</div>;
@@ -35,7 +35,7 @@ function DashboardPage() {
                     icon="🏋️"
                     title="Ejercicios"
                     text="Actualmente tenés:"
-                    value={24}
+                    value={ejercicios.length || '0'}
                     label="ejercicios"
                     linkTo="/ejercicios"
                 />
@@ -55,7 +55,7 @@ function DashboardPage() {
                     <SmallInfoCard
                         icon="🎯"
                         title="Objetivo"
-                        value="Hipertrofia"
+                        value={persona?.objetivo}
                     />
 
                     <SmallInfoCard

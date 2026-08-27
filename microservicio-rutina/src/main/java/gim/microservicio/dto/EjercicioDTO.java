@@ -23,9 +23,7 @@ public class EjercicioDTO {
         this.descanso = ejercicio.getDescanso();
         this.grupoMuscular = ejercicio.getGrupoMuscular();
         this.rir = ejercicio.getRir();
-        if (ejercicio.getRutina() != null) {
-            this.rutinaId = ejercicio.getRutina().getId();
-        }
+
     }
 
 

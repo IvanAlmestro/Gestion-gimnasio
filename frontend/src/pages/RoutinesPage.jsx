@@ -7,8 +7,8 @@ import CreateRoutine from "../components/routines/CreateRoutine.jsx";
 //Datos estáticos y de configuración fuera del render cycle
 const FILTERS = [
     { label: "Todas", value: "TODAS" },
-    { label: "Hipertrofia", value: "HIPERTROFIA" },
     { label: "Adaptación", value: "ADAPTACION" },
+    { label: "Hipertrofia", value: "HIPERTROFIA" },
     { label: "Fuerza", value: "FUERZA" },
     { label: "Definición", value: "DEFINICION" },
     { label: "Resistencia", value: "RESISTENCIA" },
@@ -17,7 +17,7 @@ const FILTERS = [
 ];
 
 function RutinasPage() {
-    const { rutinas,setRutinas, loading, error } = useRutinas();
+    const { rutinas,setRutinas, loading, error, deleteRutina} = useRutinas();
     const [selectedFilter, setSelectedFilter] = useState("TODAS");
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -58,6 +58,7 @@ function RutinasPage() {
                     <RoutineCard
                         key={rutina.id || rutina.idRutina}
                         rutina={rutina}
+                        onDelete={deleteRutina}
                     />
                 ))}
             </div>

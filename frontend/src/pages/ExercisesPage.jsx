@@ -5,7 +5,7 @@ import { rutinasApi } from "../services/api";
 
 // Datos estáticos fuera del componente para no recrearlos en memoria
 const CATEGORIES = [
-    "Todos", "Bíceps", "Tríceps", "Espalda", "Pecho", "Hombros", "Pierna"
+    "Todos", "Biceps", "Triceps", "Espalda", "Pecho", "Hombros", "Piernas"
 ];
 
 function ExercisesPage() {

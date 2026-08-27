@@ -12,8 +12,23 @@ function ProfileCardInfo({ title, info, infoExtra, onSave, inputType = "text", o
             }
             setIsEditing(false);
         } else {
-            // Si el valor actual es "No ingresaste objetivo", limpiamos el borrador para el select
-            setDraftValue(info.includes("No ingresaste") ? "" : info);
+            // MODO ENTRAR A EDICIÓN:
+            let valorInicial = info;
+
+            // Si el texto dice que no hay datos, arrancamos vacío
+            if (info.includes("No ingresaste")) {
+                valorInicial = "";
+            }
+            // SI ES SELECT: Buscamos el 'value' real en base al 'label' (info)
+            else if (inputType === "select" && options.length > 0) {
+                const opcionEncontrada = options.find(
+                    (op) => op.label === info || op.value === info
+                );
+                // Si lo encuentra, usamos el valor del backend (ej: "ADAPTACION"). Si no, vacío.
+                valorInicial = opcionEncontrada ? opcionEncontrada.value : "";
+            }
+
+            setDraftValue(valorInicial);
             setIsEditing(true);
         }
     };

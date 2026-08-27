@@ -6,5 +6,6 @@ public enum Objetivo {
     FUERZA,
     DEFINICION,
     RESISTENCIA,
+    REHABILITACION,
     MOVILIDAD
 }

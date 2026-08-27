@@ -7,7 +7,7 @@
     margin-bottom: 36px;
 }
 .dashboard-header-text h1 {
-
+    color: #fde047;
     font-size: 36px;
     margin-bottom: 8px;
 }
@@ -34,7 +34,7 @@
     display: block;
     font-weight: 800;
     color: rgb(229 198 88 / 0.87);
-    font-size: 1.7rem;
+    font-size: 1.6rem;
     margin-top: 8px;
 }
 

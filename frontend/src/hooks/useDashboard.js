@@ -1,40 +1,26 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import { useRutinas } from "./useRutinas";
+import { useEjercicios } from "./useEjercicios"; // Importamos tu nuevo hook
 
 export const useDashboard = () => {
-    const [rutinas, setRutinas] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
+    // 1. Traemos las rutinas (renombramos loading y error)
+    const {rutinas, loading: rutinasLoading, error: rutinasError, deleteRutina} = useRutinas();
 
-    // Idealmente, esto a futuro vendrá del useAuth que charlamos antes
+    // 2. Traemos los ejercicios (renombramos loading y error)
+    const {ejercicios, loading: ejerciciosLoading, error: ejerciciosError} = useEjercicios();
+
     const [persona] = useState(() => {
         const personaStorage = localStorage.getItem("persona");
         return personaStorage ? JSON.parse(personaStorage) : null;
     });
 
-    useEffect(() => {
-        const fetchRutinas = async () => {
-            try {
-                // Acá usamos el token porque esta ruta seguro está protegida
-                const token = localStorage.getItem("token");
+    // 3. Unificamos los estados para la vista
+    // Va a mostrar "cargando" mientras CUALQUIERA de los dos siga cargando
+    const loading = rutinasLoading || ejerciciosLoading;
 
-                // NOTA: A futuro cambiaremos localhost por import.meta.env.VITE_API_URL
-                const response = await fetch("http://localhost:9000/rutinas", {
-                    headers: { 'Authorization': `Bearer ${token}` }
-                });
+    // Muestra el primer error que aparezca
+    const error = rutinasError || ejerciciosError;
 
-                if (!response.ok) throw new Error("Error al obtener rutinas");
-
-                const data = await response.json();
-                setRutinas(data);
-            } catch (err) {
-                setError(err.message);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchRutinas();
-    }, []);
-
-    return { rutinas, persona, loading, error };
+    // 4. Exportamos también "ejercicios"
+    return { rutinas, ejercicios, persona, loading, error, deleteRutina };
 };

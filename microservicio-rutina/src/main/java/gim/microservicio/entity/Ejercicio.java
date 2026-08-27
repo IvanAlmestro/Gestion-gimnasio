@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Entity
 @Data
+@Table(name = "ejercicios")
 public class Ejercicio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,8 +17,6 @@ public class Ejercicio {
     private String descanso;
     private Integer rir;
     private String grupoMuscular;
-    @JsonIgnore
-    @ManyToOne
-    @JoinColumn(name= "rutina_id")
-    private Rutina rutina;
+
+
 }

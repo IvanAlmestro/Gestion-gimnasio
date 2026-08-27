@@ -29,7 +29,11 @@ public class Rutina {
     @Enumerated(EnumType.STRING)
     private Objetivo objetivo;
 
-    @OneToMany(mappedBy = "rutina")
+    @ManyToMany
+    @JoinTable(name = "rutina_ejercicio", // Nombre de la nueva tabla intermedia en MySQL
+            joinColumns = @JoinColumn(name = "id_rutina"), // Columna que apunta a esta rutina
+            inverseJoinColumns = @JoinColumn(name = "id_ejercicio")
+    )
     private List<Ejercicio> ejercicios;
 
     private LocalDate fechaCreacion;

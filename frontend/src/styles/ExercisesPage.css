@@ -1,8 +1,8 @@
 .exercises-page {
     width: 100%;
-    max-width: 1050px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding-top: 48px;
+
 }
 
 .exercises-header {
@@ -56,6 +56,9 @@
 }
 
 .exercise-card {
+    display: flex;
+
+    flex-direction: column;
     min-height: 140px;
     padding: 22px;
     border-radius: 12px;
@@ -63,17 +66,21 @@
     border: 1px solid #334155;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
     text-align: center;
+    align-items: center;
+
 }
 
 .exercise-card h3 {
-    margin: 0 0 18px;
+    margin-bottom: 15px;
     color: #f8fafc;
-    font-size: 16px;
+    font-size: 17px;
 }
 
 .exercise-card p {
+    margin-bottom: 15px;
     color: #fde047;
-    margin-bottom: 18px;
+    font-size: 1.1em;
+
 }
 
 .exercise-card-button {
@@ -83,6 +90,9 @@
     border-radius: 8px;
     padding: 6px 18px;
     cursor: pointer;
+    margin-top: auto;
+
+    width: 50%;
 }
 .search-input{
     padding: 10px;

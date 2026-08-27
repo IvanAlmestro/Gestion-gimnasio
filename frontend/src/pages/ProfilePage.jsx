@@ -10,12 +10,13 @@ function ProfilePage() {
     // En lugar de leer el localStorage a mano, lo traemos de nuestro hook global
     const { persona , setPersona} = useAuth();
     const opcionesObjetivo = [
-        { value: "ADAPTACION", label: "Adaptación Anatómica" },
-        { value: "HIPERTROFIA", label: "Hipertrofia (Ganar masa muscular)" },
-        { value: "FUERZA", label: "Fuerza Máxima" },
-        { value: "DEFINICION", label: "Definición (Pérdida de grasa)" },
-        { value: "RESISTENCIA", label: "Resistencia Muscular" },
-        { value: "MOVILIDAD", label: "Movilidad y Flexibilidad" }
+        { value: "ADAPTACION", label: "Adaptación" },
+        { value: "HIPERTROFIA", label: "Hipertrofia" },
+        { value: "FUERZA", label: "Fuerza" },
+        { value: "DEFINICION", label: "Definición" },
+        { value: "RESISTENCIA", label: "Resistencia" },
+        { value: "REHABILITACION", label: "Rehabilitación" },
+        { value: "MOVILIDAD", label: "Movilidad" }
     ];
     const handleUpdateCampo = async (campo, valor) => {
         try {

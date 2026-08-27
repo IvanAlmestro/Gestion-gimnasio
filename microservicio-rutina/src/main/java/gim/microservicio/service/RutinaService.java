@@ -15,6 +15,7 @@ import org.springframework.data.jpa.repository.support.SimpleJpaRepository;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.client.RestTemplate;
@@ -60,19 +61,10 @@ public class RutinaService {
 
     public RutinaDTO crearRutina(CrearRutinaDTO datos){
         String url = "http://localhost:8080/personas/" + datos.getIdUsuario();
-        System.out.println("URL intentando conectar al microservicio de personas: " + url);
 
         try{
             // 1. Extraemos el token que mandó el usuario en la petición original (desde el Gateway/Frontend)
-            HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
-            String tokenHeader = request.getHeader("Authorization");
-
-            // 2. Armamos los headers para el RestTemplate reenvíando el token
-            HttpHeaders headers = new HttpHeaders();
-            if (tokenHeader != null && !tokenHeader.isEmpty()) {
-                headers.set("Authorization", tokenHeader);
-            }
-            HttpEntity<String> entity = new HttpEntity<>(headers);
+            HttpEntity<String> entity = getStringHttpEntity();
 
             // 3. Hacemos la llamada protegida usando exchange en lugar de getForObject
             restTemplate.exchange(url, HttpMethod.GET, entity, Object.class);
@@ -95,6 +87,20 @@ public class RutinaService {
 
         rutinaRepository.save(rutinaNueva);
         return new RutinaDTO(rutinaNueva);
+    }
+
+    @NonNull
+    private static HttpEntity<String> getStringHttpEntity() {
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
+        String tokenHeader = request.getHeader("Authorization");
+
+        // 2. Armamos los headers para el RestTemplate reenvíando el token
+        HttpHeaders headers = new HttpHeaders();
+        if (tokenHeader != null && !tokenHeader.isEmpty()) {
+            headers.set("Authorization", tokenHeader);
+        }
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+        return entity;
     }
 
     public RutinaDTO actualizarRutina(ActualizarRutinaDTO datos, Long id){

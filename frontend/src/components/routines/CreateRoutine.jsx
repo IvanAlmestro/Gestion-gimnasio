@@ -79,6 +79,8 @@ function CreateRoutine({ onClose , onSaveOk}) {
                             <option value="ADAPTACION">Adaptación</option>
                             <option value="DEFINICION">Definición</option>
                             <option value="RESISTENCIA">Resistencia</option>
+                            <option value="REHABILITACION">Rehabilitación</option>
+                            <option value="MOVILIDAD">Movilidad</option>
                         </select>
                     </div>
                     {/* SECCIÓN DE EJERCICIOS */}
