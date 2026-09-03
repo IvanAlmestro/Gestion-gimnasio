@@ -27,10 +27,7 @@ public class RutinaController {
 
     @PostMapping
     public ResponseEntity<RutinaDTO> crearRutina(@Valid @RequestBody CrearRutinaDTO datos){
-        System.out.println("¡LLEGÓ EL POST AL MICROSERVICIO!"); // <-- Agregá esto
-        System.out.println("Datos recibidos: " + datos.getNombre()); // <-- Y esto
         RutinaDTO nueva = service.crearRutina(datos);
-
         return ResponseEntity.status(HttpStatus.CREATED).body(nueva);
     }
 
@@ -62,11 +59,8 @@ public class RutinaController {
 
     @PostMapping("/comenzar")
     public ResponseEntity<String> comenzarRutina(@RequestBody ComenzarRutinaDTO request) {
-
         // Llamamos al cerebro para que guarde todox
         registroService.registrarInicio(request.getUsuarioId(), request.getRutinaId());
-
-        // Le avisamos a React que todox salió bien (Status 200 OK)
         return ResponseEntity.ok("¡Entrenamiento registrado con éxito!");
     }
 }

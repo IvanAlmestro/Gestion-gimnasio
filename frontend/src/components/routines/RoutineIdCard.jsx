@@ -1,4 +1,6 @@
-import {Link, useNavigate} from "react-router-dom";
+import { useNavigate} from "react-router-dom";
+import {useAuth} from "../../hooks/useAuth.jsx";
+import {authApi} from "../../services/api.js";
 
 function RoutineIdCard({
                            title,
@@ -7,31 +9,39 @@ function RoutineIdCard({
                            exercises,
                            routineId}) {
     const navigate = useNavigate();
+    const { persona } = useAuth();
 
-    const handleComenzar = () => {
-        // 💡 Acá en el futuro meteremos el fetch (POST) al backend
-        // para guardar en la base de datos que el entrenamiento empezó.
+    const handleComenzar = async () => {
+        try {
+            // Asi es como lo espera el ComenzarRutinaDTO
+            const payload = {
+                usuarioId: persona.id,
+                rutinaId: routineId
+            };
 
-        // Por ahora, solo hacemos que nos lleve a la otra pantalla:
-        navigate(`/entrenamiento/${routineId}`);
+            const response = await authApi.post("/rutinas/comenzar", payload);
+
+            if (response.status === 200) {
+                console.log("Backend responde:", response.data);
+
+                // Si Spring Boot da el OK, recién ahí viajamos a la otra pantalla
+                navigate(`/entrenamiento/${routineId}`);
+            }
+        } catch (error) {
+            console.error("Error al iniciar el entrenamiento:", error);
+        }
     };
     return (
         <article className="routine-id-card">
-
             <h2>{title}</h2>
 
             <div className="routine-id-info">
-
                 <span>🔥 {exercises?.length || 0} ejercicios</span>
-
                 <span>🏆 {objective}</span>
-
                 <span>🕒 {duration}</span>
-
             </div>
 
             <table>
-
                 <thead>
                 <tr>
                     <th>Nombre</th>
@@ -40,28 +50,21 @@ function RoutineIdCard({
                     <th>RIR</th>
                 </tr>
                 </thead>
-
                 <tbody>
-
                 {exercises?.map((exercise) => (
-
                     <tr key={exercise.id}>
                         <td className="td-nombre">{exercise.nombre}</td>
                         <td>{exercise.series}</td>
-                        <td>{exercise.repeticiones-2 + " - " + exercise.repeticiones}</td>
+                        <td>{exercise.repeticiones - 2 + " - " + exercise.repeticiones}</td>
                         <td>{exercise.rir || "-"}</td>
                     </tr>
-
                 ))}
-
                 </tbody>
-
             </table>
 
             <button onClick={handleComenzar} className="btn-comenzar">
                 Comenzar {title}
             </button>
-
         </article>
     );
 }

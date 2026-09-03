@@ -34,7 +34,10 @@
     font-size: 24px;
 
 }
-
+.notification:hover{
+    cursor: pointer;
+    background-color: #0a257a;
+}
 .notification span {
     position: absolute;
     right: 4px;

@@ -1,14 +1,17 @@
-import "../styles/Header.css";
+import { Link } from "react-router-dom";
+import { useAuth } from "../hooks/useAuth.jsx"; // Traemos el hook global
 import imgUser from "../assets/user-img.jpg";
-import {Link} from "react-router-dom";
+import "../styles/Header.css";
 
 function Header() {
-    const persona = JSON.parse(localStorage.getItem("persona"));
+    // 1. Usamos el estado global en vez del localStorage estático
+    const { persona } = useAuth();
+
     const fechaActual = new Date().toLocaleDateString("es-AR", {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-        });
+        weekday: "long",
+        day: "numeric",
+        month: "long",
+    });
     const fechaMayus = fechaActual.charAt(0).toUpperCase() + fechaActual.slice(1);
 
     return (
@@ -25,17 +28,21 @@ function Header() {
                     <div className="user-info">
                         <Link to="/perfil">
                             <div className="user-avatar">
-                                <img src={imgUser} alt="imgUser" className="img-user"/>
+                                {/* 2. Renderizado dinámico de la imagen */}
+                                <img
+                                    src={persona?.fotoPerfil || imgUser}
+                                    alt="Foto del usuario"
+                                    className="img-user"
+                                />
                             </div>
                         </Link>
                         <div>
-
                             <p className="user-name">
+                                {/* Muestra el nombre real o el fallback */}
                                 {persona?.nombre || "Iván Almestro"}
                             </p>
                             <p className="user-role">Alumno</p>
                         </div>
-
                     </div>
                 </div>
             </div>

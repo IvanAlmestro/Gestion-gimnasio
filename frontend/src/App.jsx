@@ -1,5 +1,5 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import { useAuth } from "./hooks/useAuth";
+import {Routes, Route, Navigate} from "react-router-dom";
+import {AuthProvider, useAuth} from "./hooks/useAuth.jsx";
 
 import './styles/App.css';
 import AppLayout from "./layouts/AppLayout.jsx"
@@ -28,41 +28,43 @@ function ProtectedRoute({ children }) {
 
 function App() {
     return (
-        <Routes>
-            {/* Redirección por defecto */}
-            <Route path="/" element={<Navigate to="/login" replace />} />
+        <AuthProvider>
+            <Routes>
+                {/* Redirección por defecto */}
+                <Route path="/" element={<Navigate to="/login" replace />} />
 
-            {/* Rutas Públicas */}
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
+                {/* Rutas Públicas */}
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/register" element={<RegisterPage />} />
 
-            {/* Rutas Privadas envueltas en el Layout */}
-            <Route
-                element={
-                    <ProtectedRoute>
-                        <AppLayout />
-                    </ProtectedRoute>
-                }
-            >
-                <Route path="/dashboard" element={<DashboardPage />} />
-                <Route path="/rutinas" element={<RoutinesPage />} />
-                <Route path="/rutinas/:id" element={<RoutineDetailPage />} />
-                <Route path="/entrenamiento/:id" element={<ActiveWorkoutPage />} />
-                <Route path="/ejercicios" element={<ExercisesPage />} />
-                <Route path="/perfil" element={<PerfilPage />} />
-            </Route>
+                {/* Rutas Privadas envueltas en el Layout */}
+                <Route
+                    element={
+                        <ProtectedRoute>
+                            <AppLayout />
+                        </ProtectedRoute>
+                    }
+                >
+                    <Route path="/dashboard" element={<DashboardPage />} />
+                    <Route path="/rutinas" element={<RoutinesPage />} />
+                    <Route path="/rutinas/:id" element={<RoutineDetailPage />} />
+                    <Route path="/entrenamiento/:id" element={<ActiveWorkoutPage />} />
+                    <Route path="/ejercicios" element={<ExercisesPage />} />
+                    <Route path="/perfil" element={<PerfilPage />} />
+                </Route>
 
-            {/* Ruta Catch-all (404) */}
-            <Route
-                path="*"
-                element={
-                    <div style={{ textAlign: "center", marginTop: "50px" }}>
-                        <h1>404 - Página no encontrada</h1>
-                        <p>La ruta que buscás no existe.</p>
-                    </div>
-                }
-            />
-        </Routes>
+                {/* Ruta Catch-all (404) */}
+                <Route
+                    path="*"
+                    element={
+                        <div style={{ textAlign: "center", marginTop: "50px" }}>
+                            <h1>404 - Página no encontrada</h1>
+                            <p>La ruta que buscás no existe.</p>
+                        </div>
+                    }
+                />
+            </Routes>
+        </AuthProvider>
     );
 }
 

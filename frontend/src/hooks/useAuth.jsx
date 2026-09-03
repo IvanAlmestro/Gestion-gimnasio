@@ -1,35 +1,36 @@
-import { useState } from "react";
+import { useState, createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { authApi } from "../services/api";
 
-export const useAuth = () => {
+// 1. Creamos el "parlante" global
+const AuthContext = createContext();
+
+// 2. Creamos el Provider (el componente que va a envolver tu app)
+export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
-    // 1. Leemos los datos directamente del storage
     const token = localStorage.getItem("token");
     const [persona, setPersona] = useState(() => {
         const data = localStorage.getItem("persona");
         return data ? JSON.parse(data) : null;
     });
+
     const actualizarPersonaLocal = (nuevosDatos) => {
-        setPersona(nuevosDatos); // Actualiza la pantalla (React)
-        localStorage.setItem("persona", JSON.stringify(nuevosDatos)); // Actualiza el disco (Navegador)
+        setPersona(nuevosDatos);
+        localStorage.setItem("persona", JSON.stringify(nuevosDatos));
     };
+
     const login = async (email, password) => {
+        // ... tu código de login queda exactamente igual ...
         setLoading(true);
         setError("");
-
         try {
             const response = await authApi.post("/personas/login", { email, password });
-
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("persona", JSON.stringify(response.data.perfil));
-            // Extraemos el id de la respuesta
-            const idUsuario = response.data.perfil.id;
-            localStorage.setItem("idUsuarioLogueado", idUsuario);
-
+            localStorage.setItem("idUsuarioLogueado", response.data.perfil.id);
             navigate("/dashboard");
         } catch (err) {
             setError("Credenciales inválidas. Por favor, intentá de nuevo.");
@@ -59,5 +60,15 @@ export const useAuth = () => {
         }
     };
 
-    return { login, register, loading, error, persona, token , setPersona: actualizarPersonaLocal};
+    // Acá inyectamos las variables al parlante para que todos las escuchen
+    return (
+        <AuthContext.Provider value={{ login, register, loading, error, persona, token, setPersona: actualizarPersonaLocal }}>
+            {children}
+        </AuthContext.Provider>
+    );
+};
+
+// 3. Tu hook ahora simplemente "escucha" al parlante en vez de crear copias nuevas
+export const useAuth = () => {
+    return useContext(AuthContext);
 };

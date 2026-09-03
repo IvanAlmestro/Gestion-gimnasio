@@ -6,12 +6,15 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 140px 24px 32px;
+    font-size: 1.2em;
+    font-family: Montserrat;
+    font-weight: 500;
 }
 
 .sidebar-nav {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 25px;
 }
 
 .sidebar-link {
@@ -20,6 +23,7 @@
     padding: 10px 14px;
     border-radius: 10px;
     background-color: #111827;
+
 }
 .sidebar-link:hover{
     background: #085eab;
@@ -36,6 +40,9 @@
     border-radius: 8px;
     padding: 10px;
     cursor: pointer;
+    font-family: Montserrat;
+    font-weight: 500;
+    font-size: 1em;
 }
 .logout-button:hover{
     background-color: #b01f06;

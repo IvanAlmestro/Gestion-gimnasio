@@ -30,14 +30,15 @@
     border-radius: 12px;
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
 }
-.stat-card strong, .small-card strong {
+.stat-card strong, .small-card strong{
     display: block;
     font-weight: 800;
-    color: rgb(229 198 88 / 0.87);
     font-size: 1.6rem;
     margin-top: 8px;
 }
-
+.strong-progress, .stat-card strong, .small-card strong{
+    color: rgb(229 198 88 / 0.87);
+}
 .stat-card > span {
     display: block;
     color: #cbd5e1;
@@ -78,14 +79,17 @@
     min-width: 72px;
     height: 34px;
     padding: 0 18px;
-    background: #06b6d4;
+    background: rgb(6 95 212 / 0.92);
     color: #020617;
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
     font-size: 14px;
     border: none;
-    box-shadow: 0 0 14px rgba(6, 182, 212, 0.25);
+    box-shadow: 0 0 9px rgba(6, 182, 212, 0.25);
+}
+.next-workout-card .primary-button{
+    background: #06b6d4;
 }
 .primary-button:hover{
     background: #4284e8;
@@ -222,6 +226,18 @@
     pointer-events: none;
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
 }
+.btn-edit-meta{
+    text-decoration: none;
+    color: #b0a8a8;
+    background-color: #1E2B47;
+    border-radius: 20px;
+    padding: 5px;
+}
+.btn-edit-meta:hover{
+    color: rgb(229 198 88 / 0.87);
+    background-color: #1132a1;
+}
+
 .progress-bar {
     width: 60%;
     height: 25px;

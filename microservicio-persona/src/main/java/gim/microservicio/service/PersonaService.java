@@ -56,9 +56,14 @@ public class PersonaService {
         if(datos.getPesoActual() != null)
             persona.setPesoActual(datos.getPesoActual());
 
+        if(datos.getPesoMeta() != null)
+            persona.setPesoMeta(datos.getPesoMeta());
+
         if(datos.getObjetivo() != null)
             persona.setObjetivo(datos.getObjetivo());
 
+        if(datos.getFotoPerfil() != null)
+            persona.setFotoPerfil(datos.getFotoPerfil());
         // aca lo guardo en variable pero no es necesario (para ver la diferencia a RutinaService)
         Persona pActualizada = personaRepository.save(persona);
         return new PersonaPerfilDTO(pActualizada);

@@ -16,10 +16,12 @@ public class PersonaPerfilDTO {
     private String apellido;
     private String email;
     private Double altura;
+    private Double pesoMeta;
     private Double pesoActual;
     private Double pesoInicial;
     private String objetivo;
     private LocalDate fechaRegistro;
+    private String fotoPerfil;
 
     public PersonaPerfilDTO(Persona persona){
         this.id = persona.getId();
@@ -27,10 +29,12 @@ public class PersonaPerfilDTO {
         this.apellido = persona.getApellido();
         this.email = persona.getEmail();
         this.altura = persona.getAltura();
+        this.pesoMeta = persona.getPesoMeta();
         this.pesoInicial= persona.getPesoInicial();
         this.pesoActual = persona.getPesoActual();
         this.objetivo = persona.getObjetivo();
         this.fechaRegistro = persona.getFechaRegistro();
+        this.fotoPerfil = persona.getFotoPerfil();
 
     }
 }
