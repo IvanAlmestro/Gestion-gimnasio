@@ -23,7 +23,7 @@ function DashboardPage() {
 
             <div className="dashboard-stats">
                 <StatCard
-                    icon="💪"
+                    icon="📋"
                     title="Mis Rutinas"
                     text="Actualmente tenés:"
                     value={rutinas.length}
@@ -32,7 +32,7 @@ function DashboardPage() {
                 />
 
                 <StatCard
-                    icon="🏋️"
+                    icon="💪"
                     title="Ejercicios"
                     text="Actualmente tenés:"
                     value={ejercicios.length || '0'}
