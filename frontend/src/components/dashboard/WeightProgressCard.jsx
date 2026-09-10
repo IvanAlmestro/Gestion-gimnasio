@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useAuth } from "../../hooks/useAuth"
 import WeightChart from "./WeightChart.jsx";
 import {Link} from "react-router-dom";
+import {authApi} from "../../services/api.js";
 
 function WeightProgressCard() {
     const { persona } = useAuth();
@@ -10,8 +11,9 @@ function WeightProgressCard() {
     // 1. Cálculos dinámicos con tus datos reales
     const pesoInicial = persona?.pesoInicial || 0;
     const pesoActual = persona?.pesoActual || 0;
-    const diferencia = (pesoActual - pesoInicial).toFixed(1);
-    const signo = diferencia > 0 ? "+" : "";
+    const valorProgreso = pesoActual - pesoInicial;
+    const signo = valorProgreso > 0 ? "+" : "";
+    const progresoFormateado = `${signo}${valorProgreso.toFixed(1)}`;
 
 
     const calcularProgreso = (pesoInicial, pesoActual, meta) => {
@@ -29,16 +31,26 @@ function WeightProgressCard() {
     useEffect(() => {
         const fetchHistorial = async () => {
             try {
-                // 💡 FUTURO: const response = await authApi.get(`/personas/${persona.id}/historial-peso`);
-                // setHistorialPesos(response.data);
+                const response = await authApi.get(`/personas/${persona.id}/historial-peso`);
 
-                // MOCK TEMPORAL hasta que armes el backend:
-                setHistorialPesos([
-                    { fecha: 'Semana 1', peso: pesoInicial },
-                    { fecha: 'Actual', peso: pesoActual },
-                ]);
+                const dataFormateada = response.data.map(registro => {
+                    const fechaObj = new Date(registro.fecha);
+                    const fechaCorta = fechaObj.toLocaleDateString('es-AR', { day: 'numeric', month: 'short' });
+
+                    return {
+                        fecha: fechaCorta,
+                        peso: registro.peso
+                    };
+                });
+                const historialCompleto = [
+                    { fecha: 'Inicio', peso: pesoInicial },
+                    ...dataFormateada
+                ];
+
+                setHistorialPesos(historialCompleto);
+
             } catch (error) {
-                console.error("Error al cargar historial:", error);
+                console.error("Error al cargar el historial de pesos:", error);
             }
         };
 
@@ -53,7 +65,7 @@ function WeightProgressCard() {
                 <div className="weight-data">
                     <p>Peso inicial: <strong className="strong-progress">{pesoInicial} kg</strong></p>
                     <p>Peso actual: <strong className="strong-progress">{pesoActual} kg</strong></p>
-                    <p>Último cambio: <strong className="strong-progress">{signo}{diferencia} kg</strong></p>
+                    <p>Último cambio: <strong className="strong-progress">{progresoFormateado} kg</strong></p>
 
                     <p>
                         Meta: <strong className="strong-progress">

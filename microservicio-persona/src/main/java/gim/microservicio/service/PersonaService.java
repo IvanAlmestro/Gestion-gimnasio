@@ -1,10 +1,12 @@
 package gim.microservicio.service;
 
 import gim.microservicio.dto.*;
+import gim.microservicio.entity.HistorialPeso;
 import gim.microservicio.entity.Persona;
 import gim.microservicio.exception.custom.DuplicateEmailException;
 import gim.microservicio.exception.custom.InvalidCredentialsException;
 import gim.microservicio.exception.custom.PersonaNotFoundException;
+import gim.microservicio.repository.HistorialPesoRepository;
 import gim.microservicio.repository.PersonaRepository;
 import gim.microservicio.security.JWTService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,18 @@ import java.util.List;
 @Service
 public class PersonaService {
 
-    @Autowired
+
     private PersonaRepository personaRepository;
+    private HistorialPesoRepository pesoRepository;
     private final BCryptPasswordEncoder passwordEncoder;
     private final JWTService jwtService;
 
-    public PersonaService(BCryptPasswordEncoder passwordEncoder,JWTService jwtService){
+
+
+
+    public PersonaService(PersonaRepository personaRepository, HistorialPesoRepository pesoRepository, BCryptPasswordEncoder passwordEncoder,JWTService jwtService){
+        this.personaRepository = personaRepository;
+        this.pesoRepository = pesoRepository;
         this.passwordEncoder = passwordEncoder;
         this.jwtService = jwtService;
     }
@@ -53,9 +61,12 @@ public class PersonaService {
         if(datos.getAltura() != null)
             persona.setAltura(datos.getAltura());
 
-        if(datos.getPesoActual() != null)
+        if (datos.getPesoActual() != null && !datos.getPesoActual().equals(persona.getPesoActual())) {
             persona.setPesoActual(datos.getPesoActual());
-
+            // El primer parámetro es null porque la base de datos autogenera el ID
+            HistorialPeso nuevoRegistro = new HistorialPeso(null, datos.getPesoActual(), LocalDate.now(), persona);
+            pesoRepository.save(nuevoRegistro);
+        }
         if(datos.getPesoMeta() != null)
             persona.setPesoMeta(datos.getPesoMeta());
 
@@ -73,7 +84,7 @@ public class PersonaService {
         if(personaRepository.existsById(id))
             personaRepository.deleteById(id);
         else {
-            throw new PersonaNotFoundException("No existe la persona con el DNI que se intenta eliminar ");
+            throw new PersonaNotFoundException("No existe la persona con el id que se intenta eliminar ");
         }
     }
 
