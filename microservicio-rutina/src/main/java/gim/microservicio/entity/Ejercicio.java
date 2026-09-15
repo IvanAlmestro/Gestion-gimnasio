@@ -18,5 +18,6 @@ public class Ejercicio {
     private Integer rir;
     private String grupoMuscular;
 
+    
 
 }

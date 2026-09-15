@@ -1,17 +1,17 @@
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { authApi } from "../services/api";
 
-// 1. Creamos el "parlante" global
 const AuthContext = createContext();
 
-// 2. Creamos el Provider (el componente que va a envolver tu app)
 export const AuthProvider = ({ children }) => {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
     const token = localStorage.getItem("token");
+
+    // Inicializamos con lo que hay en localStorage para que la pantalla no titile
     const [persona, setPersona] = useState(() => {
         const data = localStorage.getItem("persona");
         return data ? JSON.parse(data) : null;
@@ -22,8 +22,37 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem("persona", JSON.stringify(nuevosDatos));
     };
 
+    // 1. NUEVA FUNCIÓN: Para limpiar todo si el token muere o el usuario sale manual
+    const logout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("persona");
+        localStorage.removeItem("idUsuarioLogueado");
+        setPersona(null);
+        navigate("/login"); // o "/" dependiendo de tus rutas
+    };
+
+    // 2. NUEVO EFECTO: Valida la sesión en segundo plano al abrir la app
+    useEffect(() => {
+        const verificarSesion = async () => {
+            const userId = localStorage.getItem("idUsuarioLogueado");
+
+            if (token && userId) {
+                try {
+                    // Le pedimos al backend los datos más recientes del usuario.
+                    // Si el token expiró, esto va a fallar y saltar al catch.
+                    const response = await authApi.get(`/personas/${userId}`);
+                    actualizarPersonaLocal(response.data);
+                } catch (err) {
+                    console.error("La sesión expiró o el token es inválido.");
+                    logout(); // Deslogueo automático por seguridad
+                }
+            }
+        };
+
+        verificarSesion();
+    }, []); // Se ejecuta solo una vez al cargar la app
+
     const login = async (email, password) => {
-        // ... tu código de login queda exactamente igual ...
         setLoading(true);
         setError("");
         try {
@@ -31,6 +60,8 @@ export const AuthProvider = ({ children }) => {
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("persona", JSON.stringify(response.data.perfil));
             localStorage.setItem("idUsuarioLogueado", response.data.perfil.id);
+
+            setPersona(response.data.perfil); // Actualizamos el estado al instante
             navigate("/dashboard");
         } catch (err) {
             setError("Credenciales inválidas. Por favor, intentá de nuevo.");
@@ -60,15 +91,13 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    // Acá inyectamos las variables al parlante para que todos las escuchen
     return (
-        <AuthContext.Provider value={{ login, register, loading, error, persona, token, setPersona: actualizarPersonaLocal }}>
+        <AuthContext.Provider value={{ login, register, logout, loading, error, persona, token, setPersona: actualizarPersonaLocal }}>
             {children}
         </AuthContext.Provider>
     );
 };
 
-// 3. Tu hook ahora simplemente "escucha" al parlante en vez de crear copias nuevas
 export const useAuth = () => {
     return useContext(AuthContext);
 };

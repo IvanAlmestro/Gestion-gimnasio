@@ -1,3 +1,6 @@
+/* =========================================
+   1. ESTILOS GLOBALES DE LA PÁGINA
+   ========================================= */
 .rutinas-page {
     width: 100%;
     max-width: 1200px;
@@ -5,6 +8,14 @@
     padding-top: 56px;
 }
 
+.app-content {
+    display: flex;
+    justify-content: center;
+}
+
+/* =========================================
+   2. HEADER Y BOTONES GLOBALES
+   ========================================= */
 .rutinas-header {
     display: flex;
     align-items: flex-start;
@@ -40,6 +51,20 @@
     background: rgba(6, 182, 212, 0.12);
 }
 
+.btn-back {
+    cursor: pointer;
+    text-decoration: none;
+    color: #a0a0a0;
+    font-weight: 500;
+}
+
+.btn-back:hover {
+    color: #ffffff;
+}
+
+/* =========================================
+   3. FILTROS Y CONTADOR
+   ========================================= */
 .rutinas-filters {
     display: flex;
     gap: 16px;
@@ -70,6 +95,9 @@
     font-size: 14px;
 }
 
+/* =========================================
+   4. GRID DE TARJETAS (PANTALLA PRINCIPAL)
+   ========================================= */
 .rutinas-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -84,7 +112,6 @@
     background: #182235;
     border: 1px solid #334155;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.22);
-
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -140,7 +167,6 @@
     text-decoration: none;
     font-size: 14px;
     font-weight: 700;
-
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -150,142 +176,175 @@
     background: #22d3ee;
 }
 
-/*CSS PARA ROUTINE DETAIL*/
-.routine-id-card{
-    width: 900px;
-    background: #182235;
-    border-radius:18px;
-    padding:40px 80px 40px 80px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    box-shadow:0 10px 30px rgba(0,0,0,.25);
+.delete-card-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1em;
 }
 
-.routine-id-card h2{
-
-    color:white;
-    font-size:2rem;
-    margin-bottom:20px;
-
-}
-
-.routine-id-info{
-
-    display:flex;
-    gap:20px;
-    margin-bottom:30px;
-
-}
-
-.routine-id-info span{
-
-    padding:8px 14px;
-    border-radius:999px;
-    background:#313C52;
-    color:#FFD54F;
-    font-weight:600;
-
-}
-
-.routine-id-card table{
-
-    width:100%;
-    border-collapse:collapse;
-    color:white;
-
-
-}
-
-.routine-id-card th{
-
-    padding:16px;
-    border-bottom:1px solid #3A455C;
-
-}
-
-.routine-id-card td{
-
-    padding:20px;
-    text-align:center;
-    border-bottom:1px solid #313C52;
-
-}
-
-.routine-id-card button{
-
-    margin-top:35px;
-    padding:14px 30px;
-    border:none;
-    border-radius:8px;
-
-}
-td{
-    font-weight: lighter;
-    color: #D5D4D4;
-}
-td.td-nombre{
-    text-align: left;
-
-}
-article .btn-comenzar{
-    border: 1px solid #3B82F6;
-    background-color: #1E40AF;
-    color: #F8FAFC;
-    font-family: 'Poppins', sans-serif;
-}
-
-.btn-comenzar:hover{
+.delete-card-btn:hover {
     cursor: pointer;
-    background-color: #6172ff;
 }
-.app-content{
-    display: flex;
-    justify-content: center;
-}
-.title-rutine{
+
+/* =========================================
+   5. VISTA DETALLADA (ROUTINE ID CARD)
+   ========================================= */
+.routine-detail-page .title-rutine {
     text-align: center;
     margin-bottom: 80px;
-}
-h1{
     color: #FFDC7B;
 }
 
-.btn-back {
+.routine-id-card {
+    width: 900px;
+    background: #182235;
+    border-radius: 18px;
+    padding: 40px 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0,0,0,.25);
+}
+
+.routine-id-card h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.routine-id-info {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.routine-id-info span {
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: #313C52;
+    color: #FFD54F;
+    font-weight: 600;
+}
+
+/* --- BLOQUES DE DÍAS Y TABLAS --- */
+.dias-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    width: 100%;
+}
+
+.dia-card {
+    background-color: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dia-header h3 {
+    color: #06b6d4;
+    font-size: 1.2rem;
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.table-responsive {
+    overflow-x: auto;
+}
+
+.ejercicios-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+    color: white;
+}
+
+.ejercicios-table th {
+    color: #94a3b8;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    padding: 0.75rem 0.5rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.ejercicios-table td {
+    padding: 1rem 0.5rem;
+    color: #D5D4D4;
+    font-weight: lighter;
+    border-bottom: 1px solid #313C52;
+    text-align: center;
+}
+
+.ejercicios-table tr:last-child td {
+    border-bottom: none;
+}
+
+.ejercicios-table td.td-nombre {
+    text-align: left;
+}
+
+.ejercicios-table td.td-notas {
+    color: #94a3b8;
+    font-style: italic;
+    font-size: 0.9rem;
+}
+
+.btn-comenzar {
+    margin-top: 35px;
+    padding: 14px 30px;
+    border: 1px solid #3B82F6;
+    border-radius: 8px;
+    background-color: #1E40AF;
+    color: #F8FAFC;
+    font-family: 'Poppins', sans-serif;
+    transition: background-color 0.2s ease;
+}
+
+.btn-comenzar:hover {
     cursor: pointer;
-    text-decoration: none;
-    color: #a0a0a0;
-    font-weight: 500;
-
-
+    background-color: #6172ff;
 }
-.btn-back:hover {
-    color: #ffffff;
-}
-
-/*MODAL NUEVA RUTINA*/
-/* Acomoda los grupos uno abajo del otro */
-.modal-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px; /* Separación entre los bloques del formulario */
-    margin-top: 20px;
+/* Estilo base del botón (inactivo) */
+.day-button {
+    padding: 8px 20px;
+    border-radius: 999px;
+    border: 1px solid #334155;
+    background-color: #182235;
+    color: #94a3b8;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.2s ease-in-out;
 }
 
-/* Acomoda el label y su input uno abajo del otro */
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
+/* Efecto hover opcional para cuando pasás el mouse y no está activo */
+.day-button:hover:not(.active) {
+    background-color: #1e293b;
+    border-color: #475569;
 }
+
+/* Estilo para el botón seleccionado (activo) */
+.day-button.active {
+    border: 1px solid #06b6d4;
+    background-color: rgba(6, 182, 212, 0.15);
+    color: #06b6d4;
+}
+/* =========================================
+   6. MODAL NUEVA RUTINA (FORMULARIO)
+   ========================================= */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0; right: 0; bottom: 0;
-    background-color: rgba(0, 0, 0, 0.75); /* Fondo oscuro semitransparente */
+    background-color: rgba(0, 0, 0, 0.75);
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1000; /* Asegura que esté por encima del navbar y el sidebar */
+    z-index: 1000;
 }
 
 .modal-content {
@@ -293,8 +352,10 @@ h1{
     padding: 32px;
     border-radius: 12px;
     width: 90%;
-    max-width: 500px;
+    max-width: 500px; /* Nota: Esto lo vamos a tener que agrandar cuando hagamos el form de Días */
     position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .close-btn {
@@ -306,8 +367,22 @@ h1{
     color: #9ca3af;
     cursor: pointer;
 }
+
+.modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .form-input {
-    background-color: #374151; /* Un gris un tono más claro que el fondo del modal */
+    background-color: #374151;
     border: 1px solid #4b5563;
     color: #ffffff;
     padding: 12px 16px;
@@ -320,10 +395,12 @@ h1{
 .form-input::placeholder {
     color: #9ca3af;
 }
+
 .form-input:focus {
     border-color: #06b6d4;
     box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.2);
 }
+
 .save-button {
     background-color: #06b6d4;
     color: #111827;
@@ -337,11 +414,11 @@ h1{
     transition: background-color 0.2s ease;
 }
 
-/*EJERCICIOS CHECKLIST NUEVA RUTINA*/
+/* Este bloque va a desaparecer pronto con el nuevo form, pero lo dejamos para que no se rompa ahora */
 .checkbox-list-container {
     max-height: 150px;
-    overflow-y: auto; /* Agrega la barrita de scroll si hay muchos */
-    background-color: #374151; /* Mismo fondo que los inputs */
+    overflow-y: auto;
+    background-color: #374151;
     border-radius: 8px;
     padding: 10px;
     display: flex;
@@ -360,13 +437,4 @@ h1{
 .checkbox-label {
     color: #e5e7eb;
     font-size: 0.9rem;
-}
-.delete-card-btn{
-    position: absolute; top: 10px; right: 10px;
-    background:none;
-    border: none;
-    font-size: 1em;
-}
-.delete-card-btn:hover{
-    cursor: pointer;
 }

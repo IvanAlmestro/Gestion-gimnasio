@@ -6,7 +6,7 @@ export const useRoutineDetail = (id) => {
     const [routineData, setRoutineData] = useState({
         nombre: "",
         objetivo: "",
-        ejercicios: [],
+        diasRutina: [],
         duracion: "0 min",
         routineId: null
     });
@@ -23,13 +23,13 @@ export const useRoutineDetail = (id) => {
                 const data = response.data;
 
                 // Tu excelente cálculo dinámico
-                const totalSeries = data.ejercicios?.reduce((acc, ej) => acc + ej.series, 0) || 0;
+                const totalSeries = data.diasRutina?.reduce((acc, ej) => acc + ej.series, 0) || 0;
                 const tiempoEstimado = totalSeries > 0 ? totalSeries * 3 : 90;
 
                 setRoutineData({
                     nombre: data.nombre,
                     objetivo: data.objetivo,
-                    ejercicios: data.ejercicios,
+                    diasRutina: data.diasRutina,
                     duracion: `${tiempoEstimado} min`,
                     routineId: data.id
                 });

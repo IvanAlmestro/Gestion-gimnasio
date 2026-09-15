@@ -18,8 +18,8 @@ public class RutinaDTO {
     private Objetivo objetivo;
     private LocalDate fechaCreacion;
     private Long idUsuario;
-    private List<EjercicioDTO> ejercicios;
-
+    private List<DiaRutinaDTO> diasRutina;
+    
     public RutinaDTO(Rutina datos) {
         this.id = datos.getId();
         this.nombre = datos.getNombre();
@@ -28,10 +28,10 @@ public class RutinaDTO {
         this.fechaCreacion = datos.getFechaCreacion();
         this.idUsuario = datos.getIdUsuario();
 
-        // Transformar la lista interna
-        if (datos.getEjercicios() != null) {
-            this.ejercicios = datos.getEjercicios().stream()
-                    .map(EjercicioDTO::new)
+        // Transformar la lista interna de Días
+        if (datos.getDiasRutina() != null) {
+            this.diasRutina = datos.getDiasRutina().stream()
+                    .map(DiaRutinaDTO::new)
                     .toList();
         }
     }

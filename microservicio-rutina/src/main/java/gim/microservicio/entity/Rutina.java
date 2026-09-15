@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -29,12 +30,11 @@ public class Rutina {
     @Enumerated(EnumType.STRING)
     private Objetivo objetivo;
 
-    @ManyToMany
-    @JoinTable(name = "rutina_ejercicio", // Nombre de la nueva tabla intermedia en MySQL
-            joinColumns = @JoinColumn(name = "id_rutina"), // Columna que apunta a esta rutina
-            inverseJoinColumns = @JoinColumn(name = "id_ejercicio")
-    )
-    private List<Ejercicio> ejercicios;
+    // Si borras la rutina, se borran sus días en cascada
+    @OneToMany(mappedBy = "rutina", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<DiaRutina> diasRutina = new ArrayList<>();
+
+
 
     private LocalDate fechaCreacion;
 

@@ -1,0 +1,55 @@
+### Crear Rutina Estética de 3 Días
+POST http://localhost:8081/rutinas
+Content-Type: application/json
+# Reemplazá esto con un token válido sacado del localStorage de tu navegador
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJpdmFuZHJvc0Bob3RtYWlsLmNvbSIsImlhdCI6MTc4OTQ4MTg3OCwiZXhwIjoxNzg5NDg1NDc4fQ.BDD3soRG3C8RG95ue49ZvRHJLYa1YvC2_DSGTzaopLg
+
+{
+  "nombre": "Hipertrofia 4 Días (Volumen)",
+  "descripcion": "Plan intenso de 4 días enfocado en sobrecarga progresiva y volumen muscular.",
+  "objetivo": "HIPERTROFIA",
+  "idUsuario": 1,
+  "dias": [
+    {
+      "nombre": "Día 1: Torso Pesado",
+      "ejercicios": [
+        { "ejercicioId": 1, "series": 4, "repeticiones": 6, "notas": "Press Banca - Carga pesada, 2 min descanso" },
+        { "ejercicioId": 2, "series": 4, "repeticiones": 8, "notas": "Remo con barra - Espalda recta" },
+        { "ejercicioId": 4, "series": 3, "repeticiones": 10, "notas": "Press Militar sentado" },
+        { "ejercicioId": 5, "series": 3, "repeticiones": 12, "notas": "Dominadas o Jalón al pecho" },
+        { "ejercicioId": 6, "series": 3, "repeticiones": 15, "notas": "Curl de bíceps con barra" }
+      ]
+    },
+    {
+      "nombre": "Día 2: Piernas y Core",
+      "ejercicios": [
+        { "ejercicioId": 3, "series": 4, "repeticiones": 8, "notas": "Sentadilla Libre - Bajar profundo" },
+        { "ejercicioId": 7, "series": 4, "repeticiones": 10, "notas": "Prensa a 45 grados" },
+        { "ejercicioId": 8, "series": 4, "repeticiones": 12, "notas": "Peso Muerto Rumano" },
+        { "ejercicioId": 9, "series": 3, "repeticiones": 15, "notas": "Extensiones de cuádriceps" },
+        { "ejercicioId": 10, "series": 4, "repeticiones": 20, "notas": "Elevación de talones (Gemas)" },
+        { "ejercicioId": 11, "series": 3, "repeticiones": 20, "notas": "Planchas abdominales (1 min)" }
+      ]
+    },
+    {
+      "nombre": "Día 3: Empuje (Pecho, Hombro, Tríceps)",
+      "ejercicios": [
+        { "ejercicioId": 12, "series": 4, "repeticiones": 10, "notas": "Press Inclinado con mancuernas" },
+        { "ejercicioId": 13, "series": 3, "repeticiones": 12, "notas": "Aperturas en polea" },
+        { "ejercicioId": 14, "series": 4, "repeticiones": 12, "notas": "Vuelos laterales con mancuernas" },
+        { "ejercicioId": 15, "series": 3, "repeticiones": 15, "notas": "Extensiones de tríceps en polea" },
+        { "ejercicioId": 16, "series": 3, "repeticiones": 12, "notas": "Press francés" }
+      ]
+    },
+    {
+      "nombre": "Día 4: Tirón (Espalda, Bíceps)",
+      "ejercicios": [
+        { "ejercicioId": 17, "series": 4, "repeticiones": 10, "notas": "Remo en polea baja" },
+        { "ejercicioId": 18, "series": 3, "repeticiones": 12, "notas": "Pull-over con soga" },
+        { "ejercicioId": 19, "series": 4, "repeticiones": 12, "notas": "Encogimientos de hombros (Trapecio)" },
+        { "ejercicioId": 20, "series": 4, "repeticiones": 12, "notas": "Curl martillo con mancuernas" },
+        { "ejercicioId": 21, "series": 3, "repeticiones": 15, "notas": "Curl predicador" }
+      ]
+    }
+  ]
+}

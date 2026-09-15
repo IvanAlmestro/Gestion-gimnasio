@@ -1,10 +1,9 @@
 package gim.microservicio.service;
 
-import gim.microservicio.dto.ActualizarRutinaDTO;
-import gim.microservicio.dto.CrearRutinaDTO;
-import gim.microservicio.dto.EjercicioDTO;
-import gim.microservicio.dto.RutinaDTO;
+import gim.microservicio.dto.*;
+import gim.microservicio.entity.DiaRutina;
 import gim.microservicio.entity.Ejercicio;
+import gim.microservicio.entity.EjercicioDia;
 import gim.microservicio.entity.Rutina;
 import gim.microservicio.exception.custom.PersonaNotFoundException;
 import gim.microservicio.exception.custom.RutinaNotFoundException;
@@ -75,16 +74,45 @@ public class RutinaService {
         }
 
         Rutina rutinaNueva = new Rutina();
-
-        List<Ejercicio> ejerciciosAsignados = ejercicioRepository.findAllById(datos.getEjerciciosIds());
-        rutinaNueva.setEjercicios(ejerciciosAsignados);
-
         rutinaNueva.setNombre(datos.getNombre());
         rutinaNueva.setDescripcion(datos.getDescripcion());
         rutinaNueva.setObjetivo(datos.getObjetivo());
         rutinaNueva.setFechaCreacion(LocalDate.now());
         rutinaNueva.setIdUsuario(datos.getIdUsuario());
 
+        // Iteramos sobre los días que manda el frontend
+        if (datos.getDias() != null) {
+            for (CrearDiaRutinaDTO diaDto : datos.getDias()) {
+                DiaRutina dia = new DiaRutina();
+                dia.setNombre(diaDto.getNombre());
+                dia.setRutina(rutinaNueva); // Conectamos el día con la rutina padre
+
+                // Iteramos sobre los ejercicios de ese día específico
+                if (diaDto.getEjercicios() != null) {
+                    for (CrearEjercicioDiaDTO ejDto : diaDto.getEjercicios()) {
+                        EjercicioDia ficha = new EjercicioDia();
+                        ficha.setSeries(ejDto.getSeries());
+                        ficha.setRepeticiones(ejDto.getRepeticiones());
+                        ficha.setNotas(ejDto.getNotas());
+                        ficha.setDiaRutina(dia); // Conectamos la ficha con su día
+
+                        // Buscamos el libro original en el catálogo
+                        Ejercicio ejercicioCatalogo = ejercicioRepository.findById(ejDto.getEjercicioId())
+                                .orElseThrow(() -> new RuntimeException("Ejercicio no encontrado en el catálogo: " + ejDto.getEjercicioId()));
+
+                        ficha.setEjercicio(ejercicioCatalogo);
+
+                        // Guardamos la ficha en la lista del día
+                        dia.getEjerciciosDelDia().add(ficha);
+                    }
+                }
+                // Guardamos el día en la lista de la rutina
+                rutinaNueva.getDiasRutina().add(dia);
+            }
+        }
+        // ---------------------------------
+
+        // Hibernate guarda la Rutina, y por Cascade guarda los Días y las Fichas automáticamente
         rutinaRepository.save(rutinaNueva);
         return new RutinaDTO(rutinaNueva);
     }

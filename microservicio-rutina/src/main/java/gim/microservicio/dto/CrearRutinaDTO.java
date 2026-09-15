@@ -15,7 +15,7 @@ public class CrearRutinaDTO {
     private String nombre;
     private String descripcion;
     private Objetivo objetivo;
-    private List<Long> ejerciciosIds;
+    private List<CrearDiaRutinaDTO> dias;
     private Long idUsuario;
 
 

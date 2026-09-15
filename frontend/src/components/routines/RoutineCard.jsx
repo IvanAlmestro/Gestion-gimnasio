@@ -3,6 +3,10 @@ import { Link } from "react-router-dom";
 function RoutineCard({ rutina, onDelete}) {
     const id = rutina.id || rutina.idRutina;
 
+    // Calculamos los totales de forma segura por si vienen vacíos
+    const cantidadDias = rutina.diasRutina?.length || 0;
+    const cantidadEjercicios = rutina.diasRutina?.reduce((total, dia) => total + (dia.ejercicios?.length || 0), 0) || 0;
+
     return (
         <article className="routine-card">
             <button
@@ -21,7 +25,8 @@ function RoutineCard({ rutina, onDelete}) {
             </span>
 
             <div className="routine-info">
-                <p>🔥 {rutina.ejercicios.length} ejercicios</p>
+                <p>📅 {cantidadDias} días</p>
+                <p>🔥 {cantidadEjercicios} ejercicios totales</p>
                 <p>🕒 {rutina.duracion || "60 min aprox"}</p>
             </div>
 

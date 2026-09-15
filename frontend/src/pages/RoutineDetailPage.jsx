@@ -5,7 +5,7 @@ import "../styles/RoutinePage.css";
 
 function RoutineDetailPage() {
     const { id } = useParams();
-    const { nombre, objetivo, ejercicios, duracion, routineId, loading, error } = useRoutineDetail(id);
+    const { nombre, objetivo, duracion, routineId, diasRutina, loading, error } = useRoutineDetail(id);
 
     if (loading) return <div>Cargando detalle de la rutina...</div>;
     if (error) return <div>{error}</div>;
@@ -22,7 +22,7 @@ function RoutineDetailPage() {
                 title={nombre}
                 objective={objetivo}
                 duration={duracion}
-                exercises={ejercicios}
+                dias={diasRutina}
                 routineId={routineId}
             />
         </section>
