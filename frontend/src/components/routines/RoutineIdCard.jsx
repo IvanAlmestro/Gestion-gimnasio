@@ -4,7 +4,6 @@ import { useAuth } from "../../hooks/useAuth.jsx";
 import { authApi } from "../../services/api.js";
 
 function RoutineIdCard({
-                           title,
                            objective,
                            duration,
                            dias,
@@ -63,7 +62,7 @@ function RoutineIdCard({
                             <button
                                 key={dia.id}
                                 onClick={() => setDiaActivoIndex(index)}
-                                className={`tab-button ${diaActivoIndex === index ? 'active' : ''}`}
+                                className={`day-button ${diaActivoIndex === index ? 'active' : ''}`}
                             >
                                 {/* Cortamos el string para que en la pestaña solo diga "Día 1", "Día 2", etc. */}
                                 {dia.nombre.split(':')[0]}

@@ -6,4 +6,5 @@ import lombok.Data;
 public class ComenzarRutinaDTO {
     private Long usuarioId;
     private Long rutinaId;
+    private Long diaRutinaId;
 }

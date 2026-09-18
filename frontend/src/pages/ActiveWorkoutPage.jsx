@@ -4,18 +4,18 @@ import { useRutinas } from "../hooks/useRutinas.js";
 import "../styles/ActiveWorkout.css";
 
 function ActiveWorkoutPage() {
-    const { id } = useParams();
-    const { exercises, currentIndex, loading, series, progreso, isFinished, handleSiguiente, handleInputChange, handleAgregarSerie } = useActiveWorkout(id);
+    const { rutinaId, diaId } = useParams();
+    const { exercises, currentIndex, loading, series, progreso, isFinished, handleSiguiente, handleInputChange, handleAgregarSerie } = useActiveWorkout(rutinaId, diaId);
     const { rutinas } = useRutinas();
 
     if (loading) return <div>Cargando entrenamiento...</div>;
     if (exercises.length === 0) return <div>No hay ejercicios</div>;
 
     // Usamos Number(id) porque useParams siempre devuelve un String
-    const currentRutina = rutinas.find((r) => r.id === Number(id)) || {};
+    const currentRutina = rutinas.find((r) => r.id === Number(rutinaId)) || {};
 
     const currentExercise = exercises[currentIndex];
-
+    const currentDia = currentRutina.diasRutina?.find((d) => d.id === Number(diaId));
     if (isFinished) {
 
         return (
@@ -36,16 +36,18 @@ function ActiveWorkoutPage() {
 
     return (
         <section className="active-workout-page">
-            <Link to={`/rutinas/${id}`} className="btn-back">⬅ Volver a mis rutinas</Link>
+            <Link to={`/rutinas/${rutinaId}`} className="btn-back">⬅ Volver a mis rutinas</Link>
 
             <header className="workout-header">
-                {/* Ahora el nombre es real */}
                 <h1 className="title-yellow">{currentRutina.nombre || "Rutina Actual"}</h1>
+                <h3 style={{ color: '#06b6d4', marginTop: '8px', marginBottom: '16px' }}>
+                    {currentDia?.nombre}
+                </h3>
                 <p className="subtitle">Ejercicio {currentIndex + 1} de {exercises.length}</p>
             </header>
 
             <article className="active-routine exercise-card">
-                <h2 className="exercise-title">{currentExercise.nombre || "Ejercicio Actual"}</h2>
+                <h2 className="exercise-title">{currentExercise.ejercicioNombre || "Ejercicio Actual"}</h2>
                 <span className="badge-pecho">{currentExercise.grupoMuscular}</span>
 
                 {/* 2. SOLUCIÓN AL HARDCODEO DEL EJERCICIO: */}

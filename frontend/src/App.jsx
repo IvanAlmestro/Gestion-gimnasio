@@ -48,9 +48,10 @@ function App() {
                     <Route path="/dashboard" element={<DashboardPage />} />
                     <Route path="/rutinas" element={<RoutinesPage />} />
                     <Route path="/rutinas/:id" element={<RoutineDetailPage />} />
-                    <Route path="/entrenamiento/:id" element={<ActiveWorkoutPage />} />
+                    <Route path="/entrenamiento/:rutinaId/dia/:diaId" element={<ActiveWorkoutPage />} />
                     <Route path="/ejercicios" element={<ExercisesPage />} />
                     <Route path="/perfil" element={<PerfilPage />} />
+
                 </Route>
 
                 {/* Ruta Catch-all (404) */}
