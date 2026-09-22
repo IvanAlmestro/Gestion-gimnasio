@@ -1,6 +1,6 @@
 import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/Sidebar.css";
-
+import logoGym from "../assets/LogoGym_sin_texto.png"
 function Sidebar() {
     const navigate = useNavigate();
 
@@ -13,6 +13,7 @@ function Sidebar() {
     return (
         <aside className="sidebar">
             <nav className="sidebar-nav">
+                <img src={logoGym} className="sidebar-logo" />
                 <NavLink
                     to="/dashboard"
                     className={({ isActive }) =>

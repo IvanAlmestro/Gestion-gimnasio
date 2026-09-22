@@ -34,12 +34,17 @@
     cursor: pointer;
     font-weight: 500;
 }
-
+.title-day{
+    color: #06b6d4;
+    font-size: 1.4em;
+    margin-top: 8px;
+    margin-bottom: 16px ;
+}
 .exercise-title {
     margin: 0 0 0.5rem 0;
     font-size: 1.5rem;
 }
-.title-yellow{
+.title-rutineActive{
     margin-bottom: 10px;
 }
 

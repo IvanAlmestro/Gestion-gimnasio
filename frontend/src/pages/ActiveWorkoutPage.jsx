@@ -39,8 +39,8 @@ function ActiveWorkoutPage() {
             <Link to={`/rutinas/${rutinaId}`} className="btn-back">⬅ Volver a mis rutinas</Link>
 
             <header className="workout-header">
-                <h1 className="title-yellow">{currentRutina.nombre || "Rutina Actual"}</h1>
-                <h3 style={{ color: '#06b6d4', marginTop: '8px', marginBottom: '16px' }}>
+                <h1 className="title-rutineActive">{currentRutina.nombre || "Rutina Actual"}</h1>
+                <h3  className="title-day">
                     {currentDia?.nombre}
                 </h3>
                 <p className="subtitle">Ejercicio {currentIndex + 1} de {exercises.length}</p>

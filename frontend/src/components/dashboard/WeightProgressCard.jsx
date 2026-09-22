@@ -65,7 +65,7 @@ function WeightProgressCard() {
                 <div className="weight-data">
                     <p>Peso inicial: <strong className="strong-progress">{pesoInicial} kg</strong></p>
                     <p>Peso actual: <strong className="strong-progress">{pesoActual} kg</strong></p>
-                    <p>Último cambio: <strong className="strong-progress">{progresoFormateado} kg</strong></p>
+                    <p>Diferencia de peso: <strong className="strong-progress">{progresoFormateado} kg</strong></p>
 
                     <p>
                         Meta: <strong className="strong-progress">

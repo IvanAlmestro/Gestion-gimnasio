@@ -5,12 +5,15 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    padding: 140px 24px 32px;
+    padding: 60px 24px 32px;
     font-size: 1.2em;
     font-family: Montserrat;
     font-weight: 500;
 }
-
+.sidebar-logo{
+    margin-bottom: 50px;
+    height: 40px;
+}
 .sidebar-nav {
     display: flex;
     flex-direction: column;
