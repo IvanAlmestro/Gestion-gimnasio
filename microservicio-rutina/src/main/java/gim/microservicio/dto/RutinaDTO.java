@@ -19,6 +19,7 @@ public class RutinaDTO {
     private LocalDate fechaCreacion;
     private Long idUsuario;
     private List<DiaRutinaDTO> diasRutina;
+    private boolean activa;
     
     public RutinaDTO(Rutina datos) {
         this.id = datos.getId();
@@ -27,7 +28,7 @@ public class RutinaDTO {
         this.objetivo = datos.getObjetivo();
         this.fechaCreacion = datos.getFechaCreacion();
         this.idUsuario = datos.getIdUsuario();
-
+        this.activa = datos.isActiva();
         // Transformar la lista interna de Días
         if (datos.getDiasRutina() != null) {
             this.diasRutina = datos.getDiasRutina().stream()

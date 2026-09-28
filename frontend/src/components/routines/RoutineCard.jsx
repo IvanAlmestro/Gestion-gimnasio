@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function RoutineCard({ rutina, onDelete}) {
+function RoutineCard({ rutina, onDelete, handleActivarRutina}) {
     const id = rutina.id || rutina.idRutina;
 
     // Calculamos los totales de forma segura por si vienen vacíos
@@ -9,12 +9,24 @@ function RoutineCard({ rutina, onDelete}) {
 
     return (
         <article className="routine-card">
-            <button
-                className="delete-card-btn"
-                onClick={() => onDelete(rutina.id)}
-                title="Eliminar rutina"
-            >🗑️
-            </button>
+
+
+            <div className="acciones-rutina">
+                {/* Botón de Activar (Fuego o Pin) */}
+                <button
+                    onClick={() => handleActivarRutina(id)}
+                    title={rutina.activa ? "Rutina actual" : "Marcar como activa"}
+                    className={`btn-icono ${rutina.activa ? 'icono-activo' : 'icono-inactivo'}`}
+                >
+                    {rutina.activa ? "🔥" : "📌"}
+                </button>
+
+                {/* Botón de Eliminar (Tachito) */}
+                <button className="btn-icono" title="Eliminar rutina" onClick={() => onDelete(id)}>
+                    🗑️
+                </button>
+
+            </div>
             <div className="routine-title">
                 <span className="routine-icon">💪</span>
                 <h3>{rutina.nombre}</h3>

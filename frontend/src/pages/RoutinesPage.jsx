@@ -17,7 +17,7 @@ const FILTERS = [
 ];
 
 function RutinasPage() {
-    const { rutinas,setRutinas, loading, error, deleteRutina} = useRutinas();
+    const { rutinas,setRutinas, loading, error, deleteRutina, handleActivarRutina}= useRutinas();
     const [selectedFilter, setSelectedFilter] = useState("TODAS");
     const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -59,6 +59,7 @@ function RutinasPage() {
                         key={rutina.id || rutina.idRutina}
                         rutina={rutina}
                         onDelete={deleteRutina}
+                        handleActivarRutina={handleActivarRutina}
                     />
                 ))}
             </div>

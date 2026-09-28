@@ -7,7 +7,7 @@ import SmallInfoCard from "../components/dashboard/SmallInfoCard.jsx";
 import WeightProgressCard from "../components/dashboard/WeightProgressCard.jsx";
 
 function DashboardPage() {
-    const { rutinas,ejercicios, persona, loading, error ,deleteRutina} = useDashboard();
+    const { rutinas,ejercicios, persona, loading, error } = useDashboard();
 
 
     if (loading) return <div>Cargando tu panel...</div>;

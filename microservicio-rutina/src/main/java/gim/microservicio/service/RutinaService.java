@@ -157,4 +157,27 @@ public class RutinaService {
         }
         rutinaRepository.deleteById(id);
     }
+    @Transactional
+    public void activarRutina(Long idRutina) {
+
+        // 1. Buscamos la rutina que el usuario tocó
+        Rutina rutinaDestino = rutinaRepository.findById(idRutina)
+                .orElseThrow(() -> new RuntimeException("Rutina no encontrada"));
+
+        // 2. Buscamos todas las rutinas que le pertenecen a este mismo usuario
+        Long idUsuario = rutinaDestino.getIdUsuario();
+        List<Rutina> todasLasRutinas = rutinaRepository.findByIdUsuario(idUsuario);
+
+        // 3. Recorremos la lista: prendemos la elegida y apagamos el resto
+        for (Rutina rutina : todasLasRutinas) {
+            if (rutina.getId().equals(idRutina)) {
+                rutina.setActiva(true);
+            } else {
+                rutina.setActiva(false);
+            }
+        }
+
+        // 4. Guardamos todas las rutinas actualizadas de una sola vez
+        rutinaRepository.saveAll(todasLasRutinas);
+    }
 }

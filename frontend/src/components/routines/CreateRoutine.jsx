@@ -21,6 +21,7 @@ function CreateRoutine({ onClose , onSaveOk}) {
 
 
     const handleAgregarDia = () => {
+        if (rutinaDraft.dias.length >= 7) return;
         const nuevoNumero = rutinaDraft.dias.length + 1;
         const nuevoDia = {
             idLocal: nuevoNumero,
@@ -155,9 +156,12 @@ function CreateRoutine({ onClose , onSaveOk}) {
                             ))}
 
                             {/* Botón extra para sumar días */}
-                            <button type="button" className="btn-agregar-dia" onClick={handleAgregarDia}>
-                                + Día
-                            </button>
+                            {rutinaDraft.dias.length < 7 && (
+                                <button type="button" className="btn-agregar-dia" onClick={handleAgregarDia}>
+                                    + Día
+                                </button>
+                            )}
+
                         </div>
 
                         <label>Ejercicios ({rutinaDraft.dias[diaActivoIndex].ejerciciosIds.length} seleccionados en este día)</label>

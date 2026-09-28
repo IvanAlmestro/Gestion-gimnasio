@@ -20,6 +20,28 @@ export const useRutinas = () => {
             }
         }
     };
+    const handleActivarRutina = async (idRutina) => {
+        try {
+            // 1. Le avisamos al backend que active esta rutina.
+            await rutinasApi.put(`/rutinas/${idRutina}/activar`);
+            // 2. Actualizamos el estado visual en React sin recargar la página.
+            setRutinas((actuales) =>
+                actuales.map((rutina) => {
+                    // Obtenemos el ID de forma segura igual que en la tarjeta
+                    const currentId = rutina.id || rutina.idRutina;
+
+                    if (currentId === idRutina) {
+                        return { ...rutina, activa: true };
+                    } else {
+                        return { ...rutina, activa: false };
+                    }
+                })
+            );
+        } catch (error) {
+            console.error("Error al fijar rutina:", error);
+            alert("Hubo un problema al intentar activar la rutina.");
+        }
+    };
     useEffect(() => {
         const fetchRutinas = async () => {
             setLoading(true);
@@ -36,5 +58,5 @@ export const useRutinas = () => {
         fetchRutinas();
     }, []);
 
-    return { rutinas,setRutinas, loading, error, deleteRutina};
+    return { rutinas,setRutinas, loading, error, deleteRutina, handleActivarRutina};
 };

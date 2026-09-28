@@ -38,13 +38,15 @@
 
 .new-routine-button {
     margin-top: 28px;
-    padding: 12px 28px;
+    padding: 14px 28px;
     border-radius: 8px;
     border: 2px solid #06b6d4;
     background: transparent;
     color: #67e8f9;
     font-weight: 600;
+    font-size: 1.08em;
     cursor: pointer;
+
 }
 
 .new-routine-button:hover {
@@ -128,6 +130,39 @@
 
 .routine-icon {
     font-size: 22px;
+}
+/* Contenedor de acciones (arriba a la derecha de la card) */
+.acciones-rutina {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* Estilos base para los botones de ícono/emoji */
+.btn-icono {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+/* Efecto para que el emoji crezca un poquito al pasar el mouse */
+.btn-icono:hover {
+    transform: scale(1.1);
+}
+
+/* Clases específicas para el emoji de activar */
+.icono-activo {
+    opacity: 1;
+}
+
+.icono-inactivo {
+    opacity: 0.5;
+}
+
+.icono-inactivo:hover {
+    opacity: 1; /* Se "prende" al pasar el mouse para indicar que se puede hacer clic */
 }
 
 .routine-title h3 {
@@ -353,7 +388,7 @@
     padding: 32px;
     border-radius: 12px;
     width: 90%;
-    max-width: 500px; /* Nota: Esto lo vamos a tener que agrandar cuando hagamos el form de Días */
+    max-width: 600px;
     position: relative;
     max-height: 90vh;
     overflow-y: auto;
@@ -446,6 +481,7 @@
 
 .checkbox-list-container {
     max-height: 300px;
+
     overflow-y: scroll;
     background-color: #2f3948;
     padding: 10px;

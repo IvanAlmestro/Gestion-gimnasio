@@ -39,5 +39,6 @@ public class Rutina {
     private LocalDate fechaCreacion;
 
     private Long idUsuario;
-
+    @Column(columnDefinition = "boolean default false")
+    private boolean activa =false;
 }

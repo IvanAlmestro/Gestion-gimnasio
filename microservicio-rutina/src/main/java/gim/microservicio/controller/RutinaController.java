@@ -63,5 +63,10 @@ public class RutinaController {
         registroService.registrarInicio(request.getUsuarioId(), request.getRutinaId());
         return ResponseEntity.ok("¡Entrenamiento registrado con éxito!");
     }
+    @PutMapping("/{id}/activar")
+    public ResponseEntity<String> activarRutina(@PathVariable Long id) {
+        service.activarRutina(id);
+        return ResponseEntity.ok("Rutina activada con éxito");
+    }
 }
 
