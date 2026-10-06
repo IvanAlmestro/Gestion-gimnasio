@@ -1,7 +1,6 @@
 package gim.microservicio.controller;
 
 import gim.microservicio.dto.ActualizarRutinaDTO;
-import gim.microservicio.dto.ComenzarRutinaDTO;
 import gim.microservicio.dto.CrearRutinaDTO;
 import gim.microservicio.dto.RutinaDTO;
 import gim.microservicio.service.RegistroEntrenamientoService;
@@ -57,16 +56,31 @@ public class RutinaController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/comenzar")
-    public ResponseEntity<String> comenzarRutina(@RequestBody ComenzarRutinaDTO request) {
-        // Llamamos al cerebro para que guarde todox
-        registroService.registrarInicio(request.getUsuarioId(), request.getRutinaId());
+    @PostMapping("/usuario/{usuarioId}/rutina/{rutinaId}/comenzar/{diaRutinaId}")
+    public ResponseEntity<String> comenzarEntrenamiento(
+            @PathVariable Long usuarioId,
+            @PathVariable Long rutinaId,
+            @PathVariable Long diaRutinaId) {
+
+        // Llamamos al servicio pasándole los 3 números que llegaron por la URL
+        registroService.registrarInicio(usuarioId, rutinaId, diaRutinaId);
+
         return ResponseEntity.ok("¡Entrenamiento registrado con éxito!");
     }
+
     @PutMapping("/{id}/activar")
     public ResponseEntity<String> activarRutina(@PathVariable Long id) {
         service.activarRutina(id);
         return ResponseEntity.ok("Rutina activada con éxito");
+    }
+
+    @GetMapping("/usuario/{idUsuario}/activa")
+    public ResponseEntity<RutinaDTO> obtenerRutinaActiva(@PathVariable Long idUsuario){
+        RutinaDTO rutinaActiva = service.obtenerRutinaActiva(idUsuario);
+        if (rutinaActiva == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(rutinaActiva);
     }
 }
 

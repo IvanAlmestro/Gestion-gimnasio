@@ -124,20 +124,22 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 10px;
     margin-bottom: 22px;
+    margin-top: 10px;
 }
 
 .routine-icon {
     font-size: 22px;
 }
-/* Contenedor de acciones (arriba a la derecha de la card) */
 .acciones-rutina {
+    position: absolute;
+    top: 10px;
+    right: 15px;
     display: flex;
     gap: 15px;
     align-items: center;
 }
-
 /* Estilos base para los botones de ícono/emoji */
 .btn-icono {
     background: none;

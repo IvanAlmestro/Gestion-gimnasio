@@ -20,6 +20,7 @@ public class RutinaDTO {
     private Long idUsuario;
     private List<DiaRutinaDTO> diasRutina;
     private boolean activa;
+    private Integer proximoDiaIndice;
     
     public RutinaDTO(Rutina datos) {
         this.id = datos.getId();

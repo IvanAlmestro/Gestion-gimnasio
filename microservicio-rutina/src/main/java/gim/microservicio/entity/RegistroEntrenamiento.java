@@ -17,16 +17,17 @@ public class RegistroEntrenamiento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // A qué usuario pertenece este entrenamiento
     @Column(name = "usuario_id", nullable = false)
     private Long usuarioId;
 
-    // Qué rutina completó
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rutina_id", nullable = false)
     private Rutina rutina;
 
-    // Cuándo hizo clic en "Comenzar"
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "dia_rutina_id", nullable = false)
+    private DiaRutina diaRutina;
+
     @Column(name = "fecha_completado", nullable = false)
     private LocalDateTime fechaCompletado;
 }

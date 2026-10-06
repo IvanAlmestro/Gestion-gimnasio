@@ -1,5 +1,6 @@
 package gim.microservicio.repository;
 
+import gim.microservicio.entity.RegistroEntrenamiento;
 import gim.microservicio.entity.Rutina;
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,4 +12,8 @@ public interface RutinaRepository  extends JpaRepository<Rutina, Long> {
 
 
     List<Rutina> findByIdUsuario(Long idUsuario);
+
+    Optional<Rutina> findByIdUsuarioAndActivaTrue(Long idUsuario);
+
+
 }

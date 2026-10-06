@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+// 1. NUEVO: Importamos useLocation para poder leer el ?dia=X de la URL
+import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../../hooks/useAuth.jsx";
 import { authApi } from "../../services/api.js";
 
@@ -9,32 +10,32 @@ function RoutineIdCard({
                            dias,
                            routineId }) {
     const navigate = useNavigate();
+    const location = useLocation(); // Instanciamos useLocation
     const { persona } = useAuth();
 
-    // ESTADO: Guardamos el índice del día que estamos visualizando (por defecto el 0)
-    const [diaActivoIndex, setDiaActivoIndex] = useState(0);
+    // 2. NUEVO: Leemos el parámetro de la URL
+    const queryParams = new URLSearchParams(location.search);
+    const diaDesdeUrl = queryParams.get("dia");
+
+    // 3. CAMBIO: Inicializamos el estado con el número de la URL (si no hay, usamos 0)
+    const [diaActivoIndex, setDiaActivoIndex] = useState(
+        diaDesdeUrl ? parseInt(diaDesdeUrl, 10) : 0
+    );
 
     const totalExercises = dias?.reduce((total, dia) => total + (dia.ejercicios?.length || 0), 0) || 0;
-
-    // Extraemos el objeto del día actual para no escribir dias[diaActivoIndex] todo el tiempo
     const diaActual = dias && dias.length > 0 ? dias[diaActivoIndex] : null;
 
     const handleComenzar = async () => {
         if (!diaActual) return;
 
         try {
-            const payload = {
-                usuarioId: persona.id,
-                rutinaId: routineId,
-                // le manda al backend qué día exacto está empezando
-                diaRutinaId: diaActual.id
-            };
-
-            const response = await authApi.post("/rutinas/comenzar", payload);
+            // 4. CAMBIO: Borramos el payload y armamos la URL completa con backticks (``)
+            const response = await authApi.post(
+                `/rutinas/usuario/${persona.id}/rutina/${routineId}/comenzar/${diaActual.id}`
+            );
 
             if (response.status === 200) {
                 console.log("Backend responde:", response.data);
-                // Navegamos pasando la info del día para que la próxima pantalla sepa qué renderizar
                 navigate(`/entrenamiento/${routineId}/dia/${diaActual.id}`);
             }
         } catch (error) {
@@ -64,7 +65,6 @@ function RoutineIdCard({
                                 onClick={() => setDiaActivoIndex(index)}
                                 className={`day-button ${diaActivoIndex === index ? 'active' : ''}`}
                             >
-                                {/* Cortamos el string para que en la pestaña solo diga "Día 1", "Día 2", etc. */}
                                 {dia.nombre.split(':')[0]}
                             </button>
                         ))}
