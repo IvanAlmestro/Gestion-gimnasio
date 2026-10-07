@@ -30,4 +30,7 @@ public class RegistroEntrenamiento {
 
     @Column(name = "fecha_completado", nullable = false)
     private LocalDateTime fechaCompletado;
+
+    @Column(name = "completado", columnDefinition = "boolean default false")
+    private boolean completado = false;
 }

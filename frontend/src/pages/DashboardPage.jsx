@@ -7,7 +7,7 @@ import SmallInfoCard from "../components/dashboard/SmallInfoCard.jsx";
 import WeightProgressCard from "../components/dashboard/WeightProgressCard.jsx";
 
 function DashboardPage() {
-    const { rutinas,ejercicios, persona, rutinaActiva, loading, error } = useDashboard();
+    const { rutinas,ejercicios, persona, rutinaActiva,totalEntrenamientos, loading, error } = useDashboard();
 
 
 
@@ -45,7 +45,7 @@ function DashboardPage() {
                 <StatCard
                     icon="🗓️"
                     title="Días entrenados"
-                    value={125}
+                    value={totalEntrenamientos}
                     label="días"
                 />
             </div>

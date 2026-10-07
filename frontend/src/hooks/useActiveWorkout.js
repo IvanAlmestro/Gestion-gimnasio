@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import {authApi} from "../services/api.js";
 
 export const useActiveWorkout = (rutinaId, diaId) => {
     const navigate = useNavigate();
@@ -64,18 +65,37 @@ export const useActiveWorkout = (rutinaId, diaId) => {
         }
     }, [rutinaId, diaId]);
 
+    const puedeAvanzar = series.length > 0 && series.every(serie =>
+        String(serie.peso).trim() !== "" &&
+        String(serie.reps).trim() !== ""
+    );
     const handleSiguiente = () => {
+        // Doble validación por seguridad
+        if (!puedeAvanzar) return;
+
         if (currentIndex < exercises.length - 1) {
             const nextIndex = currentIndex + 1;
             setCurrentIndex(nextIndex);
-
-            // LIMPIEZA CLAVE: Armamos las filas vacías para el ejercicio que sigue
             generarSeriesVacias(exercises[nextIndex].series);
         } else {
             setIsFinished(true);
         }
     };
 
+    const handleFinalizar = async () => {
+        if (!puedeAvanzar) return;
+
+        const registroId = localStorage.getItem("registroActualId");
+        if (registroId) {
+            try {
+                await authApi.put(`/registros/${registroId}/finalizar`);
+                localStorage.removeItem("registroActualId");
+            } catch (error) {
+                console.error("Error al finalizar en el backend:", error);
+            }
+        }
+        setIsFinished(true);
+    };
     const handleInputChange = (id, campo, valor) => {
         setSeries(
             series.map((serie) =>
@@ -102,5 +122,17 @@ export const useActiveWorkout = (rutinaId, diaId) => {
         ? Math.round(((currentIndex + 1) / exercises.length) * 100)
         : 0;
 
-    return { exercises, currentIndex, loading, series, progreso, isFinished, handleSiguiente, handleInputChange, handleAgregarSerie };
+    return {
+        exercises,
+        currentIndex,
+        loading,
+        series,
+        progreso,
+        isFinished,
+        puedeAvanzar,
+        handleSiguiente,
+        handleFinalizar,
+        handleInputChange,
+        handleAgregarSerie
+    };
 };

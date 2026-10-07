@@ -26,20 +26,32 @@ public class RegistroEntrenamientoService {
     }
 
     @Transactional
-    public void registrarInicio(Long usuarioId, Long rutinaId, Long diaRutinaId) { // <-- Agregamos el ID del día
+    public Long registrarInicio(Long usuarioId, Long rutinaId, Long diaRutinaId) {
         Rutina rutina = rutinaRepository.findById(rutinaId)
                 .orElseThrow(() -> new RuntimeException("Rutina no encontrada con id: " + rutinaId));
         DiaRutina dia = diaRutinaRepository.findById(diaRutinaId)
                 .orElseThrow(() -> new RuntimeException("Día no encontrado con id: " + diaRutinaId));
 
         RegistroEntrenamiento nuevoRegistro = new RegistroEntrenamiento();
+        nuevoRegistro.setCompletado(false); // Nace incompleto
         nuevoRegistro.setUsuarioId(usuarioId);
         nuevoRegistro.setRutina(rutina);
-
         nuevoRegistro.setDiaRutina(dia);
         nuevoRegistro.setFechaCompletado(LocalDateTime.now());
 
-        registroRepository.save(nuevoRegistro);
+        RegistroEntrenamiento guardado = registroRepository.save(nuevoRegistro);
+        return guardado.getId(); // Devolvemos el ID para que React lo use después
+    }
+    @Transactional
+    public void finalizarEntrenamiento(Long registroId) {
+        RegistroEntrenamiento registro = registroRepository.findById(registroId)
+                .orElseThrow(() -> new RuntimeException("Registro no encontrado"));
+
+        registro.setCompletado(true);
+        registroRepository.save(registro);
+    }
+    public Long obtenerTotalEntrenamientos(Long idUsuario) {
+        return registroRepository.countByUsuarioIdAndCompletadoTrue(idUsuario);
     }
 
 }

@@ -66,7 +66,6 @@ public class RutinaService {
     }
     public RutinaDTO crearRutina(CrearRutinaDTO datos){
         String url = "http://localhost:8080/personas/" + datos.getIdUsuario();
-
         try{
             // 1. Extraemos el token que mandó el usuario en la petición original (desde el Gateway/Frontend)
             HttpEntity<String> entity = getStringHttpEntity();
@@ -78,7 +77,6 @@ public class RutinaService {
             System.out.println("Error real del RestTemplate: " + e.getMessage());
             throw new PersonaNotFoundException("El usuario con ese ID no existe");
         }
-
         Rutina rutinaNueva = new Rutina();
         rutinaNueva.setNombre(datos.getNombre());
         rutinaNueva.setDescripcion(datos.getDescripcion());
@@ -116,8 +114,6 @@ public class RutinaService {
                 rutinaNueva.getDiasRutina().add(dia);
             }
         }
-        // ---------------------------------
-
         // Hibernate guarda la Rutina, y por Cascade guarda los Días y las Fichas automáticamente
         rutinaRepository.save(rutinaNueva);
         return new RutinaDTO(rutinaNueva);
@@ -240,4 +236,5 @@ public class RutinaService {
         }
         return 0;
     }
+
 }

@@ -26,23 +26,49 @@ function RoutineIdCard({
     const diaActual = dias && dias.length > 0 ? dias[diaActivoIndex] : null;
 
     const handleComenzar = async () => {
-        if (!diaActual) return;
+        if (!diaActual || !persona) {
+            console.error("Faltan datos del día o del usuario logueado.");
+            return;
+        }
 
         try {
             // 4. CAMBIO: Borramos el payload y armamos la URL completa con backticks (``)
             const response = await authApi.post(
-                `/rutinas/usuario/${persona.id}/rutina/${routineId}/comenzar/${diaActual.id}`
+                `/registros/usuario/${persona.id}/rutina/${routineId}/comenzar/${diaActual.id}`
             );
 
             if (response.status === 200) {
                 console.log("Backend responde:", response.data);
+                // Guardamos el ID del registro en curso
+                localStorage.setItem("registroActualId", response.data);
                 navigate(`/entrenamiento/${routineId}/dia/${diaActual.id}`);
+
             }
         } catch (error) {
             console.error("Error al iniciar el entrenamiento:", error);
         }
     };
+    const handleFinalizar = async () => {
+        const registroId = localStorage.getItem("registroActualId");
 
+        if (!registroId) {
+            console.error("No se encontró un entrenamiento en curso.");
+            return;
+        }
+
+        try {
+            // Llamamos al nuevo endpoint PUT de Spring Boot
+            await authApi.put(`/registros/${registroId}/finalizar`);
+
+            // Limpiamos la memoria para no arrastrar datos viejos
+            localStorage.removeItem("registroActualId");
+
+            // Lo mandamos de vuelta al Dashboard
+            navigate("/");
+        } catch (error) {
+            console.error("Error al finalizar:", error);
+        }
+    };
     return (
         <article className="routine-id-card">
             <h2>Detalle de Entrenamiento</h2>
@@ -108,6 +134,7 @@ function RoutineIdCard({
             <button onClick={handleComenzar} className="btn-comenzar" style={{ marginTop: '35px' }}>
                 Comenzar {diaActual ? diaActual.nombre.split(':')[0] : 'Rutina'}
             </button>
+
         </article>
     );
 }

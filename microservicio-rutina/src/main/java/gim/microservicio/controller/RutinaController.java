@@ -3,7 +3,6 @@ package gim.microservicio.controller;
 import gim.microservicio.dto.ActualizarRutinaDTO;
 import gim.microservicio.dto.CrearRutinaDTO;
 import gim.microservicio.dto.RutinaDTO;
-import gim.microservicio.service.RegistroEntrenamientoService;
 import gim.microservicio.service.RutinaService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -17,11 +16,9 @@ import java.util.List;
 public class RutinaController {
 
     private final RutinaService service;
-    private final RegistroEntrenamientoService registroService;
 
-    public RutinaController(RutinaService service, RegistroEntrenamientoService registroService){
+    public RutinaController(RutinaService service){
         this.service = service;
-        this.registroService = registroService;
     }
 
     @PostMapping
@@ -56,17 +53,6 @@ public class RutinaController {
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/usuario/{usuarioId}/rutina/{rutinaId}/comenzar/{diaRutinaId}")
-    public ResponseEntity<String> comenzarEntrenamiento(
-            @PathVariable Long usuarioId,
-            @PathVariable Long rutinaId,
-            @PathVariable Long diaRutinaId) {
-
-        // Llamamos al servicio pasándole los 3 números que llegaron por la URL
-        registroService.registrarInicio(usuarioId, rutinaId, diaRutinaId);
-
-        return ResponseEntity.ok("¡Entrenamiento registrado con éxito!");
-    }
 
     @PutMapping("/{id}/activar")
     public ResponseEntity<String> activarRutina(@PathVariable Long id) {
@@ -82,5 +68,6 @@ public class RutinaController {
         }
         return ResponseEntity.ok(rutinaActiva);
     }
+
 }
 
