@@ -48,34 +48,14 @@ function RoutineIdCard({
             console.error("Error al iniciar el entrenamiento:", error);
         }
     };
-    const handleFinalizar = async () => {
-        const registroId = localStorage.getItem("registroActualId");
 
-        if (!registroId) {
-            console.error("No se encontró un entrenamiento en curso.");
-            return;
-        }
-
-        try {
-            // Llamamos al nuevo endpoint PUT de Spring Boot
-            await authApi.put(`/registros/${registroId}/finalizar`);
-
-            // Limpiamos la memoria para no arrastrar datos viejos
-            localStorage.removeItem("registroActualId");
-
-            // Lo mandamos de vuelta al Dashboard
-            navigate("/");
-        } catch (error) {
-            console.error("Error al finalizar:", error);
-        }
-    };
     return (
         <article className="routine-id-card">
             <h2>Detalle de Entrenamiento</h2>
 
             <div className="routine-id-info">
-                <span>📅 {dias?.length || 0} Días</span>
-                <span>🔥 {totalExercises} ejercicios</span>
+                <span>📅 {dias?.length || 0}  {dias.length ===1 ? "dia" : "dias"}</span>
+                <span>🔥 {totalExercises} ejercicios </span>
                 <span>🏆 {objective}</span>
                 <span>🕒 {duration}</span>
             </div>

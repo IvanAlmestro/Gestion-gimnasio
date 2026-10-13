@@ -14,21 +14,28 @@ export const useDashboard = () => {
     });
 
     const [totalEntrenamientos, setTotalEntrenamientos] = useState(0);
+    const [rachaActual, setRachaActual] = useState(0);
 
     useEffect(() => {
         const fetchEstadisticas = async () => {
             if (!persona || !persona.id) return;
 
             try {
-                const response = await authApi.get(`/registros/usuario/${persona.id}/diasEntrenados`);
-                setTotalEntrenamientos(response.data);
+                // 2. Pedimos ambos datos en simultáneo
+                const [resDias, resRacha] = await Promise.all([
+                    authApi.get(`/registros/usuario/${persona.id}/diasEntrenados`),
+                    authApi.get(`/registros/usuario/${persona.id}/racha`)
+                ]);
+
+                setTotalEntrenamientos(resDias.data);
+                setRachaActual(resRacha.data);
             } catch (err) {
-                console.error("Error al traer el total de entrenamientos:", err);
+                console.error("Error al traer las estadísticas:", err);
             }
         };
 
         fetchEstadisticas();
-    }, [persona]); // Se ejecuta cuando el componente carga y ya tenemos a la persona
+    }, [persona]);
 
     const rutinaActiva = rutinas.find(rutina => rutina.activa === true) || null;
 
@@ -41,6 +48,7 @@ export const useDashboard = () => {
         persona,
         rutinaActiva,
         totalEntrenamientos,
+        rachaActual,
         loading,
         error,
         deleteRutina

@@ -1,84 +1,106 @@
-.app-header {
-    height: 80px;
-    background-color: #111827;
+/* ==========================================================================
+   HEADER / TOPBAR (Sin fondo, integrado al dashboard)
+   ========================================================================== */
+.dashboard-topbar {
     display: flex;
-    justify-content: center;
-    width: 100%;
-}
-
-.header-container {
-    display: flex;
-    align-items: center;
     justify-content: space-between;
-    width: 90%;
+    align-items: center;
+    width: 100%;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 20px auto 40px auto;
 }
 
-.header-date {
-    color: #b3c2dc;
-    font-size: 0.9rem;
-}
-
-.header-user {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-}
-
-.notification {
-    position: relative;
-    background-color: #1c2e57;
-    padding: 12px;
-    border-radius: 12px;
+/* Bloque Izquierdo (Saludo y Fecha) */
+.topbar-left h1 {
+    color: rgb(229 198 88 / 0.87);
     font-size: 24px;
-
-}
-.notification:hover{
-    cursor: pointer;
-    background-color: #0a257a;
-}
-.notification span {
-    position: absolute;
-    right: 4px;
-    bottom: 4px;
-    font-size: 12px;
-    color: white;
-    background-color: blue;
-    border-radius: 50%;
-    padding: 1px 4px;
+    font-weight: 700;
+    margin: 0 0 4px 0;
 }
 
-.user-info {
+.topbar-left p {
+    color: #94a3b8; /* Gris apagado */
+    font-size: 14px;
+    margin: 0;
+}
+
+/* Bloque Derecho (Perfil y Campana) */
+.topbar-right {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 20px;
 }
 
-.user-avatar {
+/* Avatar y Textos del Usuario */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-profile a {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
     width: 52px;
     height: 52px;
-    border-radius: 12px;
-    background-color: #cbd5e1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: clip;
-}
-
-.user-name {
-    margin: 0;
-    font-weight: 600;
-}
-
-.user-role {
-    margin: 0;
-    color: #fde047;
-    font-size: 12px;
-}
-.img-user{
-    height: 100%;
-    width: 100%;
+    border-radius: 50%;
     object-fit: cover;
+    transition: transform 0.2s ease;
+}
 
+.avatar:hover {
+    transform: scale(1.05);
+}
+
+.user-details {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+.user-details strong {
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.user-details span {
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+/* Botón de la Campana */
+.bell-button {
+    background-color: #1e293b;
+    border: none;
+    border-radius: 12px;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #94a3b8;
+    cursor: pointer;
+    position: relative;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+.bell-button:hover {
+    background-color: #334155;
+    color: #ffffff;
+}
+
+/* Puntito de notificación naranja */
+.notification-dot {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 8px;
+    height: 8px;
+    background-color: #f97316; /* Naranja vibrante para llamar la atención */
+    border-radius: 50%;
+    border: 2px solid #1e293b;
 }

@@ -37,7 +37,7 @@ function RoutineCard({ rutina, onDelete, handleActivarRutina}) {
             </span>
 
             <div className="routine-info">
-                <p>📅 {cantidadDias} días</p>
+                <p>📅 {cantidadDias} {cantidadDias === 1 ? "día" :"días"}</p>
                 <p>🔥 {cantidadEjercicios} ejercicios totales</p>
                 <p>🕒 {rutina.duracion || "60 min aprox"}</p>
             </div>

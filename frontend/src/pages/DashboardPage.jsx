@@ -7,7 +7,7 @@ import SmallInfoCard from "../components/dashboard/SmallInfoCard.jsx";
 import WeightProgressCard from "../components/dashboard/WeightProgressCard.jsx";
 
 function DashboardPage() {
-    const { rutinas,ejercicios, persona, rutinaActiva,totalEntrenamientos, loading, error } = useDashboard();
+    const { rutinas,ejercicios, persona, rutinaActiva,totalEntrenamientos, rachaActual, loading, error } = useDashboard();
 
 
 
@@ -17,11 +17,7 @@ function DashboardPage() {
 
     return (
         <section className="dashboard-page">
-
-            <div className="dashboard-header-text">
-                <h1>Hola, {persona?.nombre || "Iván"} 👋</h1>
-                <p>Tus informes y actividades diarias acá</p>
-            </div>
+            
 
             <div className="dashboard-stats">
                 <StatCard
@@ -29,7 +25,7 @@ function DashboardPage() {
                     title="Mis Rutinas"
                     text="Actualmente tenés:"
                     value={rutinas.length}
-                    label="rutinas"
+                    label={rutinas.length === 1 ? "rutina" : "rutinas"}
                     linkTo="/rutinas"
                 />
 
@@ -38,7 +34,7 @@ function DashboardPage() {
                     title="Ejercicios"
                     text="Actualmente tenés:"
                     value={ejercicios.length || '0'}
-                    label="ejercicios"
+                    label={ejercicios.length === 1 ? "ejercicio" : "ejercicios"}
                     linkTo="/ejercicios"
                 />
 
@@ -46,7 +42,8 @@ function DashboardPage() {
                     icon="🗓️"
                     title="Días entrenados"
                     value={totalEntrenamientos}
-                    label="días"
+                    text="Actualmente vas:"
+                    label = {totalEntrenamientos === 1 ? "día" : "días"}
                 />
             </div>
 
@@ -63,8 +60,8 @@ function DashboardPage() {
                     <SmallInfoCard
                         icon="🔥"
                         title="Racha actual"
-                        value={12}
-                        label="días"
+                        value={rachaActual}
+                        label={rachaActual === 1 ? "día" : "días"}
                     />
                 </div>
             </div>

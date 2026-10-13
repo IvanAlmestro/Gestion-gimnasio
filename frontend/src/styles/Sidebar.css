@@ -1,53 +1,81 @@
+/* ==========================================================================
+   SIDEBAR PRINCIPAL
+   ========================================================================== */
 .sidebar {
     width: 220px;
     min-height: 100vh;
-    background-color: #0b1220;
+    background-color: #0f172a; /* Volvemos a tu azul original, adiós al negro */
+
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     padding: 60px 24px 32px;
     font-size: 1.2em;
-    font-family: Montserrat;
-    font-weight: 500;
+    font-family: 'Montserrat', sans-serif;
 }
-.sidebar-logo{
-    margin-bottom: 50px;
-    height: 40px;
+.sidebar-logo {
+    margin: 0 0 50px 0;
+    font-size: 1.8rem;
+    font-weight: 900;
+    letter-spacing: 3px; /* Separa las letras para darle aire de marca premium */
+    color: rgb(229 198 88 / 0.87); /* Tu dorado original */
+    text-transform: uppercase;
 }
+
 .sidebar-nav {
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 16px; /* Reduje un poco el gap para que quede más agrupado y elegante */
 }
 
+/* ==========================================================================
+   LINKS DE NAVEGACIÓN
+   ========================================================================== */
 .sidebar-link {
-    color: #f8fafc;
+    display: flex;
+    align-items: center;
+    gap: 12px; /* Espacio ideal entre tu ícono y el texto */
+    padding: 12px 16px; /* Más área de clic */
+    color: #94a3b8; /* Gris apagado para inactivos */
     text-decoration: none;
-    padding: 10px 14px;
     border-radius: 10px;
-    background-color: #111827;
+    font-weight: 500;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
 
+.sidebar-link:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
 }
-.sidebar-link:hover{
-    background: #085eab;
-}
+
 .sidebar-link.active {
-    background-color: #8a4f1d;
-    box-shadow: 0 0 12px rgba(6, 182, 212, 0.35);
+    background-color: rgb(8 197 229 / 0.18);
+    color: #d2f1fa;
+    font-weight: 700;
+    border: 1px solid rgba(6, 182, 212, 0.3);
+    box-shadow: 0 0 16px rgba(6, 182, 212, 0.15);
 }
 
+/* ==========================================================================
+   BOTÓN DE CERRAR SESIÓN
+   ========================================================================== */
 .logout-button {
     background-color: #4a1f1f;
     color: #fca5a5;
     border: 1px solid #8b3a3a;
+
     border-radius: 8px;
     padding: 10px;
     cursor: pointer;
-    font-family: Montserrat;
+    font-family: 'Montserrat', sans-serif;
     font-weight: 500;
     font-size: 1em;
+    transition: background-color 0.2s ease, color 0.2s ease;
 }
-.logout-button:hover{
+.logout-button svg{
+    margin-right: 10px;
+}
+.logout-button:hover {
     background-color: #b01f06;
-    color : #ffb5b5;
+    color: #ffb5b5;
 }

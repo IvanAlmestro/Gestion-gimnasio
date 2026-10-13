@@ -3,6 +3,7 @@ import { useAuth } from "../../hooks/useAuth"
 import WeightChart from "./WeightChart.jsx";
 import {Link} from "react-router-dom";
 import {authApi} from "../../services/api.js";
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 function WeightProgressCard() {
     const { persona } = useAuth();

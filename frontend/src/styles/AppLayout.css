@@ -1,7 +1,7 @@
 .app-layout {
     min-height: 100vh;
     display: flex;
-    background: linear-gradient(135deg,#0B1020, #1E2B47);
+    background: radial-gradient(circle at 0% 0%, #162238 0%, #0b1220 100%);
     color: #f8fafc;
 }
 

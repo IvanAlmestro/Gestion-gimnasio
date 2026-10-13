@@ -51,7 +51,7 @@ function RutinasPage() {
                 ))}
             </div>
 
-            <p className="rutinas-count">{filteredRutinas.length} rutinas encontradas</p>
+            <p className="rutinas-count">{filteredRutinas.length} {filteredRutinas.length === 1 ? "rutina encontrada" : "rutinas encontradas"}</p>
 
             <div className="rutinas-grid">
                 {filteredRutinas.map((rutina) => (

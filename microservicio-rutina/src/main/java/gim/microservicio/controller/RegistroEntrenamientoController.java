@@ -18,6 +18,10 @@ public class RegistroEntrenamientoController {
     public ResponseEntity<Long> obtenerTotalEntrenamientos(@PathVariable Long idUsuario){
         return ResponseEntity.ok(registroService.obtenerTotalEntrenamientos(idUsuario));
     }
+    @GetMapping("/usuario/{idUsuario}/racha")
+    public ResponseEntity<Integer> obtenerRachaActual(@PathVariable Long idUsuario) {
+        return ResponseEntity.ok(registroService.obtenerRachaActual(idUsuario));
+    }
 
     // El endpoint para empezar a entrenar
     @PostMapping("/usuario/{usuarioId}/rutina/{rutinaId}/comenzar/{diaRutinaId}")
@@ -35,4 +39,6 @@ public class RegistroEntrenamientoController {
         registroService.finalizarEntrenamiento(registroId);
         return ResponseEntity.ok("¡Rutina completada!");
     }
+
+
 }

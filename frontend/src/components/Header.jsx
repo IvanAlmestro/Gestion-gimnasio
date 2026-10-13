@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth.jsx"; // Traemos el hook global
+import { useAuth } from "../hooks/useAuth.jsx";
+import { Bell } from "lucide-react"; // Reemplazo del emoji por un ícono SVG
 import imgUser from "../assets/user-img.jpg";
 import "../styles/Header.css";
 
 function Header() {
-    // 1. Usamos el estado global en vez del localStorage estático
     const { persona } = useAuth();
 
     const fechaActual = new Date().toLocaleDateString("es-AR", {
@@ -14,37 +14,38 @@ function Header() {
     });
     const fechaMayus = fechaActual.charAt(0).toUpperCase() + fechaActual.slice(1);
 
+    // Obtenemos el nombre para reutilizarlo limpio
+    const nombreUsuario = persona?.nombre || "Ivan";
+
     return (
-        <header className="app-header">
-            <div className="header-container">
-                <p className="header-date">{fechaMayus}</p>
+        <header className="dashboard-topbar">
+            {/* Bloque Izquierdo: Saludo y Fecha */}
+            <div className="topbar-left">
+                <h1>Hola, {nombreUsuario}</h1>
+                <p>{fechaMayus}</p>
+            </div>
 
-                <div className="header-user">
-                    <div className="notification">
-                        🔔
-                        <span>10</span>
-                    </div>
-
-                    <div className="user-info">
-                        <Link to="/perfil">
-                            <div className="user-avatar">
-                                {/* 2. Renderizado dinámico de la imagen */}
-                                <img
-                                    src={persona?.fotoPerfil || imgUser}
-                                    alt="Foto del usuario"
-                                    className="img-user"
-                                />
-                            </div>
-                        </Link>
-                        <div>
-                            <p className="user-name">
-                                {/* Muestra el nombre real o el fallback */}
-                                {persona?.nombre || "Iván Almestro"}
-                            </p>
-                            <p className="user-role">Alumno</p>
-                        </div>
+            {/* Bloque Derecho: Perfil y Notificaciones */}
+            <div className="topbar-right">
+                <button className="bell-button">
+                    <Bell size={20} />
+                    <span className="notification-dot"></span>
+                </button>
+                <div className="user-profile">
+                    <Link to="/perfil">
+                        <img
+                            src={persona?.fotoPerfil || imgUser}
+                            alt="Foto del usuario"
+                            className="avatar"
+                        />
+                    </Link>
+                    <div className="user-details">
+                        <strong>{nombreUsuario}</strong>
+                        <span>Alumno</span>
                     </div>
                 </div>
+
+
             </div>
         </header>
     );

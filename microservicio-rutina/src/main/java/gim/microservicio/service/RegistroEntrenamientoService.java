@@ -9,7 +9,9 @@ import gim.microservicio.repository.RutinaRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class RegistroEntrenamientoService {
@@ -52,6 +54,39 @@ public class RegistroEntrenamientoService {
     }
     public Long obtenerTotalEntrenamientos(Long idUsuario) {
         return registroRepository.countByUsuarioIdAndCompletadoTrue(idUsuario);
+    }
+    public int obtenerRachaActual(Long idUsuario){
+
+        List<RegistroEntrenamiento> registros = registroRepository
+                .findByUsuarioIdAndCompletadoTrueOrderByFechaCompletadoDesc(idUsuario);
+
+        if (registros.isEmpty()) {
+            return 0;
+        }
+        // 1. Extraemos solo las fechas (sin la hora) y quitamos repetidos del mismo día
+        // Nota: Si tu campo fechaCompletado ya es LocalDate (y no LocalDateTime), borrá el .toLocalDate()
+        List<LocalDate> fechas = registros.stream()
+                .map(r -> r.getFechaCompletado().toLocalDate())
+                .distinct()
+                .toList();
+
+        LocalDate hoy = LocalDate.now();
+        LocalDate ultimoEntrenamiento = fechas.get(0);
+
+        // 2. Si no entrenó ni hoy ni ayer, la racha ya se rompió y vale 0
+        if (ultimoEntrenamiento.isBefore(hoy.minusDays(1))) {
+            return 0;
+        }
+        // 3. Contamos hacia atrás cuántos días consecutivos entrenó
+        int racha = 1;
+        int i = 0;
+
+        while (i < fechas.size() - 1 && fechas.get(i).minusDays(1).equals(fechas.get(i + 1))) {
+            racha++;
+            i++;
+        }
+        return racha;
+
     }
 
 }

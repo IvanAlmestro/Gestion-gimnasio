@@ -1,6 +1,9 @@
 import { NavLink, useNavigate } from "react-router-dom";
+// Importamos los íconos de Lucide
+import { LayoutDashboard, ClipboardList, Dumbbell, User, LogOut } from "lucide-react";
 import "../styles/Sidebar.css";
-import logoGym from "../assets/LogoGym_sin_texto.png"
+
+
 function Sidebar() {
     const navigate = useNavigate();
 
@@ -13,14 +16,17 @@ function Sidebar() {
     return (
         <aside className="sidebar">
             <nav className="sidebar-nav">
-                <img src={logoGym} className="sidebar-logo" />
+                <h2 className="sidebar-logo">LIMITLESS</h2>
+
                 <NavLink
                     to="/dashboard"
                     className={({ isActive }) =>
                         isActive ? "sidebar-link active" : "sidebar-link"
                     }
                 >
-                    📊 Dashboard
+                    {/* El size=20 asegura que el ícono tenga el tamaño perfecto al lado del texto */}
+                    <LayoutDashboard size={20} />
+                    Dashboard
                 </NavLink>
 
                 <NavLink
@@ -29,7 +35,8 @@ function Sidebar() {
                         isActive ? "sidebar-link active" : "sidebar-link"
                     }
                 >
-                    🔷 Rutinas
+                    <ClipboardList size={20} />
+                    Rutinas
                 </NavLink>
 
                 <NavLink
@@ -38,7 +45,8 @@ function Sidebar() {
                         isActive ? "sidebar-link active" : "sidebar-link"
                     }
                 >
-                    🏋️ Ejercicios
+                    <Dumbbell size={20} />
+                    Ejercicios
                 </NavLink>
 
                 <NavLink
@@ -47,12 +55,14 @@ function Sidebar() {
                         isActive ? "sidebar-link active" : "sidebar-link"
                     }
                 >
-                    👤 Perfil
+                    <User size={20} />
+                    Perfil
                 </NavLink>
             </nav>
 
             <button className="logout-button" onClick={logout}>
-                🚪 Cerrar Sesión
+                <LogOut size={20} />
+                Cerrar Sesión
             </button>
         </aside>
     );

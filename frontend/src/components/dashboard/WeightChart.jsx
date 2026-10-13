@@ -28,15 +28,30 @@ function WeightChart({ historialPesos }) {
         return index === 0 ? `M ${point.x} ${point.y}` : `${acc} L ${point.x} ${point.y}`;
     }, "");
 
+    // Creamos el path para el área de abajo (baja hasta la base del SVG)
+    const firstX = points[0]?.x || 0;
+    const lastX = points[points.length - 1]?.x || width;
+    const areaD = `${pathD} L ${lastX} ${height - 5} L ${firstX} ${height - 5} Z`;
+
     return (
         <div className="custom-weight-chart">
             <svg viewBox={`0 0 ${width} ${height}`} className="chart-svg">
                 <defs>
-                    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#0284c7" />
-                        <stop offset="100%" stopColor="#06b6d4" />
+                    {/* Gradiente para la línea */}
+                    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%" >
+                        <stop offset="0%" stopColor="#0284c7"/>
+                        <stop offset="100%" stopColor="#06b6d4"/>
+                    </linearGradient>
+
+                    {/* Gradiente vertical transparente para el área de abajo */}
+                    <linearGradient id="areaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.5" />
+                        <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.0" />
                     </linearGradient>
                 </defs>
+
+                {/* Relleno de área transparente */}
+                <path d={areaD} fill="url(#areaGrad)" />
 
                 {/* Línea principal */}
                 <path d={pathD} fill="none" stroke="url(#lineGrad)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
@@ -47,10 +62,10 @@ function WeightChart({ historialPesos }) {
                         key={i}
                         cx={pt.x}
                         cy={pt.y}
-                        r={hoveredPoint?.fecha === pt.fecha ? 6 : 4}
+                        r={hoveredPoint?.fecha === pt.fecha ? 4 : 2}
                         fill="#06b6d4"
                         stroke="#111827"
-                        strokeWidth="2"
+                        strokeWidth="1"
                         className="chart-dot"
                         onMouseEnter={() => setHoveredPoint(pt)}
                         onMouseLeave={() => setHoveredPoint(null)}
