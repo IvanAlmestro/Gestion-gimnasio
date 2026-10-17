@@ -5,7 +5,6 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-
 }
 
 .app-content {
@@ -14,31 +13,11 @@
 }
 
 /* =========================================
-   2. HEADER Y BOTONES GLOBALES
+   2. BOTONES GLOBALES
    ========================================= */
-.rutinas-header {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    margin-bottom: 48px;
-}
-
-.rutinas-header h1 {
-    margin: 0 0 18px;
-    color: #fde047;
-    font-size: 34px;
-    font-weight: 800;
-}
-
-.rutinas-header p {
-    margin: 0;
-    color: #f8fafc;
-    font-size: 15px;
-}
-
 .new-routine-button {
-    margin-top: 28px;
-    padding: 14px 28px;
+    /* Eliminamos el margin-top para que se alinee con los filtros en el flexbox */
+    padding: 12px 24px;
     border-radius: 8px;
     border: 2px solid #06b6d4;
     background: transparent;
@@ -46,11 +25,12 @@
     font-weight: 600;
     font-size: 1.08em;
     cursor: pointer;
-
+    white-space: nowrap; /* Evita que el texto se rompa en dos líneas */
+    transition: background-color 0.2s ease;
 }
 
 .new-routine-button:hover {
-    background: rgba(6, 182, 212, 0.12);
+    background: rgba(6, 182, 212, 0.4);
 }
 
 .btn-back {
@@ -65,12 +45,20 @@
 }
 
 /* =========================================
-   3. FILTROS Y CONTADOR
+   3. BARRA SUPERIOR (FILTROS Y BOTÓN)
    ========================================= */
-.rutinas-filters {
+.rutinas-topbar {
     display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Esto soluciona el botón flotante */
+    margin-bottom: 16px; /* Reducimos un poco para juntarlo con el texto de abajo */
+    gap: 20px;
+}
+
+.rutinas-filters-group {
+    display: flex;
+    flex-wrap: wrap;
     gap: 16px;
-    margin-bottom: 24px;
 }
 
 .routine-filter {
@@ -82,6 +70,7 @@
     color: #cbd5e1;
     font-weight: 500;
     cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .routine-filter.active {
@@ -92,9 +81,10 @@
 }
 
 .rutinas-count {
-    margin: 0 0 36px;
+    margin: 0 0 32px 0;
     color: #94a3b8;
-    font-size: 14px;
+    font-size: 15px;
+    font-weight: 500;
 }
 
 /* =========================================
@@ -132,6 +122,7 @@
 .routine-icon {
     font-size: 22px;
 }
+
 .acciones-rutina {
     position: absolute;
     top: 10px;
@@ -140,7 +131,7 @@
     gap: 15px;
     align-items: center;
 }
-/* Estilos base para los botones de ícono/emoji */
+
 .btn-icono {
     background: none;
     border: none;
@@ -149,12 +140,10 @@
     transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-/* Efecto para que el emoji crezca un poquito al pasar el mouse */
 .btn-icono:hover {
     transform: scale(1.1);
 }
 
-/* Clases específicas para el emoji de activar */
 .icono-activo {
     opacity: 1;
 }
@@ -164,7 +153,7 @@
 }
 
 .icono-inactivo:hover {
-    opacity: 1; /* Se "prende" al pasar el mouse para indicar que se puede hacer clic */
+    opacity: 1;
 }
 
 .routine-title h3 {
@@ -267,7 +256,6 @@
     font-weight: 600;
 }
 
-/* --- BLOQUES DE DÍAS Y TABLAS --- */
 .dias-container {
     display: flex;
     flex-direction: column;
@@ -348,7 +336,7 @@
     cursor: pointer;
     background-color: #6172ff;
 }
-/* Estilo base del botón (inactivo) */
+
 .day-button {
     padding: 8px 20px;
     border-radius: 999px;
@@ -360,18 +348,17 @@
     transition: all 0.2s ease-in-out;
 }
 
-/* Efecto hover opcional para cuando pasás el mouse y no está activo */
 .day-button:hover:not(.active) {
     background-color: #1e293b;
     border-color: #475569;
 }
 
-/* Estilo para el botón seleccionado (activo) */
 .day-button.active {
     border: 1px solid #06b6d4;
     background-color: rgba(6, 182, 212, 0.15);
     color: #06b6d4;
 }
+
 /* =========================================
    6. MODAL NUEVA RUTINA (FORMULARIO)
    ========================================= */
@@ -451,39 +438,37 @@
     margin-top: 10px;
     transition: background-color 0.2s ease;
 }
+
 .dias-tabs {
     display: flex;
-    gap: 10px; /* Separación entre los botones */
-    margin-bottom: 20px; /* Aire antes de la lista de ejercicios */
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 .tab-button, .btn-agregar-dia {
     padding: 8px 16px;
     border-radius: 8px;
-    border: 1px solid #4b5563; /* Borde gris oscuro */
+    border: 1px solid #4b5563;
     background-color: transparent;
-    color: #9ca3af; /* Texto gris claro */
+    color: #9ca3af;
     cursor: pointer;
     font-weight: 500;
     transition: all 0.2s ease;
 }
 
-/* Efecto hover sutil */
 .tab-button:hover, .btn-agregar-dia:hover {
     background-color: rgba(255, 255, 255, 0.05);
 }
 
-/* El día que está seleccionado actualmente */
 .tab-button.active {
-    background-color: #06b6d4; /* Tu color cyan */
-    color: #111827; /* Texto oscuro para contrastar */
+    background-color: #06b6d4;
+    color: #111827;
     border-color: #06b6d4;
     font-weight: 600;
 }
 
 .checkbox-list-container {
     max-height: 300px;
-
     overflow-y: scroll;
     background-color: #2f3948;
     padding: 10px;
@@ -493,21 +478,18 @@
 .checkbox-item {
     display: flex;
     align-items: center;
-
     gap: 12px;
-    padding: 12px 16px; /* Área de clic mucho más grande */
+    padding: 12px 16px;
     border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.2s ease;
     margin-bottom: 4px;
 }
 
-/* Resalta la fila entera cuando pasas el mouse */
 .checkbox-item:hover {
     background-color: rgb(92 237 250 / 0.07);
 }
 
-/* Agrandamos el checkbox y le damos color */
 .checkbox-item input[type="checkbox"] {
     width: 20px;
     height: 20px;
@@ -518,16 +500,17 @@
 .checkbox-label {
     color: #e5e7eb;
     font-size: 15px;
-    /* Evita que el usuario seleccione el texto por accidente al hacer clic rápido */
     user-select: none;
 }
-/* Estiliza la barra de scroll en WebKit (Chrome, Edge, Safari) */
+
 .checkbox-list-container::-webkit-scrollbar {
     width: 10px;
 }
+
 .checkbox-list-container::-webkit-scrollbar-track {
     background: transparent;
 }
+
 .checkbox-list-container::-webkit-scrollbar-thumb {
     background-color: rgb(6 182 212 / 0.67);
     border-radius: 10px;

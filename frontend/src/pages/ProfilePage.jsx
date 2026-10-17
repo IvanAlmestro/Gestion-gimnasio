@@ -84,8 +84,10 @@ function ProfilePage() {
                         </button>
                     </div>
 
-                    <h1>Hola, {persona?.nombre || "Iván"}! 👋</h1>
-                    <p>Gestioná la información de tu cuenta</p>
+                    <h1>{persona?.nombre|| "Iván"}  {persona?.apellido}</h1>
+                    <span className="profile-role-badge">Alumno</span>
+
+
                 </div>
 
                 <div className="profile-stats">

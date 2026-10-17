@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import { useAuth } from "../hooks/useAuth.jsx";
 import { Bell } from "lucide-react"; // Reemplazo del emoji por un ícono SVG
 import imgUser from "../assets/user-img.jpg";
@@ -6,6 +6,17 @@ import "../styles/Header.css";
 
 function Header() {
     const { persona } = useAuth();
+    const location = useLocation();
+
+    const titulosPorRuta = {
+        "/": "Dashboard",
+        "/dashboard": "Dashboard",
+        "/perfil": "Mi Perfil",
+        "/rutinas": "Mis Rutinas",
+        "/ejercicios": "Mis Ejercicios"
+    };
+
+    const tituloActual = titulosPorRuta[location.pathname] || "Limitless";
 
     const fechaActual = new Date().toLocaleDateString("es-AR", {
         weekday: "long",
@@ -19,9 +30,9 @@ function Header() {
 
     return (
         <header className="dashboard-topbar">
-            {/* Bloque Izquierdo: Saludo y Fecha */}
+
             <div className="topbar-left">
-                <h1>Hola, {nombreUsuario}</h1>
+                <h1>{tituloActual}</h1>
                 <p>{fechaMayus}</p>
             </div>
 

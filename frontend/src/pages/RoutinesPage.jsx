@@ -30,25 +30,26 @@ function RutinasPage() {
 
     return (
         <section className="rutinas-page">
-            <div className="rutinas-header">
-                <div>
-                    <h1>Mis rutinas:</h1>
-                    <p>Gestioná tus planes de entrenamiento</p>
+
+
+            <div className="rutinas-topbar">
+                {/* Grupo izquierdo: Solo los filtros */}
+                <div className="rutinas-filters-group">
+                    {FILTERS.map((filter) => (
+                        <button
+                            key={filter.value}
+                            className={selectedFilter === filter.value ? "routine-filter active" : "routine-filter"}
+                            onClick={() => setSelectedFilter(filter.value)}
+                        >
+                            {filter.label}
+                        </button>
+                    ))}
                 </div>
 
-                <button className="new-routine-button" onClick={() => setIsModalOpen(true)}>+ Nueva Rutina</button>
-            </div>
-
-            <div className="rutinas-filters">
-                {FILTERS.map((filter) => (
-                    <button
-                        key={filter.value}
-                        className={selectedFilter === filter.value ? "routine-filter active" : "routine-filter"}
-                        onClick={() => setSelectedFilter(filter.value)}
-                    >
-                        {filter.label}
-                    </button>
-                ))}
+                {/* Grupo derecho: El botón principal aislado */}
+                <button className="new-routine-button" onClick={() => setIsModalOpen(true)}>
+                    + Nueva Rutina
+                </button>
             </div>
 
             <p className="rutinas-count">{filteredRutinas.length} {filteredRutinas.length === 1 ? "rutina encontrada" : "rutinas encontradas"}</p>

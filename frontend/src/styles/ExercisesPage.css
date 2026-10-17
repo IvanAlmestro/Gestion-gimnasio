@@ -2,51 +2,83 @@
     width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-
 }
 
-.exercises-header {
-    margin-bottom: 32px;
+/* =========================================
+   BARRA SUPERIOR (FILTROS Y BÚSQUEDA)
+   ========================================= */
+.exercises-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 16px; /* Mismo margen que en rutinas */
+    gap: 20px;
 }
 
-.exercises-header h1 {
-    color: #fde047;
-    font-size: 32px;
-    margin-bottom: 28px;
-}
-
-.exercise-search {
-    width: 260px;
-    background: #182235;
-    color: #cbd5e1;
-}
-
-.exercise-filters {
+.exercise-filters-group {
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-    margin-bottom: 20px;
 }
-
 .filter-button {
-    min-width: 110px;
-    padding: 10px 18px;
-    border-radius: 10px;
-    border: 1px solid #243247;
+    min-width: 110px; /* Le devolvemos la anchura base */
+    height: 38px;
+    padding: 0 16px;
+    border-radius: 8px;
+    border: 1px solid #334155;
     background: #182235;
-    color: #f8fafc;
+    color: #cbd5e1;
+    font-weight: 500;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
 }
 
 .filter-button.active {
     border-color: #06b6d4;
     background: #1e3a5f;
     color: #e0f2fe;
+    box-shadow: 0 0 12px rgba(6, 182, 212, 0.18);
 }
 
-.exercise-count {
+.exercise-search {
+    width: 280px; /* Ancho fijo para que no se deforme */
+    flex-shrink: 0; /* Impide que los filtros aplasten la barra de búsqueda */
+}
+
+.search-input {
+    width: 100%;
+    height: 38px; /* Altura fija idéntica a los filtros */
+    padding: 0 16px;
+    color: #ffffff;
+    background-color: #182235;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    outline: none; /* Quita el borde azul por defecto del navegador */
+}
+
+.search-input::placeholder {
     color: #94a3b8;
-    margin-bottom: 36px;
+}
+
+/* Efecto de luz al hacer clic en buscar */
+.search-input:focus {
+    border-color: #06b6d4;
+    box-shadow: 0 0 0 2px rgba(6, 182, 212, 0.15);
+}
+
+/* =========================================
+   CONTADOR Y GRID DE TARJETAS
+   ========================================= */
+.exercise-count {
+    margin: 0 0 32px 0; /* 32px de aire exacto igual que en rutinas */
+    color: #94a3b8;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .exercise-grid {
@@ -57,7 +89,6 @@
 
 .exercise-card {
     display: flex;
-
     flex-direction: column;
     min-height: 140px;
     padding: 22px;
@@ -67,7 +98,6 @@
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
     text-align: center;
     align-items: center;
-
 }
 
 .exercise-card h3 {
@@ -80,26 +110,23 @@
     margin-bottom: 15px;
     color: #fde047;
     font-size: 1.1em;
-
 }
 
 .exercise-card-button {
-    background: #1e40af;
-    color: #f8fafc;
-    border: 1px solid #3b82f6;
-    border-radius: 8px;
-    padding: 6px 18px;
+    background: #06b6d4;
+    color: #0b1220;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 24px;
+    font-size: 14px;
+    font-weight: 700;
     cursor: pointer;
     margin-top: auto;
-
     width: 50%;
+    transition: background-color 0.2s ease, transform 0.1s ease;
 }
-.search-input{
-    padding: 10px;
-    height: 100%;
-    width: 100%;
-    color:white;
-    background-color: #182235;
-    border: 1px solid #334155;
-    border-radius: 10px;
+
+.exercise-card-button:hover {
+    background: #0891b2; /* Un tono más oscuro al pasar el mouse */
+    transform: translateY(-1px);
 }
