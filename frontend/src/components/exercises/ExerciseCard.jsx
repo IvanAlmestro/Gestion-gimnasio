@@ -1,10 +1,13 @@
-function ExerciseCard({ name, muscleGroup }) {
+function ExerciseCard({ exercise, onView }) {
     return (
         <article className="exercise-card">
-            <h3>{name}</h3>
-            <p>{muscleGroup}</p>
+            <h3>{exercise.nombre}</h3>
+            <p>{exercise.grupoMuscular}</p>
 
-            <button className="exercise-card-button">
+            <button
+                className="exercise-card-button"
+                onClick={() => onView(exercise)}
+            >
                 Ver
             </button>
         </article>

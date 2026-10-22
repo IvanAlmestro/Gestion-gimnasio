@@ -1,0 +1,121 @@
+/* =========================================
+   MODAL DE DETALLE DE EJERCICIO
+   ========================================= */
+.exercise-modal {
+    max-width: 500px; /* Un poco más angosto que el de rutinas para que parezca una tarjeta */
+    padding: 32px;
+}
+
+.exercise-visual {
+    width: 100%;
+    height: 220px;
+    background-color: #0b1220; /* Fondo hundido */
+    border: 1px solid #334155;
+    border-radius: 12px;
+    margin-bottom: 24px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.exercise-visual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.visual-placeholder {
+    text-align: center;
+    color: #475569;
+}
+
+.visual-placeholder span {
+    font-size: 32px;
+    display: block;
+    margin-bottom: 8px;
+    opacity: 0.5;
+}
+
+.visual-placeholder p {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.exercise-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+}
+
+.exercise-header h2 {
+    margin: 0;
+    font-size: 20px;
+    flex-grow: 1;
+    padding-right: 16px;
+}
+
+.muscle-badge {
+    background-color: rgba(253, 224, 71, 0.1);
+    color: #fde047; /* Dorado para el músculo */
+    border: 1px solid rgba(253, 224, 71, 0.2);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* Grilla de parámetros recomendados */
+.exercise-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.stat-box {
+    background-color: #0b1220;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 12px 8px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.stat-label {
+    color: #94a3b8;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.stat-value {
+    color: #06b6d4; /* Cyan para los números */
+    font-size: 18px;
+    font-weight: 800;
+}
+
+/* Instrucciones */
+.exercise-instructions {
+    background-color: rgba(255, 255, 255, 0.02);
+    border-top: 1px solid #334155;
+    padding-top: 20px;
+}
+
+.exercise-instructions h3 {
+    margin: 0 0 12px 0;
+    color: #f8fafc;
+    font-size: 15px;
+}
+
+.exercise-instructions p {
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 14px;
+    line-height: 1.6;
+}

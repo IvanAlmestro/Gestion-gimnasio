@@ -17,7 +17,10 @@ public class Ejercicio {
     private String descanso;
     private Integer rir;
     private String grupoMuscular;
+    @Column(columnDefinition = "TEXT")
+    private String descripcion;
 
+    private String imagenUrl;
     
 
 }

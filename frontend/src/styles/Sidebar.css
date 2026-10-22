@@ -5,7 +5,6 @@
     width: 220px;
     min-height: 100vh;
     background-color: #0f172a; /* Volvemos a tu azul original, adiós al negro */
-
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -13,13 +12,31 @@
     font-size: 1.2em;
     font-family: 'Montserrat', sans-serif;
 }
-.sidebar-logo {
-    margin: 0 0 50px 0;
-    font-size: 1.8rem;
+.limitless-logo {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 22px;
     font-weight: 900;
-    letter-spacing: 3px; /* Separa las letras para darle aire de marca premium */
-    color: rgb(229 198 88 / 0.87); /* Tu dorado original */
     text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #f8fafc;
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+
+.limitless-logo span {
+    color: #06b6d4;
+    font-weight: 400;
+}
+.brand-link {
+    text-align: center;
+    text-decoration: none;
+    color: rgb(229 198 88 / 0.87); /* Tu dorado original */
+    display: block; /* Para que el área de clic sea cómoda y no solo el texto */
+    transition: opacity 0.2s ease;
+}
+
+.brand-link:hover {
+    opacity: 0.8; /* Un feedback visual sutil al pasar el mouse */
 }
 
 .sidebar-nav {
@@ -49,10 +66,9 @@
 }
 
 .sidebar-link.active {
-    background-color: rgb(8 197 229 / 0.18);
-    color: #d2f1fa;
-    font-weight: 700;
-    border: 1px solid rgba(6, 182, 212, 0.3);
+    background-color: rgb(0 187 255 / 0.3);
+    color: #00c5ff;
+    border: 1px solid rgba(6, 182, 212, 0.5);
     box-shadow: 0 0 16px rgba(6, 182, 212, 0.15);
 }
 

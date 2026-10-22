@@ -16,7 +16,12 @@ function Sidebar() {
     return (
         <aside className="sidebar">
             <nav className="sidebar-nav">
-                <h2 className="sidebar-logo">LIMITLESS</h2>
+
+                <NavLink to="/dashboard" className="brand-link">
+                    <h2 className="limitless-logo">
+                        LIMIT<span>LESS</span>
+                    </h2>
+                </NavLink>
 
                 <NavLink
                     to="/dashboard"

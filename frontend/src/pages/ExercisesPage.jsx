@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import ExerciseCard from "../components/exercises/ExerciseCard.jsx";
+import ExerciseModal from "../components/exercises/ExerciseModal.jsx"; // <-- Asegurate de que la ruta sea correcta
 import "../styles/ExercisesPage.css";
 import { rutinasApi } from "../services/api";
 
@@ -13,6 +14,9 @@ function ExercisesPage() {
     const [searchTerm, setSearchTerm] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+
+    // NUEVO: Estado para saber qué ejercicio está mirando el usuario
+    const [selectedExercise, setSelectedExercise] = useState(null);
 
     useEffect(() => {
         async function fetchExercises() {
@@ -39,8 +43,6 @@ function ExercisesPage() {
 
     return (
         <section className="exercises-page">
-
-            {/* Nueva estructura Topbar (idéntica a Rutinas) */}
             <div className="exercises-topbar">
                 <div className="exercise-filters-group">
                     {CATEGORIES.map((category) => (
@@ -73,11 +75,19 @@ function ExercisesPage() {
                 {filteredExercises.map((exercise) => (
                     <ExerciseCard
                         key={exercise.id}
-                        name={exercise.nombre}
-                        muscleGroup={exercise.grupoMuscular}
+                        exercise={exercise} // Le pasamos el objeto entero
+                        onView={setSelectedExercise} // Le pasamos la función que actualiza el estado
                     />
                 ))}
             </div>
+
+            {/* NUEVO: El modal se renderiza por encima de todo si hay un ejercicio seleccionado */}
+            {selectedExercise && (
+                <ExerciseModal
+                    ejercicio={selectedExercise}
+                    onClose={() => setSelectedExercise(null)}
+                />
+            )}
         </section>
     );
 }
