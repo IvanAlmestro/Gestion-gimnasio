@@ -11,47 +11,74 @@ function LoginPage() {
     const handleLogin = async (e) => {
         e.preventDefault();
 
-        // Validación temprana frontend (evita peticiones innecesarias a la BD)
+        // Validación temprana frontend
         if (!email || !password) return;
 
         await login(email, password);
     };
 
     return (
-        <section className="login-page">
-            <form className="login-container" onSubmit={handleLogin}>
-                <h1>Limitless</h1>
-                <h2>Potenciá tus entrenamientos</h2>
+        <div className="login-page">
+            <div className="login-card">
 
-                <input
-                    placeholder="Email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="input-login"
-                    required
-                />
+                <div className="login-header">
+                    <h1 className="limitless-logo login-logo">
+                        LIMIT<span>LESS</span>
+                    </h1>
+                    <p className="login-subtitle">Potenciá tus entrenamientos</p>
+                </div>
 
-                <input
-                    placeholder="Contraseña"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="input-login"
-                    required
-                />
+                <form className="login-form" onSubmit={handleLogin}>
+                    <div className="form-group">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            className="form-input"
+                            placeholder="tu@email.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                <button type="submit" disabled={loading}>
-                    {loading ? "Ingresando..." : "Ingresar"}
-                </button>
+                    <div className="form-group">
+                        <label>Contraseña</label>
+                        <input
+                            type="password"
+                            className="form-input"
+                            placeholder="••••••••"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                {error && <p className="login-message error">{error}</p>}
+                    {/* Mensaje de error integrado al nuevo diseño */}
+                    {error && <p className="error-message">{error}</p>}
 
-                <Link className="login-link" to="/register">
-                    ¿No tenés cuenta? Registrate
-                </Link>
-            </form>
-        </section>
+                    <button
+                        type="submit"
+                        className="primary-button login-btn"
+                        disabled={loading}
+                        style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}
+                    >
+                        {loading ? (
+                            <>
+                                <span className="button-spinner"></span>
+                                Ingresando...
+                            </>
+                        ) : (
+                            "Ingresar"
+                        )}
+                    </button>
+                </form>
+
+                <div className="login-footer">
+                    <p>¿No tenés cuenta? <Link to="/register" className="text-link">Registrate</Link></p>
+                </div>
+
+            </div>
+        </div>
     );
 }
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
-import "../styles/LoginPage.css";
+import "../styles/LoginPage.css"; // Usa exactamente tu nuevo CSS
 
 function RegisterPage() {
     const [email, setEmail] = useState("");
@@ -17,88 +17,124 @@ function RegisterPage() {
     const handleRegister = async (e) => {
         e.preventDefault();
 
-        // 1. Validación Frontend estricta
         if (!nombre || !apellido || !email || !password || !pesoInicial) return;
         if (password.length < 6) {
-            alert("La contraseña debe tener al menos 6 caracteres"); // A futuro cambiamos por un toast
+            alert("La contraseña debe tener al menos 6 caracteres");
             return;
         }
-        // 2. Llamada limpia a la lógica de negocio
+
         const success = await register(nombre, apellido, email, password, pesoInicial);
 
         if (success) {
             setMensajeExito("¡Registro exitoso! Redirigiendo...");
-            setTimeout(() => navigate("/login"), 1500); // Pequeña pausa para que vea el mensaje
+            setTimeout(() => navigate("/login"), 1500);
         }
     };
 
     return (
-        <section className="login-page">
-            <form className="login-container register-container" onSubmit={handleRegister}>
-                <h1>Limitless</h1>
-                <h2>Potenciá tus entrenamientos</h2>
+        <div className="login-page">
+            <div className="login-card">
 
-                <label>Nombre</label>
-                <input
-                    placeholder="Ej: Ivan"
-                    type="text"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                    className="input-login"
-                    required
-                />
+                <div className="login-header">
+                    <h1 className="limitless-logo login-logo">
+                        LIMIT<span>LESS</span>
+                    </h1>
+                    <p className="login-subtitle">Creá tu cuenta para empezar</p>
+                </div>
 
-                <label>Apellido</label>
-                <input
-                    placeholder="Ej: Suarez"
-                    type="text"
-                    value={apellido}
-                    onChange={(e) => setApellido(e.target.value)}
-                    className="input-login"
-                    required
-                />
-                <label>Peso (kg)</label>
-                <input
-                    type="number"
-                    step="0.1"
-                    value={pesoInicial}
-                    onChange={(e) => setPesoInicial(e.target.value)}
-                    required // 👈 Esto hace que el navegador no te deje enviar el form vacío
-                    placeholder="Ej: 80.5"
-                />
+                <form className="login-form" onSubmit={handleRegister}>
 
-                <label>Email</label>
-                <input
-                    placeholder="Ej: ivan@email.com"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="input-login"
-                    required
-                />
+                    {/* Fila agrupada para Nombre y Apellido */}
+                    <div style={{ display: "flex", gap: "16px" }}>
+                        <div className="form-group" style={{ flex: 1 }}>
+                            <label>Nombre</label>
+                            <input
+                                type="text"
+                                className="form-input"
+                                placeholder="Ej: Iván"
+                                value={nombre}
+                                onChange={(e) => setNombre(e.target.value)}
+                                required
+                            />
+                        </div>
+                        <div className="form-group" style={{ flex: 1 }}>
+                            <label>Apellido</label>
+                            <input
+                                type="text"
+                                className="form-input"
+                                placeholder="Ej: Almestro"
+                                value={apellido}
+                                onChange={(e) => setApellido(e.target.value)}
+                                required
+                            />
+                        </div>
+                    </div>
 
-                <label>Contraseña</label>
-                <input
-                    placeholder="Minimo 6 caracteres"
-                    type="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="input-login"
-                    required
-                    minLength={6}
-                />
+                    <div className="form-group">
+                        <label>Peso Inicial (kg)</label>
+                        <input
+                            type="number"
+                            step="0.1"
+                            className="form-input"
+                            placeholder="Ej: 68.5"
+                            value={pesoInicial}
+                            onChange={(e) => setPesoInicial(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                <button type="submit" disabled={loading}>
-                    {loading ? "Registrando..." : "Registrarse"}
-                </button>
+                    <div className="form-group">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            className="form-input"
+                            placeholder="tu@email.com"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
 
-                {/* Manejo de feedback al usuario */}
-                {error && <p className="login-message error">{error}</p>}
-                {mensajeExito && <p className="login-message success">{mensajeExito}</p>}
+                    <div className="form-group">
+                        <label>Contraseña</label>
+                        <input
+                            type="password"
+                            className="form-input"
+                            placeholder="Mínimo 6 caracteres"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                            minLength={6}
+                        />
+                    </div>
 
-                <Link className="login-link" to="/login">¿Ya tenés cuenta? Iniciar sesión</Link>
-            </form>
-        </section>
+                    {/* Mensajes de feedback integrados */}
+                    {error && <p className="error-message">{error}</p>}
+                    {mensajeExito && <p className="success-message">{mensajeExito}</p>}
+
+                    <button
+                        type="submit"
+                        className="primary-button login-btn"
+                        disabled={loading}
+                        style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "10px" }}
+                    >
+                        {loading ? (
+                            <>
+                                <span className="button-spinner"></span>
+                                Registrando...
+                            </>
+                        ) : (
+                            "Registrarse"
+                        )}
+                    </button>
+                </form>
+
+                <div className="login-footer">
+                    <p>¿Ya tenés cuenta? <Link to="/login" className="text-link">Iniciar sesión</Link></p>
+                </div>
+
+            </div>
+        </div>
     );
 }
 

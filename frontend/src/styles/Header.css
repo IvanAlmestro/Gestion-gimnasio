@@ -8,6 +8,8 @@
     width: 100%;
     max-width: 1200px;
     margin: 20px auto 40px auto;
+    padding: 0 40px;
+    box-sizing: border-box;
 }
 
 /* Bloque Izquierdo (Saludo y Fecha) */

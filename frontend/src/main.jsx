@@ -5,10 +5,12 @@ import { BrowserRouter } from "react-router-dom";
 import App from './App.jsx';
 import './styles/index.css';
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-    <React.StrictMode>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </React.StrictMode>
-);
+setTimeout(() => {
+    ReactDOM.createRoot(document.getElementById('root')).render(
+        <React.StrictMode>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </React.StrictMode>
+    );
+}, 1000);

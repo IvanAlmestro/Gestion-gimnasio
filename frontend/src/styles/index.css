@@ -11,6 +11,7 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(135deg,#0B1020, #1E2B47);
     align-items: center;
-    min-height: 980px;
+    min-height: 100vh;
     color: white;
 }
+

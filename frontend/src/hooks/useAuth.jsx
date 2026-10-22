@@ -56,6 +56,7 @@ export const AuthProvider = ({ children }) => {
         setLoading(true);
         setError("");
         try {
+            await new Promise(resolve => setTimeout(resolve, 800));
             const response = await authApi.post("/personas/login", { email, password });
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("persona", JSON.stringify(response.data.perfil));
@@ -75,6 +76,7 @@ export const AuthProvider = ({ children }) => {
         setError("");
 
         try {
+            await new Promise(resolve => setTimeout(resolve, 800));
             await authApi.post("/personas/register", {
                 nombre: nombre,
                 apellido: apellido,
