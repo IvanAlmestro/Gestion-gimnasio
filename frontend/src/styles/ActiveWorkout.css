@@ -4,18 +4,16 @@
     flex-direction: column;
     align-items: center;
     color: #ffffff;
-    padding: 2rem;
+    padding: 0 2rem 110px 2rem;
 }
 .workout-header {
     text-align: center;
-    margin-bottom: 2rem;
-    position: relative;
+    margin-bottom: 1.5rem;
     width: 100%;
-    /* Aumentamos de 600px a 800px para que el botón "Volver" tenga espacio para respirar */
     max-width: 800px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; /* Centra los títulos Torso/Pierna y Día 1, pero respeta el align-self: flex-start del botón */
 }
 .active-routine{
     max-width: 800px;
@@ -26,27 +24,53 @@
     flex-direction: column;
     align-items: center;
 }
+.title-day-container {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap:5px;
+}
+.title-rutineActive{
+    color: #06b6d4;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+}
+h1.title-rutine{
+    color: rgb(229 198 88 / 1);
+    font-weight: 800;
+    letter-spacing: 3px;
+}
 .btn-volver {
-    position: absolute;
-    left: 10px; /* Lo despegamos un poco del borde izquierdo */
-    top: 5px; /* Lo alineamos sutilmente con el título */
-    color: #64b5f6;
-    cursor: pointer;
-    font-weight: 500;
+    align-self: flex-start; /* Clave: lo pega contra la izquierda del contenedor */
+    margin-bottom: 12px;    /* Deja un respiro prolijo antes del título de la rutina */
+    color: #94a3b8;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 8px;
+    background-color: rgba(30, 41, 59, 0.6);
+    border: 1px solid #334155;
+    transition: all 0.2s ease;
+}
+
+.btn-volver:hover {
+    color: #06b6d4;
+    border-color: rgba(6, 182, 212, 0.4);
+    background-color: rgba(6, 182, 212, 0.08);
+    transform: translateX(-2px);
 }
 .title-day{
-    color: #06b6d4;
+
     font-size: 1.4em;
-    margin-top: 8px;
-    margin-bottom: 16px ;
+
 }
 .exercise-title {
     margin: 0 0 0.5rem 0;
     font-size: 1.5rem;
 }
-.title-rutineActive{
-    margin-bottom: 10px;
-}
+
 
 .badge-pecho {
     background-color: #313a52;
@@ -66,7 +90,9 @@
     margin-bottom: 2rem;
     line-height: 1.8;
 }
-
+article p.exercise-info-p{
+    color: #e0e0e0;
+}
 .highlight {
     color: #ffd54f;
     font-weight: 600;
@@ -82,21 +108,132 @@
     margin-bottom: 1.5rem;
 }
 
+/* --- Tabla con Grid Modificado (5 columnas) --- */
 .table-header {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* Ajustamos los anchos: 50px (serie) | 3 fr (inputs) | 50px (check) */
+    grid-template-columns: 50px 1fr 1fr 1fr 50px;
     text-align: center;
-    font-size: 0.8rem;
-    color: #e0e0e0;
+    color: #94a3b8;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
     padding-bottom: 8px;
     border-bottom: 1px solid #3a4560;
 }
 
 .table-row {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-columns: 50px 1fr 1fr 1fr 50px;
     gap: 10px;
     align-items: center;
+    transition: opacity 0.3s ease;
+}
+
+/* Efecto visual cuando la serie está completada */
+.row-completed {
+    opacity: 0.6;
+}
+
+/* --- Botón Check --- */
+.btn-check {
+    background-color: transparent;
+    border: 1px solid rgb(59 91 219 / 0.7);
+    border-radius: 8px;
+    height: 38px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #64748b; /* Gris apagado por defecto */
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-check:hover {
+    border-color: #10b981;
+    color: #10b981;
+}
+
+.btn-check.checked {
+    background-color: rgba(16, 185, 129, 0.15); /* Verde esmeralda suave */
+    border-color: #10b981;
+    color: #10b981;
+}
+
+/* --- Sticky Timer (Temporizador Flotante) --- */
+@keyframes slideUpTimer {
+    0% { transform: translate(-50%, 100px); opacity: 0; }
+    100% { transform: translate(-50%, 0); opacity: 1; }
+}
+
+.sticky-timer {
+    position: fixed;
+    bottom: 20px;
+    left: 56%;
+    transform: translateX(-50%);
+    background-color: #182235;
+    border: 1px solid #334155;
+    border-radius: 100px; /* Bordes totalmente redondeados tipo píldora */
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(6, 182, 212, 0.2);
+    z-index: 1000;
+    animation: slideUpTimer 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.timer-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+
+.timer-label {
+    font-size: 11px;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.timer-clock {
+    font-size: 26px;
+    font-weight: 800;
+    color: #06b6d4; /* Tu cyan principal */
+    font-variant-numeric: tabular-nums; /* Evita que el texto baile al cambiar los segundos */
+}
+
+.timer-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.timer-btn {
+    background-color: #1e293b;
+    border: 1px solid #334155;
+    color: #cbd5e1;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.timer-btn:hover {
+    background-color: #334155;
+    color: #ffffff;
+}
+
+.timer-btn.skip {
+    background-color: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+
+.timer-btn.skip:hover {
+    background-color: rgba(239, 68, 68, 0.2);
 }
 
 /* --- Inputs simulando botones --- */
@@ -122,15 +259,18 @@
     background: transparent;
     border: none;
     color: #ffffff;
-    flex: 1; /* Le dice al input que tome todo el espacio disponible en el medio */
+    flex: 1;
     width: 100%;
     text-align: center;
     font-family: inherit;
     outline: none;
-    /* Truco visual: compensa el espacio del 'kg' para que el número se siga viendo en el centro absoluto */
-    margin-left: 18px;
+    margin-left: 0;
 }
 
+/* Solo compensa el ancho de "kg" en la columna de PESO */
+.input-wrapper:has(.unit) input {
+    margin-left: 10px;
+}
 /* Ocultar flechas en los inputs numéricos */
 .input-wrapper input::-webkit-outer-spin-button,
 .input-wrapper input::-webkit-inner-spin-button {
@@ -155,13 +295,16 @@
 }
 
 .btn-agregar {
-    background-color: #3b5bdb;
-    color: white;
-    border: none;
+    background-color: transparent;
+    border: 1px solid rgba(6, 182, 212, 0.5);
+    color: #06b6d4;
     padding: 8px 16px;
     border-radius: 8px;
     font-size: 0.85rem;
     cursor: pointer;
+}
+.btn-agregar:hover {
+    background-color: rgba(6, 182, 212, 0.1);
 }
 
 .next-container {
@@ -172,9 +315,8 @@
 }
 
 .btn-siguiente {
-    background-color: transparent;
-    border: 1px solid #3b5bdb;
-    color: white;
+    background-color: #06b6d4;
+    color: #0b1220;
     padding: 10px 30px;
     border-radius: 8px;
     font-size: 1rem;
@@ -212,7 +354,7 @@
     border-radius: 10px;
 
     /* Glow suave y elegante */
-    box-shadow: 0px 0px 15px rgba(92, 124, 250, 0.4);
+    box-shadow: 0 0 15px rgba(92, 124, 250, 0.4);
     transition: width 0.3s ease-in-out;
 }
 

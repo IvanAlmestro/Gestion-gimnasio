@@ -17,6 +17,7 @@ public class EjercicioDiaDTO {
     private String notas;
     private Long ejercicioId;
     private String ejercicioNombre;
+    private String grupoMuscular;
 
     public EjercicioDiaDTO(EjercicioDia ficha) {
         this.id = ficha.getId();
@@ -24,10 +25,12 @@ public class EjercicioDiaDTO {
         this.repeticiones = ficha.getRepeticiones();
         this.notas = ficha.getNotas();
 
+
         // Prevenimos NullPointerExceptions
         if (ficha.getEjercicio() != null) {
             this.ejercicioId = ficha.getEjercicio().getId();
             this.ejercicioNombre = ficha.getEjercicio().getNombre();
+            this.grupoMuscular = ficha.getEjercicio().getGrupoMuscular();
         }
     }
 }

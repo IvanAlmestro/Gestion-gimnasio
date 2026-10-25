@@ -12,10 +12,10 @@ function RoutineDetailPage() {
 
     return (
         <section className="routine-detail-page">
-            <Link to="/rutinas" className="btn-back">⬅ Volver a mis rutinas</Link>
+            <Link to="/rutinas" className="btn-volver">⬅ Volver a mis rutinas</Link>
 
             <div className="routine-header">
-                <h1 className="title-rutine">Rutina: {nombre}</h1>
+                <h1 className="title-rutine">{nombre}</h1>
             </div>
 
             <RoutineIdCard
