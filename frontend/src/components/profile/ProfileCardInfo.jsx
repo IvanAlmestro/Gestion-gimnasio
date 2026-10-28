@@ -1,7 +1,7 @@
 import { useState } from "react";
 
-// Sumamos inputType (por defecto es "text") y options (por defecto un arreglo vacío)
-function ProfileCardInfo({ title, info, infoExtra, onSave, inputType = "text", options = [] }) {
+// 1. Agregamos className con un valor por defecto vacío
+function ProfileCardInfo({ title, info, infoExtra, onSave, inputType = "text", options = [], className = "", onCustomEdit }) {
     const [isEditing, setIsEditing] = useState(false);
     const [draftValue, setDraftValue] = useState(info);
 
@@ -12,19 +12,17 @@ function ProfileCardInfo({ title, info, infoExtra, onSave, inputType = "text", o
             }
             setIsEditing(false);
         } else {
-            // MODO ENTRAR A EDICIÓN:
             let valorInicial = info;
-
-            // Si el texto dice que no hay datos, arrancamos vacío
+            if (onCustomEdit) {
+                onCustomEdit();
+                return;
+            }
             if (info.includes("No ingresaste")) {
                 valorInicial = "";
-            }
-            // SI ES SELECT: Buscamos el 'value' real en base al 'label' (info)
-            else if (inputType === "select" && options.length > 0) {
+            } else if (inputType === "select" && options.length > 0) {
                 const opcionEncontrada = options.find(
                     (op) => op.label === info || op.value === info
                 );
-                // Si lo encuentra, usamos el valor del backend (ej: "ADAPTACION"). Si no, vacío.
                 valorInicial = opcionEncontrada ? opcionEncontrada.value : "";
             }
 
@@ -34,11 +32,11 @@ function ProfileCardInfo({ title, info, infoExtra, onSave, inputType = "text", o
     };
 
     return (
-        <article className="profile-card-info">
+        // 2. Combinamos tu clase fija con la clase dinámica (setting-full-width)
+        <article className={`profile-card-info ${className}`}>
             <div className="profile-card-info-text">
                 <h3>{title}</h3>
                 {isEditing ? (
-                    // RENDERIZADO CONDICIONAL: Si es select mostramos el desplegable, sino el input
                     inputType === "select" ? (
                         <select
                             value={draftValue}
@@ -59,9 +57,7 @@ function ProfileCardInfo({ title, info, infoExtra, onSave, inputType = "text", o
                             onChange={(e) => setDraftValue(e.target.value)}
                             className="profile-input"
                         />
-
                     )
-
                 ) : (
                     <p>{info} {infoExtra}</p>
                 )}
@@ -78,10 +74,7 @@ function ProfileCardInfo({ title, info, infoExtra, onSave, inputType = "text", o
                 <button className="profile-card-button" onClick={handleButtonClick}>
                     {isEditing ? "Guardar" : "Editar"}
                 </button>
-
-
             </div>
-
         </article>
     );
 }

@@ -47,7 +47,7 @@ function RegisterPage() {
                     {/* Fila agrupada para Nombre y Apellido */}
                     <div style={{ display: "flex", gap: "16px" }}>
                         <div className="form-group" style={{ flex: 1 }}>
-                            <label>Nombre</label>
+                            <label>Nombre *</label>
                             <input
                                 type="text"
                                 className="form-input"
@@ -58,7 +58,7 @@ function RegisterPage() {
                             />
                         </div>
                         <div className="form-group" style={{ flex: 1 }}>
-                            <label>Apellido</label>
+                            <label>Apellido *</label>
                             <input
                                 type="text"
                                 className="form-input"
@@ -76,15 +76,15 @@ function RegisterPage() {
                             type="number"
                             step="0.1"
                             className="form-input"
-                            placeholder="Ej: 68.5"
+                            placeholder="Ej: 68.5 (opcional)"
                             value={pesoInicial}
                             onChange={(e) => setPesoInicial(e.target.value)}
-                            required
+
                         />
                     </div>
 
                     <div className="form-group">
-                        <label>Email</label>
+                        <label>Email *</label>
                         <input
                             type="email"
                             className="form-input"
@@ -96,7 +96,7 @@ function RegisterPage() {
                     </div>
 
                     <div className="form-group">
-                        <label>Contraseña</label>
+                        <label>Contraseña *</label>
                         <input
                             type="password"
                             className="form-input"

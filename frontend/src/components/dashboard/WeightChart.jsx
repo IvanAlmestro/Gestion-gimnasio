@@ -1,84 +1,60 @@
-import { useState } from 'react';
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid } from 'recharts';
 import '../../styles/Dashboard.css';
 
 function WeightChart({ historialPesos }) {
-    const [hoveredPoint, setHoveredPoint] = useState(null);
-
     if (!historialPesos || historialPesos.length === 0) {
         return <div className="chart-empty-state">No hay datos de peso registrados aún.</div>;
     }
 
-    // Cálculos para escalar los puntos dentro del SVG
-    const width = 360;
-    const height = 100;
-    const padding = 20;
-
-    const pesos = historialPesos.map(d => d.peso);
-    const minPeso = Math.min(...pesos) - 0.5;
-    const maxPeso = Math.max(...pesos) + 0.5;
-    const range = maxPeso - minPeso || 1;
-
-    const points = historialPesos.map((item, index) => {
-        const x = padding + (index * (width - 2 * padding)) / (historialPesos.length - 1 || 1);
-        const y = height - padding - ((item.peso - minPeso) / range) * (height - 2 * padding);
-        return { ...item, x, y };
-    });
-
-    const pathD = points.reduce((acc, point, index) => {
-        return index === 0 ? `M ${point.x} ${point.y}` : `${acc} L ${point.x} ${point.y}`;
-    }, "");
-
-    // Creamos el path para el área de abajo (baja hasta la base del SVG)
-    const firstX = points[0]?.x || 0;
-    const lastX = points[points.length - 1]?.x || width;
-    const areaD = `${pathD} L ${lastX} ${height - 5} L ${firstX} ${height - 5} Z`;
-
     return (
         <div className="custom-weight-chart">
-            <svg viewBox={`0 0 ${width} ${height}`} className="chart-svg">
-                <defs>
-                    {/* Gradiente para la línea */}
-                    <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="0%" >
-                        <stop offset="0%" stopColor="#0284c7"/>
-                        <stop offset="100%" stopColor="#06b6d4"/>
-                    </linearGradient>
+            <ResponsiveContainer width="100%" height="100%">
+                <AreaChart data={historialPesos} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
+                    <defs>
+                        <linearGradient id="areaColor" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="5%" stopColor="#06b6d4" stopOpacity={0.5} />
+                            <stop offset="95%" stopColor="#06b6d4" stopOpacity={0} />
+                        </linearGradient>
+                    </defs>
 
-                    {/* Gradiente vertical transparente para el área de abajo */}
-                    <linearGradient id="areaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stopColor="#06b6d4" stopOpacity="0.5" />
-                        <stop offset="100%" stopColor="#06b6d4" stopOpacity="0.0" />
-                    </linearGradient>
-                </defs>
+                    {/* Cuadrícula sutil horizontal */}
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#334155" opacity={0.5} />
 
-                {/* Relleno de área transparente */}
-                <path d={areaD} fill="url(#areaGrad)" />
-
-                {/* Línea principal */}
-                <path d={pathD} fill="none" stroke="url(#lineGrad)" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
-
-                {/* Puntos interactivos */}
-                {points.map((pt, i) => (
-                    <circle
-                        key={i}
-                        cx={pt.x}
-                        cy={pt.y}
-                        r={hoveredPoint?.fecha === pt.fecha ? 4 : 2}
-                        fill="#06b6d4"
-                        stroke="#111827"
-                        strokeWidth="1"
-                        className="chart-dot"
-                        onMouseEnter={() => setHoveredPoint(pt)}
-                        onMouseLeave={() => setHoveredPoint(null)}
+                    {/* Fechas en el eje X */}
+                    <XAxis
+                        dataKey="fecha"
+                        stroke="#94a3b8"
+                        fontSize={12}
+                        tickLine={false}
+                        axisLine={false}
+                        dy={10}
+                        interval="preserveStartEnd" /* <-- Obliga a renderizar las esquinas */
+                        padding={{ left: 20, right: 20 }} /* <-- Despega la línea de las paredes */
                     />
-                ))}
-            </svg>
 
-            {/* Tooltip flotante */}
-            {hoveredPoint && (
-                <div className="custom-chart-tooltip">
-                    <span>{hoveredPoint.fecha}: <strong>{hoveredPoint.peso} kg</strong></span>
-                </div>
-            )}
+                    {/* Eje Y oculto pero necesario para que no se aplaste la línea */}
+                    <YAxis domain={['dataMin - 1', 'dataMax + 1']} hide={true} />
+
+                    {/* Tooltip interactivo que sigue al mouse */}
+                    <Tooltip
+                        contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', borderRadius: '8px', color: '#f8fafc' }}
+                        itemStyle={{ color: '#06b6d4', fontWeight: 'bold' }}
+                        labelStyle={{ color: '#94a3b8', marginBottom: '4px' }}
+                        formatter={(value) => [`${value} kg`, 'Peso']}
+                    />
+
+                    {/* La línea principal con gradiente */}
+                    <Area
+                        type="monotone"
+                        dataKey="peso"
+                        stroke="#06b6d4"
+                        strokeWidth={3}
+                        fillOpacity={1}
+                        fill="url(#areaColor)"
+                        activeDot={{ r: 6, fill: '#06b6d4', stroke: '#1e293b', strokeWidth: 2 }}
+                    />
+                </AreaChart>
+            </ResponsiveContainer>
         </div>
     );
 }

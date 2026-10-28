@@ -11,6 +11,7 @@ public class ActualizarPerfilDTO {
     private String apellido;
     private Double altura;
     private Double pesoActual;
+    private Double pesoInicial;
     private Double pesoMeta;
     private String objetivo;
     private String fotoPerfil;

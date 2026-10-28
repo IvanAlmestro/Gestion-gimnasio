@@ -9,7 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/personas")
@@ -53,6 +55,23 @@ public class PersonaController {
         return ResponseEntity.ok(service.actualizarPerfil(id, datos)) ;
     }
 
+    @PutMapping("/{id}/password")
+    public ResponseEntity<Map<String, String>> cambiarPassword(
+            @PathVariable Long id,
+            @RequestBody CambiarPasswordDTO dto) {
+
+        try {
+            // Llamás al método que ya armaste en el Service
+            service.cambiarContrasena(id, dto);
+
+            // Si no hay errores, devolvemos un 200 OK con un mensaje JSON
+            return ResponseEntity.ok(Collections.singletonMap("mensaje", "Contraseña actualizada exitosamente"));
+
+        } catch (RuntimeException e) {
+            // Si el service tira error (ej: "Contraseña actual incorrecta"), mandamos un 400 Bad Request
+            return ResponseEntity.badRequest().body(Collections.singletonMap("error", e.getMessage()));
+        }
+    }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> eliminarPersona(@PathVariable Long id){
         service.eliminarPersona(id);

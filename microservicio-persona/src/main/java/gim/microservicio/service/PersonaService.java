@@ -52,6 +52,9 @@ public class PersonaService {
         Persona persona = personaRepository.findById(id)
                 .orElseThrow(() -> new PersonaNotFoundException("No existe persona con ese ID"));
 
+        if(datos.getPesoInicial() != null) {
+            persona.setPesoInicial(datos.getPesoInicial());
+        }
         if(datos.getNombre() !=null)
             persona.setNombre(datos.getNombre());
 
@@ -79,7 +82,19 @@ public class PersonaService {
         Persona pActualizada = personaRepository.save(persona);
         return new PersonaPerfilDTO(pActualizada);
     }
+    public void cambiarContrasena(Long usuarioId, CambiarPasswordDTO dto) {
+        Persona persona= personaRepository.findById(usuarioId)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
 
+        // 1. Verificás que la contraseña actual coincida con la de la base de datos
+        if (!passwordEncoder.matches(dto.getPasswordActual(), persona.getPassword())) {
+            throw new RuntimeException("La contraseña actual es incorrecta");
+        }
+
+        // 2. Encriptás la nueva y la guardás
+        persona.setPassword(passwordEncoder.encode(dto.getNuevaPassword()));
+        personaRepository.save(persona);
+    }
     public void eliminarPersona(Long id){
         if(personaRepository.existsById(id))
             personaRepository.deleteById(id);

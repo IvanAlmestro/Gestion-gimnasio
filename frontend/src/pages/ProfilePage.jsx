@@ -5,6 +5,7 @@ import imgperfil from "../assets/user-img.jpg";
 import ProfileCardStats from "../components/profile/ProfileCardStats.jsx";
 import ProfileCardInfo from "../components/profile/ProfileCardInfo.jsx";
 import "../styles/Profile.css";
+import PasswordChangeModal from "../components/profile/PasswordChangeModal.jsx";
 
 
 function ProfilePage() {
@@ -25,6 +26,8 @@ function ProfilePage() {
 
     // Estado para la vista previa (usa la de la base de datos si existe, sino la por defecto)
     const [previewImg, setPreviewImg] = useState(persona?.fotoPerfil || imgperfil);
+
+    const [mostrarModalPassword, setMostrarModalPassword] = useState(false);
 
     const handleFileChange = (e) => {
         const file = e.target.files[0];
@@ -115,45 +118,65 @@ function ProfilePage() {
                 <div className="profile-info">
                     <h2>Configuración de la cuenta:</h2>
 
-                    <ProfileCardInfo
-                        title="Email:"
-                        info={persona?.email || "Sin email"}
-                    />
 
-                    <ProfileCardInfo
-                        title="Contraseña:"
-                        info="************"
-                    />
-                    <ProfileCardInfo
-                        title="Objetivo:"
-                        info={persona?.objetivo ?
-                            opcionesObjetivo.find(op => op.value === persona.objetivo)?.label || persona.objetivo
-                            : "No ingresaste objetivo"}
-                        onSave={(nuevoValor) => handleUpdateCampo("objetivo", nuevoValor)}
-                        inputType="select"
-                        options={opcionesObjetivo}
-                    />
-                    <ProfileCardInfo
-                        title="Altura:"
-                        info={persona?.altura ? `${Number(persona.altura).toFixed(2)}` : "No ingresaste altura"}
-                        infoExtra={"metros"}
-                        onSave={(nuevoValor) => handleUpdateCampo("altura", nuevoValor)}
-                    />
-                    <ProfileCardInfo
-                        title="Peso Actual: "
-                        info={persona?.pesoActual ? `${persona.pesoActual}` : "No ingresaste peso"}
-                        infoExtra={"kg"}
-                        onSave={(nuevoValor) => handleUpdateCampo("pesoActual", nuevoValor)}
-                    />
-                    <ProfileCardInfo
-                        title="Meta de peso:"
-                        info={persona?.altura ? `${Number(persona.pesoMeta).toFixed(1)}` : "No ingresaste peso meta"}
-                        infoExtra={"kg"}
-                        onSave={(nuevoValor) => handleUpdateCampo("pesoMeta", nuevoValor)}
-                    />
+                    <div className="settings-container">
+                        <ProfileCardInfo
+                            title="Email:"
+                            info={persona?.email || "Sin email"}
+                            className="setting-full-width"
+                        />
 
+                        <ProfileCardInfo
+                            title="Contraseña:"
+                            info="************"
+                            className="setting-full-width"
+                            onCustomEdit={() => setMostrarModalPassword(true)}
+                        />
+
+                        <ProfileCardInfo
+                            title="Objetivo:"
+                            info={persona?.objetivo ?
+                                opcionesObjetivo.find(op => op.value === persona.objetivo)?.label || persona.objetivo
+                                : "No ingresaste objetivo"}
+                            onSave={(nuevoValor) => handleUpdateCampo("objetivo", nuevoValor)}
+                            inputType="select"
+                            options={opcionesObjetivo}
+                            className="setting-full-width"
+                        />
+
+                        {/* --- DESDE ACÁ SE ACOMODAN EN 2 COLUMNAS AUTOMÁTICAMENTE --- */}
+                        <ProfileCardInfo
+                            title="Altura:"
+                            info={persona?.altura ? `${Number(persona.altura).toFixed(2)}` : "No ingresaste altura"}
+                            infoExtra={"metros"}
+                            onSave={(nuevoValor) => handleUpdateCampo("altura", nuevoValor)}
+                        />
+
+                        <ProfileCardInfo
+                            title="Peso Actual:"
+                            info={persona?.pesoActual ? `${persona.pesoActual}` : "No ingresaste peso"}
+                            infoExtra={"kg"}
+                            onSave={(nuevoValor) => handleUpdateCampo("pesoActual", nuevoValor)}
+                        />
+
+                        <ProfileCardInfo
+                            title="Meta de peso:"
+                            info={persona?.pesoMeta ? `${Number(persona.pesoMeta).toFixed(1)}` : "No ingresaste peso meta"}
+                            infoExtra={"kg"}
+                            onSave={(nuevoValor) => handleUpdateCampo("pesoMeta", nuevoValor)}
+                        />
+
+                        <ProfileCardInfo
+                            title="Peso Inicial:"
+                            info={persona?.pesoInicial ? `${persona.pesoInicial}` : "No ingresaste peso"}
+                            infoExtra={"kg"}
+                            onSave={(nuevoValor) => handleUpdateCampo("pesoInicial", nuevoValor)}
+                        />
+                        {mostrarModalPassword && (
+                            <PasswordChangeModal onClose={() => setMostrarModalPassword(false)} />
+                        )}
+                    </div>
                 </div>
-
             </div>
         </section>
     );

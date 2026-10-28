@@ -31,7 +31,7 @@ public class Persona {
     private String fotoPerfil;
 
     private Double pesoMeta; // Peso meta del usuario
-    private Double pesoInicial; // Se guarda cuando se registra y no se toca más
+    private Double pesoInicial;
     private Double pesoActual;  // Es el que se va actualizando
     private Double altura;
 

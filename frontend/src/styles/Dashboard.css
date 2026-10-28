@@ -258,42 +258,17 @@ a.stat-card-link:hover .stat-arrow {
 
 .custom-weight-chart {
     position: relative;
-    width: 100%;
-    max-width: 750px;
-    height: 300px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    width: 90%;
+    height: 250px;
 }
 
-.chart-svg {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
+.success-progress {
+    color: #03fde4;
+    font-weight: 700;
 }
 
-.chart-dot {
-    cursor: pointer;
-
-    transition: r 0.2s ease, fill 0.2s ease;
-}
-
-.chart-dot:hover {
-    fill: #38bdf8;
-}
-
-.custom-chart-tooltip {
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    background-color: #1f2937;
-    border: 1px solid #374151;
-    color: #e5e7eb;
-    padding: 4px 8px;
-    border-radius: 6px;
-    font-size: 0.8rem;
-    pointer-events: none;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.4);
+.recharts-wrapper {
+    outline: none !important;
 }
 
 .btn-edit-meta {

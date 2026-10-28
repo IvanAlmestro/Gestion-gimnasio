@@ -1,51 +1,63 @@
 import { useEffect, useState } from "react";
-import { useAuth } from "../../hooks/useAuth"
+import { useAuth } from "../../hooks/useAuth";
 import WeightChart from "./WeightChart.jsx";
-import {Link} from "react-router-dom";
-import {authApi} from "../../services/api.js";
-import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { Link } from "react-router-dom";
+import { authApi } from "../../services/api.js";
 
 function WeightProgressCard() {
     const { persona } = useAuth();
     const [historialPesos, setHistorialPesos] = useState([]);
 
-    // 1. Cálculos dinámicos con tus datos reales
     const pesoInicial = persona?.pesoInicial || 0;
-    const pesoActual = persona?.pesoActual || 0;
+
+    // 1. Calculamos la fecha de inicio una sola vez acá arriba
+    const fechaInicioObj = persona?.fechaRegistro ? new Date(persona.fechaRegistro) : new Date();
+    const fechaInicioFormateada = persona?.fechaRegistro
+        ? fechaInicioObj.toLocaleDateString('es-AR', { day: 'numeric', month: 'short' })
+        : 'Inicio';
+
+    // 2. Sincronizamos el peso actual mirando siempre el último dato del gráfico
+    const pesoActual = historialPesos.length > 0
+        ? historialPesos[historialPesos.length - 1].peso
+        : (persona?.pesoActual || 0);
+
     const valorProgreso = pesoActual - pesoInicial;
     const signo = valorProgreso > 0 ? "+" : "";
     const progresoFormateado = `${signo}${valorProgreso.toFixed(1)}`;
 
-
     const calcularProgreso = (pesoInicial, pesoActual, meta) => {
-        // Evita dividir por cero o errores si la meta aún no está definida
         if (!meta || pesoInicial === meta) return 0;
 
         const distanciaTotal = meta - pesoInicial;
         const distanciaRecorrida = pesoActual - pesoInicial;
 
         let porcentaje = (distanciaRecorrida / distanciaTotal) * 100;
-
-        // Mantiene la barra visualmente impecable entre 0% y 100%
         return Math.min(Math.max(Math.round(porcentaje), 0), 100);
     };
+
     useEffect(() => {
         const fetchHistorial = async () => {
             try {
                 const response = await authApi.get(`/personas/${persona.id}/historial-peso`);
 
-                const dataFormateada = response.data.map(registro => {
+                const dataAgrupada = response.data.reduce((acc, registro) => {
+                    // ACÁ ESTABA EL ERROR: Ahora sí sacamos la fecha de CADA registro del historial
                     const fechaObj = new Date(registro.fecha);
                     const fechaCorta = fechaObj.toLocaleDateString('es-AR', { day: 'numeric', month: 'short' });
 
-                    return {
-                        fecha: fechaCorta,
-                        peso: registro.peso
-                    };
-                });
+                    const index = acc.findIndex(item => item.fecha === fechaCorta);
+
+                    if (index !== -1) {
+                        acc[index].peso = registro.peso;
+                    } else {
+                        acc.push({ fecha: fechaCorta, peso: registro.peso });
+                    }
+                    return acc;
+                }, []);
+
                 const historialCompleto = [
-                    { fecha: 'Inicio', peso: pesoInicial },
-                    ...dataFormateada
+                    { fecha: fechaInicioFormateada, peso: pesoInicial },
+                    ...dataAgrupada
                 ];
 
                 setHistorialPesos(historialCompleto);
@@ -56,7 +68,7 @@ function WeightProgressCard() {
         };
 
         if (persona?.id) fetchHistorial();
-    }, [persona]);
+    }, [persona, pesoInicial, fechaInicioFormateada]);
 
     return (
         <article className="weight-card">
@@ -66,6 +78,8 @@ function WeightProgressCard() {
                 <div className="weight-data">
                     <p>Peso inicial: <strong className="strong-progress">{pesoInicial} kg</strong></p>
                     <p>Peso actual: <strong className="strong-progress">{pesoActual} kg</strong></p>
+
+                    {/* Volvemos a tu clase original para mantener la neutralidad de la métrica */}
                     <p>Diferencia de peso: <strong className="strong-progress">{progresoFormateado} kg</strong></p>
 
                     <p>
@@ -74,13 +88,13 @@ function WeightProgressCard() {
                     </strong>
                         <Link to="/perfil" className="btn-edit-meta">✏️ Editar</Link>
                     </p>
-
                 </div>
+
                 <WeightChart historialPesos={historialPesos} />
             </div>
 
             <div className="progress-bar">
-                <div className="progress-fill" style={{ width:`${calcularProgreso(pesoInicial, pesoActual, persona?.pesoMeta)}%` }}></div>
+                <div className="progress-fill" style={{ width: `${calcularProgreso(pesoInicial, pesoActual, persona?.pesoMeta)}%` }}></div>
             </div>
 
             <span className="progress-label">
